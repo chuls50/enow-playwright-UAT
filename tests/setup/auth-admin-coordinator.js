@@ -9,16 +9,16 @@ test.describe('Admin Authentication Setup', () => {
     await page.goto(baseUrl);
     await page.waitForURL(/.*\/login/);
 
-    // Fill email - use UAT_ADMIN_USERNAME
+    // Fill email - use UAT_ADMINCOORDINATOR_USERNAME
     await page
       .getByPlaceholder('Enter email')
-      .fill(process.env.UAT_ADMIN_USERNAME);
+      .fill(process.env.UAT_ADMINCOORDINATOR_USERNAME);
     await page.getByRole('button', { name: 'Next' }).click();
 
-    // Fill password - use UAT_ADMIN_PASSWORD
+    // Fill password - use UAT_ADMINCOORDINATOR_PASSWORD
     await page
       .getByPlaceholder('Enter your password')
-      .fill(process.env.UAT_ADMIN_PASSWORD);
+      .fill(process.env.UAT_ADMINCOORDINATOR_PASSWORD);
     await page.getByRole('button', { name: 'Log In' }).click();
 
     // Wait for successful login
@@ -26,8 +26,12 @@ test.describe('Admin Authentication Setup', () => {
     await page.waitForLoadState('networkidle');
 
     // Save authentication state
-    await context.storageState({ path: 'playwright/.auth/admin.json' });
-    console.log(`✅ Admin authentication state saved. (UAT-CodyTest)`);
+    await context.storageState({
+      path: 'playwright/.auth/admin-coordinator.json',
+    });
+    console.log(
+      `✅ Admin+Coordinator authentication state saved. (UAT-CodyTest)`
+    );
 
     await context.close();
   });

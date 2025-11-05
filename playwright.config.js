@@ -2,15 +2,24 @@ import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 // Load environment variables
+dotenv.config({ debug: false, quiet: true });
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+// Ensure auth directory exists
+const authDir = path.resolve(__dirname, 'playwright', '.auth');
+if (!fs.existsSync(authDir)) {
+  fs.mkdirSync(authDir, { recursive: true });
+}
 
 
 export default defineConfig({
   testDir: './tests',
-  fullyParallel: true,
+  testIgnore: ['**/utils/**', '**/documentation-examples/**'], // Exclude utilities and examples from test execution
+  fullyParallel: false, // Changed to false since you mentioned no parallel execution
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 0 : 0,
   workers: process.env.CI ? 1 : 1,
@@ -97,68 +106,26 @@ export default defineConfig({
       name: 'auth-coordinator',
       testMatch: '**/setup/auth-coordinator.js',
     },
-
-    // // Admin tests with stored auth
-    // {
-    //   name: 'admin-chrome',
-    //   testMatch: '**/admin/**/*.spec.js',
-    //   use: { 
-    //     ...devices['Desktop Chrome'],
-    //     storageState: 'playwright/.auth/admin.json'
-    //   },
-    //   dependencies: ['auth-admin'],
-    // },
-
-    // // Provider tests with stored auth
-    // {
-    //   name: 'provider-chrome',
-    //   testMatch: '**/provider/**/*.spec.js',
-    //   use: { 
-    //     ...devices['Desktop Chrome'],
-    //     storageState: 'playwright/.auth/provider.json'
-    //   },
-    //   dependencies: ['auth-provider'],
-    // },
-
-    // // Patient tests with stored auth
-    // {
-    //   name: 'patient-chrome',
-    //   testMatch: '**/patient/**/*.spec.js',
-    //   use: { 
-    //     ...devices['Desktop Chrome'],
-    //     storageState: 'playwright/.auth/patient.json'
-    //   },
-    //   dependencies: ['auth-patient'],
-    // },
-
-    // // Coordinator tests with stored auth
-    // {
-    //   name: 'coordinator-chrome',
-    //   testMatch: '**/coordinator/**/*.spec.js',
-    //   use: { 
-    //     ...devices['Desktop Chrome'],
-    //     storageState: 'playwright/.auth/coordinator.json'
-    //   },
-    //   dependencies: ['auth-coordinator'],
-    // },
-
-    // // Auth tests (no stored auth needed)
-    // {
-    //   name: 'auth-chrome',
-    //   testMatch: '**/auth/**/*.spec.js',
-    //   workers: 1,
-    //   use: { ...devices['Desktop Chrome']},
-    // },
-
-    // // General tests (no stored auth needed)
-    // {
-    //   name: 'general-chrome',
-    //   testMatch: '**/general/**/*.spec.js',
-    //   use: { ...devices['Desktop Chrome']},
-    // },
+    {
+      name: 'auth-admin-coordinator',
+      testMatch: '**/setup/auth-admin-coordinator.js',
+    },
+    {
+      name: 'auth-provider-coordinator',
+      testMatch: '**/setup/auth-provider-coordinator.js',
+    },
 
 
-
+    // Desktop Chrome project for /tests folder that depends on auth-setup projects
+    {
+      name: 'chrome-desktop',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+      dependencies: ['auth-admin', 'auth-provider', 'auth-patient', 'auth-coordinator', 'auth-admin-coordinator', 'auth-provider-coordinator'],
+      testMatch: '**/*.spec.js',
+      testIgnore: ['**/setup/**', '**/utils/**', '**/documentation-examples/**'], // Exclude setup, utils, and examples from main test execution
+    },
     ],
 
 

@@ -1,6 +1,4 @@
 import { test } from '@playwright/test';
-import dotenv from 'dotenv';
-dotenv.config();
 
 test.describe('Coordinator Authentication Setup', () => {
   test('setup coordinator authentication', async ({ browser }) => {
@@ -29,7 +27,7 @@ test.describe('Coordinator Authentication Setup', () => {
 
     // Save authentication state
     await context.storageState({ path: 'playwright/.auth/coordinator.json' });
-    console.log(`✅ Coordinator authentication state saved.`);
+    console.log(`✅ Coordinator authentication state saved. (UAT-CodyTest)`);
 
     await context.close();
   });
