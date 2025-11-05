@@ -1,0 +1,20 @@
+# Ignore artifacts:
+build
+dist
+coverage
+node_modules
+playwright-report
+test-results
+
+# Ignore all HTML files:
+*.html
+
+# Ignore package-lock and yarn.lock
+package-lock.json
+yarn.lock
+
+# Ignore environment files
+.env*
+
+# Ignore config files that shouldn't be formatted
+*.config.js

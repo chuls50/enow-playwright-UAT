@@ -1,0 +1,48 @@
+# Authentication state files
+playwright/.auth/
+playwright/.auth/*.json
+
+# Environment variables containing sensitive information
+.env
+.env.local
+.env.*
+
+# Playwright test results
+playwright-report/
+test-results/
+
+# Node.js dependencies
+node_modules/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log
+
+# Optional: VS Code settings that might contain personal paths
+.vscode/
+
+allure-report/
+allure-results/
+
+# Playwright
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Coverage
+coverage/
+*.lcov
