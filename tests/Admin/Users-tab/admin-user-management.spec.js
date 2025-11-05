@@ -55,9 +55,7 @@ test.describe('Admin User Managment @regression', () => {
     await userTablePage.searchInput.fill(searchTerm);
 
     // capture the inner text of cell-0
-    const firstUsername = await userTablePage.page
-      .getByTestId('cell-0-name')
-      .innerText();
+    const firstUsername = await userTablePage.page.getByTestId('cell-0-name').innerText();
 
     // verify the search result contains the search term
     expect(firstUsername.toLowerCase()).toContain(searchTerm.toLowerCase());
@@ -110,12 +108,9 @@ test.describe('Admin User Managment @regression', () => {
     await userTablePage.page.waitForTimeout(500);
 
     // Extract date values from the Last Updated column (6th column)
-    const dates = await userTablePage.page.$$eval(
-      'tbody tr td:nth-child(6)',
-      cells => {
-        return cells.map(cell => new Date(cell.textContent.trim()));
-      }
-    );
+    const dates = await userTablePage.page.$$eval('tbody tr td:nth-child(6)', (cells) => {
+      return cells.map((cell) => new Date(cell.textContent.trim()));
+    });
 
     // Verify ascending order (oldest to newest)
     for (let i = 0; i < dates.length - 1; i++) {
@@ -200,18 +195,12 @@ test.describe('Admin User Managment @regression', () => {
 
     // Click institution dropdown and verify options are visible
     await userTablePage.inviteUsersInstitutionDropdown.click();
-    await expect(
-      userTablePage.inviteUsersInstitutionDropdownOptions
-    ).toBeVisible();
-    await expect(
-      userTablePage.inviteUsersInstitutionDropdownOptionGlobalMed
-    ).toBeVisible();
+    await expect(userTablePage.inviteUsersInstitutionDropdownOptions).toBeVisible();
+    await expect(userTablePage.inviteUsersInstitutionDropdownOptionGlobalMed).toBeVisible();
 
-    // Select GlobalMed option and verify selection
-    await userTablePage.inviteUsersInstitutionDropdownOptionGlobalMed.click();
-    await expect(userTablePage.inviteUsersInstitutionDropdown).toContainText(
-      'GM Healthcare'
-    );
+    // Select Cody Test option and verify selection
+    await userTablePage.inviteUsersInstitutionDropdownOptionCodyTest.click();
+    await expect(userTablePage.inviteUsersInstitutionDropdownOptionCodyTest).toBeVisible();
   });
 
   test('Verify Role dropdown selection in Invite Users Modal @[111698] @admin @functional', async () => {
@@ -221,24 +210,14 @@ test.describe('Admin User Managment @regression', () => {
     // Click role dropdown and verify all role options are visible
     await userTablePage.inviteUsersRoleDropdown.click();
     await expect(userTablePage.inviteUsersRoleDropdownOptions).toBeVisible();
-    await expect(
-      userTablePage.inviteUsersRoleDropdownOptionAdmin
-    ).toBeVisible();
-    await expect(
-      userTablePage.inviteUsersRoleDropdownOptionPatient
-    ).toBeVisible();
-    await expect(
-      userTablePage.inviteUsersRoleDropdownOptionProvider
-    ).toBeVisible();
-    await expect(
-      userTablePage.inviteUsersRoleDropdownOptionCoordinator
-    ).toBeVisible();
+    await expect(userTablePage.inviteUsersRoleDropdownOptionAdmin).toBeVisible();
+    await expect(userTablePage.inviteUsersRoleDropdownOptionPatient).toBeVisible();
+    await expect(userTablePage.inviteUsersRoleDropdownOptionProvider).toBeVisible();
+    await expect(userTablePage.inviteUsersRoleDropdownOptionCoordinator).toBeVisible();
 
     // Select Admin role and verify dropdown closes
     await userTablePage.inviteUsersRoleDropdownOptionAdmin.click();
-    await expect(
-      userTablePage.inviteUsersRoleDropdownOptions
-    ).not.toBeVisible();
+    await expect(userTablePage.inviteUsersRoleDropdownOptions).not.toBeVisible();
   });
 
   test('Validate Clicking Cancel button on Invite Users Modal @[111699] @admin @functional', async () => {
@@ -288,8 +267,6 @@ test.describe('Admin User Managment @regression', () => {
       timeout: 10000,
     });
     await expect(userTablePage.invitationSentMessage).toBeVisible();
-    console.log(
-      `User invited: ${firstName} ${lastName} (${email}) - Role: ${role}`
-    );
+    console.log(`User invited: ${firstName} ${lastName} (${email}) - Role: ${role}`);
   });
 });

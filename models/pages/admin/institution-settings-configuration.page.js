@@ -19,7 +19,7 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
     // Configuration Page Elements
     this.heading = page.getByRole('heading', { name: 'Product Configuration' });
 
-    // Toggle Elements
+    // Enforce Country / State Licensing Toggle
     this.enforceCountryText = page.getByText('Enforce Country / State Licensing on Provider Lists Enabled');
     this.enforceCountryToggle = page
       .locator('label')
@@ -28,6 +28,7 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
       })
       .getByTestId('switch-div');
 
+    // Waiting Room toggle
     this.waitingRoomOptionText = page.getByText('Waiting Room Option');
     this.waitingRoomOptionToggle = page
       .locator('label')
@@ -37,12 +38,14 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
       'When this value is set, users joining an appointment will be in a waiting room'
     );
 
+    // Dispatcher Option toggle
     this.dispatcherOptionText = page.getByText('Dispatcher Option');
     this.dispatcherOptionToggle = page
       .locator('label')
       .filter({ hasText: 'Dispatcher Option' })
       .getByTestId('switch-div');
 
+    // Enable Chat Appointments toggle
     this.enableChatAppointmentsText = page.getByText('Enable Chat Appointment Types');
     this.enableChatAppointmentsToggle = page
       .locator('label')
