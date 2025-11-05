@@ -12,46 +12,26 @@ export class LoginPage extends BasePage {
     this.nextButton = page.getByRole('button', { name: 'Next' });
     this.welcomeMessage = page.locator('#root').getByText('Welcome back!');
     this.errorMessage = page.getByText('Enter an email');
-    this.errorMessageInvalidEmail = page.getByText(
-      'Email fields can only include'
-    );
-    this.errorMessageValidUnregisteredEmail = page.getByText(
-      "Couldn't find an account for the email address provided"
-    );
+    this.errorMessageInvalidEmail = page.getByText('Email fields can only include');
+    this.errorMessageValidUnregisteredEmail = page.getByText("Couldn't find an account for the email address provided");
 
     // Password Step Elements
     this.passwordLabel = page.getByText('Enter your password*');
-    this.passwordField = page.getByRole('textbox', {
-      name: 'Enter your password',
-    });
-    this.passwordInput = page.locator(
-      'input[name="password"], input[type="password"]'
-    );
+    this.passwordField = page.getByRole('textbox', { name: 'Enter your password' });
+    this.passwordInput = page.locator('input[name="password"], input[type="password"]');
     this.eyeButton = page.getByRole('button', { name: 'Eye' });
     this.loginButton = page.getByRole('button', { name: 'Log In' });
-    this.forgotPasswordLink = page.getByRole('link', {
-      name: 'Forgot Password',
-    });
+    this.forgotPasswordLink = page.getByRole('link', { name: 'Forgot Password' });
     this.backToPasswordLink = page.getByText('Back to password page');
     this.errorMessageEmptyPassword = page.getByText('Enter a password');
-    this.errorMessageWrongPassword = page.getByText(
-      'Wrong password. Try again or'
-    );
+    this.errorMessageWrongPassword = page.getByText('Wrong password. Try again or');
 
     // Forgot Password Elements
-    this.forgotPasswordHeading = page.getByRole('heading', {
-      name: 'Forgot Password?',
-    });
-    this.passwordResetHeading = page.getByRole('heading', {
-      name: 'Your reset password link was',
-    });
-    this.emailDisplay = page
-      .locator('div')
-      .filter({ hasText: /^chuls\+smokeprod@globalmed\.com$/ });
+    this.forgotPasswordHeading = page.getByRole('heading', { name: 'Forgot Password?' });
+    this.passwordResetHeading = page.getByRole('heading', { name: 'Your reset password link was' });
+    this.emailDisplay = page.locator('div').filter({ hasText: /^chuls\+smokeprod@globalmed\.com$/ });
     this.sendEmailButton = page.getByRole('button', { name: 'Send email' });
-    this.confirmationHeading = page.getByRole('heading', {
-      name: 'Your reset password link was sent',
-    });
+    this.confirmationHeading = page.getByRole('heading', { name: 'Your reset password link was sent' });
     this.resendLink = page.getByRole('link', { name: 'Resend link' });
 
     // Shared Elements
@@ -66,30 +46,16 @@ export class LoginPage extends BasePage {
     this.spanishLanguageText = page.getByText('Español');
 
     // Language Options (both testid and text versions)
-    this.spanishLanguageOption = page.getByTestId(
-      'custom-dropdown-item-Spanish'
-    );
+    this.spanishLanguageOption = page.getByTestId('custom-dropdown-item-Spanish');
     this.spanishLanguageTextOption = page.getByText('Spanish');
-    this.portugueseLanguageOption = page.getByTestId(
-      'custom-dropdown-item-Portuguese'
-    );
-    this.englishLanguageOption = page.getByTestId(
-      'custom-dropdown-item-English'
-    );
-    this.englishLanguageOptionSpanish = page.getByTestId(
-      'custom-dropdown-item-Inglés'
-    );
-    this.englishLanguageOptionPortuguese = page.getByTestId(
-      'custom-dropdown-item-Inglês'
-    );
+    this.portugueseLanguageOption = page.getByTestId('custom-dropdown-item-Portuguese');
+    this.englishLanguageOption = page.getByTestId('custom-dropdown-item-English');
+    this.englishLanguageOptionSpanish = page.getByTestId('custom-dropdown-item-Inglés');
+    this.englishLanguageOptionPortuguese = page.getByTestId('custom-dropdown-item-Inglês');
 
     // Language-specific headings
-    this.loginHeadingSpanish = page.getByRole('heading', {
-      name: 'Inicio de sesión',
-    });
-    this.loginHeadingPortuguese = page.getByRole('heading', {
-      name: 'Faça o login',
-    });
+    this.loginHeadingSpanish = page.getByRole('heading', { name: 'Inicio de sesión' });
+    this.loginHeadingPortuguese = page.getByRole('heading', { name: 'Faça o login' });
 
     // Welcome Image
     this.welcomeImage = page.locator('img[alt="welcome"]');
@@ -156,9 +122,7 @@ export class LoginPage extends BasePage {
     };
 
     if (!languageMap[language]) {
-      throw new Error(
-        `Unsupported language: ${language}. Supported languages: ${Object.keys(languageMap).join(', ')}`
-      );
+      throw new Error(`Unsupported language: ${language}. Supported languages: ${Object.keys(languageMap).join(', ')}`);
     }
 
     // Open the language dropdown
@@ -169,9 +133,7 @@ export class LoginPage extends BasePage {
     await languageMap[language].option.click();
 
     // Wait for the page to update with new language
-    await this.page
-      .getByRole('heading', { name: languageMap[language].headingText })
-      .waitFor({ state: 'visible' });
+    await this.page.getByRole('heading', { name: languageMap[language].headingText }).waitFor({ state: 'visible' });
 
     // Close dropdown by clicking the trigger again if still open
     try {

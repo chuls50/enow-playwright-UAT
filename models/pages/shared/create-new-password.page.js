@@ -1,4 +1,4 @@
-import { BasePage } from "../../base-page.js";
+import { BasePage } from '../../base-page.js';
 
 export class CreateNewPasswordPage extends BasePage {
   constructor(page) {
@@ -23,16 +23,37 @@ export class CreateNewPasswordPage extends BasePage {
     this.requirementSpecialChar = this.page.getByText('At least 1 special character');
 
     // Password Requirement Icons (X marks for failed requirements)
-    this.minLengthFailIcon = this.page.locator('div').filter({ hasText: /^At least 12 characters$/ }).getByTestId('icon-XClose');
-    this.uppercaseFailIcon = this.page.locator('div').filter({ hasText: /^At least 1 uppercase$/ }).getByTestId('icon-XClose');
-    this.lowercaseFailIcon = this.page.locator('div').filter({ hasText: /^At least 1 lowercase$/ }).getByTestId('icon-XClose');
-    this.numberFailIcon = this.page.locator('div').filter({ hasText: /^At least 1 number$/ }).getByTestId('icon-XClose');
-    this.specialCharFailIcon = this.page.locator('div').filter({ hasText: /^At least 1 special character$/ }).getByTestId('icon-XClose');
+    this.minLengthFailIcon = this.page
+      .locator('div')
+      .filter({ hasText: /^At least 12 characters$/ })
+      .getByTestId('icon-XClose');
+    this.uppercaseFailIcon = this.page
+      .locator('div')
+      .filter({ hasText: /^At least 1 uppercase$/ })
+      .getByTestId('icon-XClose');
+    this.lowercaseFailIcon = this.page
+      .locator('div')
+      .filter({ hasText: /^At least 1 lowercase$/ })
+      .getByTestId('icon-XClose');
+    this.numberFailIcon = this.page
+      .locator('div')
+      .filter({ hasText: /^At least 1 number$/ })
+      .getByTestId('icon-XClose');
+    this.specialCharFailIcon = this.page
+      .locator('div')
+      .filter({ hasText: /^At least 1 special character$/ })
+      .getByTestId('icon-XClose');
 
     // Buttons
     this.newPasswordButton = this.page.getByTestId('new-password-button');
-    this.passwordVisibilityToggle = this.page.locator('div').filter({ hasText: /^New password\*$/ }).getByRole('button');
-    this.confirmPasswordVisibilityToggle = this.page.locator('div').filter({ hasText: /^Confirm new password\*$/ }).getByRole('button');
+    this.passwordVisibilityToggle = this.page
+      .locator('div')
+      .filter({ hasText: /^New password\*$/ })
+      .getByRole('button');
+    this.confirmPasswordVisibilityToggle = this.page
+      .locator('div')
+      .filter({ hasText: /^Confirm new password\*$/ })
+      .getByRole('button');
 
     // Error Messages
     this.passwordRequirementsError = this.page.getByText('Your password must have:');

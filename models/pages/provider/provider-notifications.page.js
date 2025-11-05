@@ -7,9 +7,7 @@ export class NotificationsPage extends BasePage {
     // Main page elements
     this.title = page.locator('div').filter({ hasText: /^Account settings$/ });
     this.navbar = page.getByRole('navigation');
-    this.header = page
-      .getByRole('paragraph')
-      .filter({ hasText: 'Notifications' });
+    this.header = page.getByRole('paragraph').filter({ hasText: 'Notifications' });
     this.headerText = page.getByText('Manage your notification');
     this.notificationMethods = page.getByText('Notification methods');
     this.emailNotification = page.getByText('Email');
@@ -31,16 +29,10 @@ export class NotificationsPage extends BasePage {
     // session reminders page
     this.sessionRemindersModal = page.getByTestId('modal');
     this.sessionRemindersRemindMe = page.getByText('Remind me').nth(1);
-    this.sessionRemindersDropdown = page.getByTestId(
-      'custom-select-item-wrapper'
-    );
+    this.sessionRemindersDropdown = page.getByTestId('custom-select-item-wrapper');
     this.sessionRemindersDropdownOptions = page.getByTestId('custom-dropdown');
-    this.sessionRemindersDropdownOption1 = page.getByTestId(
-      'custom-dropdown-item-5 minutes before'
-    );
-    this.sessionRemindersDropdownOption3 = page.getByTestId(
-      'custom-dropdown-item-15 minutes before'
-    );
+    this.sessionRemindersDropdownOption1 = page.getByTestId('custom-dropdown-item-5 minutes before');
+    this.sessionRemindersDropdownOption3 = page.getByTestId('custom-dropdown-item-15 minutes before');
     this.sessionRemindersDefaultOption = page
       .getByTestId('custom-select-item-wrapper')
       .locator('div')
@@ -54,15 +46,11 @@ export class NotificationsPage extends BasePage {
     this.sessionRemindersXClose = page.getByRole('button', { name: 'XClose' });
 
     // success message
-    this.successMessage = page.getByText(
-      'Notification preferences updated successfully.'
-    );
+    this.successMessage = page.getByText('Notification preferences updated successfully.');
   }
 
   async gotoNotificationsPage() {
-    await this.page.goto(
-      `${process.env.UAT_URL}/account-settings/notifications`
-    );
+    await this.page.goto(`${process.env.UAT_URL}/account-settings/notifications`);
 
     // Wait for spinner to disappear if present
     await this.waitForSpinnerToDisappear();
@@ -72,10 +60,7 @@ export class NotificationsPage extends BasePage {
 
     // if 5 minutes is not already selected, select it
     const currentReminderText = await this.defaultReminder.textContent();
-    if (
-      !currentReminderText ||
-      !currentReminderText.trim().match(/^5 minutes before/)
-    ) {
+    if (!currentReminderText || !currentReminderText.trim().match(/^5 minutes before/)) {
       await this.changeSessionReminder.click();
       await this.sessionRemindersModal.waitFor({ state: 'visible' });
       await this.sessionRemindersDropdown.click();

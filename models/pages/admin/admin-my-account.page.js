@@ -15,19 +15,13 @@ export class MyAccountPage extends BasePage {
     this.navigationBar = page.getByText('My accountNotifications');
 
     // My Account Section
-    this.myAccountLabel = page
-      .getByRole('paragraph')
-      .filter({ hasText: 'My account' });
+    this.myAccountLabel = page.getByRole('paragraph').filter({ hasText: 'My account' });
     this.myAccountText = page.getByText('Update and manage your account');
     this.profileIcon = page.getByTestId('avatar').locator('div').nth(1);
     this.profileName = page.getByText('CODY TEST USER ADMIN');
     this.profileEmail = page.getByText('chuls+adminprod@globalmed.com');
-    this.uploadPhotoButton = page.getByRole('button', {
-      name: 'Download Upload photo',
-    });
-    this.deletePhotoButton = page.getByRole('button', {
-      name: 'Trash Delete photo',
-    });
+    this.uploadPhotoButton = page.getByRole('button', { name: 'Download Upload photo' });
+    this.deletePhotoButton = page.getByRole('button', { name: 'Trash Delete photo' });
 
     // Profile Details Section
     this.profileDetailsSection = page.getByText('Profile details');
@@ -42,56 +36,34 @@ export class MyAccountPage extends BasePage {
       .filter({ hasText: /^Profile detailsEdit$/ })
       .getByRole('button');
 
-    // Application language section
+    // Application Language Section
     this.applicationLanguageSection = page.getByText('Application language');
-    this.changeLanguageButton = page.getByRole('link', {
-      name: 'Change language',
-    });
-    this.changeLanguageModal = page
-      .getByTestId('modal')
-      .getByText('Change language');
+    this.changeLanguageButton = page.getByRole('link', { name: 'Change language' });
+    this.changeLanguageModal = page.getByTestId('modal').getByText('Change language');
 
-    // Time zone section
+    // Time Zone Section
     this.timeZoneSection = page.getByText('Time zone', { exact: true });
-    this.changeTimeZoneButton = page.getByRole('link', {
-      name: 'Change time zone',
-    });
-    this.changeTimeZoneModal = page
-      .getByTestId('modal')
-      .getByText('Change time zone');
+    this.changeTimeZoneButton = page.getByRole('link', { name: 'Change time zone' });
+    this.changeTimeZoneModal = page.getByTestId('modal').getByText('Change time zone');
 
     // Account Deletion Section
     this.accountDeletionSection = page.getByText('Account', { exact: true });
-    this.accountDeletionButton = page.getByText('Delete account', {
-      exact: true,
-    });
+    this.accountDeletionButton = page.getByText('Delete account', { exact: true });
     this.accountDeletionModal = page.getByTestId('modal');
     this.accountDeletionHeader = page.getByText('Delete account?');
     this.accountDeleteText = page.getByText('Deleting your account will');
-    this.accountDeletionModalXCloseButton = page.getByRole('button', {
-      name: 'XClose',
-    });
-    this.accountDeletionNoCancelButton = page.getByRole('button', {
-      name: 'No, cancel',
-    });
-    this.accountDeletionConfirmButton = page.getByRole('button', {
-      name: 'Yes, delete',
-    });
+    this.accountDeletionModalXCloseButton = page.getByRole('button', { name: 'XClose' });
+    this.accountDeletionNoCancelButton = page.getByRole('button', { name: 'No, cancel' });
+    this.accountDeletionConfirmButton = page.getByRole('button', { name: 'Yes, delete' });
 
     // Edit Profile Modal
     this.editProfileModal = page.getByText('Edit profile detailsFirst');
     this.editProfileHeader = page.getByText('Edit profile details');
 
     // Error Messages
-    this.invalidImageErrorMessage = page.getByText(
-      'Please upload an image file.'
-    );
-    this.fileSizeExceededMessage = page.getByText(
-      'File size should not exceed 5 MB'
-    );
-    this.profilePictureDeletedMessage = page.getByText(
-      'Profile picture deleted successfully.'
-    );
+    this.invalidImageErrorMessage = page.getByText('Please upload an image file.');
+    this.fileSizeExceededMessage = page.getByText('File size should not exceed 5 MB');
+    this.profilePictureDeletedMessage = page.getByText('Profile picture deleted successfully.');
   }
 
   async gotoMyAccount() {

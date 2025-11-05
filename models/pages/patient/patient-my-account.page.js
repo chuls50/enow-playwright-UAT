@@ -1,10 +1,4 @@
 import { BasePage } from '../../base-page.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-// Create __dirname equivalent for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export class MyAccountPage extends BasePage {
   constructor(page) {
@@ -26,16 +20,10 @@ export class MyAccountPage extends BasePage {
     this.profileIconDeleteButton = page.getByRole('button', {
       name: 'Trash Delete photo',
     });
-    this.profileIconSuccessMessage = page.getByText(
-      'Photo picture uploaded successfully.'
-    );
-    this.deleteProfilePictureSuccessMessage = page.getByText(
-      'Profile picture deleted successfully.'
-    );
+    this.profileIconSuccessMessage = page.getByText('Photo picture uploaded successfully.');
+    this.deleteProfilePictureSuccessMessage = page.getByText('Profile picture deleted successfully.');
     this.editProfileButton = page.getByRole('button', { name: 'Edit Edit' });
-    this.profileUpdatedSuccessMessage = page
-      .getByText('Profile updated')
-      .first();
+    this.profileUpdatedSuccessMessage = page.getByText('Profile updated').first();
 
     // Profile information labels
     this.firstNameText = page.getByText('First name');
@@ -59,9 +47,7 @@ export class MyAccountPage extends BasePage {
     this.editProfileDetailsModalDOBInput = page.getByRole('textbox', {
       name: 'MM/DD/YYYY',
     });
-    this.editProfileDetailsModalGenderSelect = page
-      .getByTestId('custom-select-item-wrapper')
-      .first();
+    this.editProfileDetailsModalGenderSelect = page.getByTestId('custom-select-item-wrapper').first();
     this.editProfileDetailsModalSaveButton = page.getByRole('button', {
       name: 'Save changes',
     });
@@ -154,10 +140,8 @@ export class MyAccountPage extends BasePage {
   }
 
   async fillEditProfileForm(firstName, lastName, dob) {
-    if (firstName)
-      await this.editProfileDetailsModalFirstNameInput.fill(firstName);
-    if (lastName)
-      await this.editProfileDetailsModalLastNameInput.fill(lastName);
+    if (firstName) await this.editProfileDetailsModalFirstNameInput.fill(firstName);
+    if (lastName) await this.editProfileDetailsModalLastNameInput.fill(lastName);
     if (dob) await this.editProfileDetailsModalDOBInput.fill(dob);
   }
 

@@ -1,4 +1,3 @@
-import { expect } from '@playwright/test';
 import { BasePage } from '../../base-page.js';
 
 export class InstitutionSettingsInsurancePage extends BasePage {
@@ -22,16 +21,11 @@ export class InstitutionSettingsInsurancePage extends BasePage {
       .filter({ hasText: /^Premium package$/ })
       .getByTestId('switch-div');
     this.premiumPackageNameLabel = page.getByText('Premium package name');
-    this.premiumPackageNameInput = page.locator(
-      'input[name="insurance\\.premiumPackageName"]'
-    );
+    this.premiumPackageNameInput = page.locator('input[name="insurance\\.premiumPackageName"]');
 
     // Insurance setup
     this.insuranceTitle = page.getByText('Insurance title');
-    this.insuranceInput = page
-      .locator('div')
-      .filter({ hasText: /^Add$/ })
-      .getByPlaceholder('Example');
+    this.insuranceInput = page.locator('div').filter({ hasText: /^Add$/ }).getByPlaceholder('Example');
     this.copayAmount = page.getByText('Co-pay amount');
     this.copayInput = page.getByRole('textbox', { name: '0' });
     this.deleteButton = page
@@ -45,17 +39,9 @@ export class InstitutionSettingsInsurancePage extends BasePage {
       name: 'Payments Setup',
     });
     this.selfPaymentLabel = page.getByText('Self Payment');
-    this.selfPaymentToggleSwitch = page
-      .locator('label')
-      .filter({ hasText: 'Self Payment' })
-      .getByTestId('switch-div');
-    this.selfPaymentCheckbox = page
-      .locator('label')
-      .filter({ hasText: 'Self Payment' })
-      .getByTestId('switch-div');
-    this.selectPaymentProcessorLabel = page.getByText(
-      'Select a payment processor'
-    );
+    this.selfPaymentToggleSwitch = page.locator('label').filter({ hasText: 'Self Payment' }).getByTestId('switch-div');
+    this.selfPaymentCheckbox = page.locator('label').filter({ hasText: 'Self Payment' }).getByTestId('switch-div');
+    this.selectPaymentProcessorLabel = page.getByText('Select a payment processor');
     this.selectPaymentProcessorDropdown = page
       .locator('div')
       .filter({ hasText: /^Select a payment processor/ })
@@ -67,10 +53,7 @@ export class InstitutionSettingsInsurancePage extends BasePage {
     this.stripeProcessorItem = page.getByTestId('item Stripe');
 
     this.currencyLabel = page.getByText('Currency');
-    this.currencyDropdown = page
-      .locator('div')
-      .getByTestId('icon-ChevronDown')
-      .nth(2);
+    this.currencyDropdown = page.locator('div').getByTestId('icon-ChevronDown').nth(2);
     this.usdCurrencyItem = page.getByTestId('item USD - United States dollar');
     this.dopCurrencyItem = page.getByTestId('item DOP - Dominican peso');
 
@@ -92,18 +75,14 @@ export class InstitutionSettingsInsurancePage extends BasePage {
     });
 
     // Patient payment reminders
-    this.patientPaymentRemindersLabel = page.getByText(
-      'Patient payment reminders'
-    );
+    this.patientPaymentRemindersLabel = page.getByText('Patient payment reminders');
     this.patientPaymentRemindersToggle = page
       .locator('label')
       .filter({ hasText: 'Patient payment reminders' })
       .getByTestId('switch-div');
     this.serviceRemindersLabel = page.getByText('Service reminder');
     this.serviceReminderDropdown = page.getByTestId('dropdown-field').nth(2);
-    this.serviceReminderDropdownSelection = page.getByTestId(
-      'item 48 hours before appointment'
-    );
+    this.serviceReminderDropdownSelection = page.getByTestId('item 48 hours before appointment');
     this.intervalsLabel = page.getByText('Intervals');
     this.intervalsDropdown = page.getByTestId('dropdown-field').nth(3);
     this.intervalsDropdownSelection = page.getByTestId('item Every 8 hours');
@@ -116,12 +95,8 @@ export class InstitutionSettingsInsurancePage extends BasePage {
     this.successMessage = page.getByText('SuccessInfo updated');
 
     // Error messages
-    this.errorMessage = page
-      .getByText('This field is required - please provide a value')
-      .first();
-    this.errorMessageToast = page
-      .getByText('Please fix the errors in the form.')
-      .first();
+    this.errorMessage = page.getByText('This field is required - please provide a value').first();
+    this.errorMessageToast = page.getByText('Please fix the errors in the form.').first();
 
     // Success messages
     this.successMessage = page.getByText('SuccessInfo updated');
@@ -205,10 +180,7 @@ export class InstitutionSettingsInsurancePage extends BasePage {
   }
 
   async enablePatientPaymentRemindersIfNeeded() {
-    const isRemindersEnabled =
-      (await this.patientPaymentRemindersToggle.getAttribute(
-        'aria-checked'
-      )) === 'true';
+    const isRemindersEnabled = (await this.patientPaymentRemindersToggle.getAttribute('aria-checked')) === 'true';
     if (!isRemindersEnabled) {
       await this.patientPaymentRemindersToggle.click();
       await this.page.waitForLoadState('networkidle');

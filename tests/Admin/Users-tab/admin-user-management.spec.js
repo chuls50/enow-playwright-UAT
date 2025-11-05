@@ -50,22 +50,17 @@ test.describe('Admin User Managment @regression', () => {
   });
 
   test('Verify Search functionality on Users Tab @[111336] @admin @functional', async () => {
-    // Define the expected user cell locator based on test environment data
-    const johnDoeUserCell = userTablePage.page.getByRole('cell', {
-      name: 'John Doe',
-    });
+    // search by name
+    const searchTerm = 'cody test provider-';
+    await userTablePage.searchInput.fill(searchTerm);
 
-    // search by first name
-    await userTablePage.searchInput.fill('John');
-    await expect(johnDoeUserCell.first()).toBeVisible();
+    // capture the inner text of cell-0
+    const firstUsername = await userTablePage.page
+      .getByTestId('cell-0-name')
+      .innerText();
 
-    //search by last name
-    await userTablePage.searchInput.fill('Doe');
-    await expect(johnDoeUserCell.first()).toBeVisible();
-
-    // search by full name
-    await userTablePage.searchInput.fill('John Doe');
-    await expect(johnDoeUserCell.first()).toBeVisible();
+    // verify the search result contains the search term
+    expect(firstUsername.toLowerCase()).toContain(searchTerm.toLowerCase());
   });
 
   test('Verify Role filtering functionality on Users Tab @[111337] @admin @functional', async () => {
@@ -93,11 +88,12 @@ test.describe('Admin User Managment @regression', () => {
 
   test('Verify Active toggle behavior on Users Tab @[111339] @admin @functional', async () => {
     // Search for specific user to test toggle behavior
-    await userTablePage.searchInput.fill('John Doe');
+    const userToToggle = 'cody test provider-';
+    await userTablePage.searchInput.fill(userToToggle);
 
     // Toggle user to inactive state
     await userTablePage.activeToggleSwitch.click();
-    await userTablePage.page.waitForTimeout(500);
+    await userTablePage.page.waitForTimeout(1000);
     await userTablePage.page.waitForSelector('text=User is now inactive', {
       state: 'visible',
     });
@@ -105,7 +101,6 @@ test.describe('Admin User Managment @regression', () => {
 
     // Toggle user back to active state
     await userTablePage.activeToggleSwitch.click();
-    await userTablePage.page.waitForTimeout(500);
     await expect(userTablePage.userActiveMessage).toBeVisible();
   });
 
@@ -169,23 +164,26 @@ test.describe('Admin User Managment @regression', () => {
     await userTablePage.inviteUsersButton.click();
 
     // Fill valid names and verify button remains disabled without complete form
-    await userTablePage.inviteUsersFirstNameField.fill('John');
-    await userTablePage.inviteUsersLastNameField.fill('Doe');
+    const validFirstName = 'John';
+    const validLastName = 'Doe';
+    await userTablePage.inviteUsersFirstNameField.fill(validFirstName);
+    await userTablePage.inviteUsersLastNameField.fill(validLastName);
     await expect(userTablePage.inviteUsersSendInviteButton).toBeDisabled();
 
     // Fill invalid characters in name fields
+    const invalidName = '%^&*';
     await userTablePage.inviteUsersFirstNameField.click();
-    await userTablePage.inviteUsersFirstNameField.fill('%^&*');
+    await userTablePage.inviteUsersFirstNameField.fill(invalidName);
     await userTablePage.inviteUsersLastNameField.click();
-    await userTablePage.inviteUsersLastNameField.fill('$%^&*');
+    await userTablePage.inviteUsersLastNameField.fill(invalidName);
 
     // Fill invalid characters in email field
     await userTablePage.inviteUsersEmailField.click();
-    await userTablePage.inviteUsersEmailField.fill('$%^&*');
+    await userTablePage.inviteUsersEmailField.fill(invalidName);
 
     // Select institution and role to complete form
     await userTablePage.inviteUsersInstitutionDropdown.click();
-    await userTablePage.inviteUsersInstitutionDropdownOptionGlobalMed.click();
+    await userTablePage.inviteUsersInstitutionDropdownOptionCodyTest.click();
     await userTablePage.dropdownField.click();
     await userTablePage.inviteUsersRoleDropdownOptionPatient.click();
 

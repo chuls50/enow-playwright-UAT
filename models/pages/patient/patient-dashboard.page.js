@@ -9,11 +9,7 @@ export class DashboardPage extends BasePage {
 
     // Navigation Elements
     this.navbar = page.getByTestId('navigation');
-    this.navbarInstitutionLogo = page
-      .getByTestId('navigation')
-      .getByTestId('avatar')
-      .locator('div')
-      .nth(1);
+    this.navbarInstitutionLogo = page.getByTestId('navigation').getByTestId('avatar').locator('div').nth(1);
     this.navbarDashboard = page.locator('a').filter({ hasText: 'Dashboard' });
 
     // Schedule Appointment

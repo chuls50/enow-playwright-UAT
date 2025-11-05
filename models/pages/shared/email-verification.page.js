@@ -1,47 +1,47 @@
 import { expect } from '@playwright/test';
 
 export class EmailVerificationPage {
-    constructor(page) {
-        this.page = page;
-        
-        // Page elements
-        this.verifyEmailHeading = page.getByRole('heading', { name: 'Verify your email' });
-        this.resendLink = page.getByRole('link', { name: 'Resend link' });
-        this.resendConfirmationMessage = page.getByText('Please check your email for a verification link');
-    }
+  constructor(page) {
+    this.page = page;
 
-    getEmailText(email) {
-        return this.page.getByText(email);
-    }
+    // Page elements
+    this.verifyEmailHeading = page.getByRole('heading', { name: 'Verify your email' });
+    this.resendLink = page.getByRole('link', { name: 'Resend link' });
+    this.resendConfirmationMessage = page.getByText('Please check your email for a verification link');
+  }
 
-    async clickResendLink() {
-        await this.resendLink.click();
-    }
+  getEmailText(email) {
+    return this.page.getByText(email);
+  }
 
-    async verifyEmailVerificationHeading() {
-        await expect(this.verifyEmailHeading).toBeVisible();
-    }
+  async clickResendLink() {
+    await this.resendLink.click();
+  }
 
-    async verifyEmailDisplayed(email) {
-        await expect(this.getEmailText(email)).toBeVisible();
-    }
+  async verifyEmailVerificationHeading() {
+    await expect(this.verifyEmailHeading).toBeVisible();
+  }
 
-    async verifyResendLinkVisible() {
-        await expect(this.resendLink).toBeVisible();
-    }
+  async verifyEmailDisplayed(email) {
+    await expect(this.getEmailText(email)).toBeVisible();
+  }
 
-    async verifyResendConfirmation() {
-        await expect(this.resendConfirmationMessage).toBeVisible();
-    }
+  async verifyResendLinkVisible() {
+    await expect(this.resendLink).toBeVisible();
+  }
 
-    async verifyEmailVerificationElements(email) {
-        await this.verifyEmailVerificationHeading();
-        await this.verifyEmailDisplayed(email);
-        await this.verifyResendLinkVisible();
-    }
+  async verifyResendConfirmation() {
+    await expect(this.resendConfirmationMessage).toBeVisible();
+  }
 
-    async testResendLinkWorkflow() {
-        await this.clickResendLink();
-        await this.verifyResendConfirmation();
-    }
+  async verifyEmailVerificationElements(email) {
+    await this.verifyEmailVerificationHeading();
+    await this.verifyEmailDisplayed(email);
+    await this.verifyResendLinkVisible();
+  }
+
+  async testResendLinkWorkflow() {
+    await this.clickResendLink();
+    await this.verifyResendConfirmation();
+  }
 }

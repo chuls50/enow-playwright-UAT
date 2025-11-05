@@ -8,9 +8,7 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
     super(page);
 
     // Settings Navigation
-    this.institutionSettingsTab = page
-      .locator('a')
-      .filter({ hasText: 'Institution Settings' });
+    this.institutionSettingsTab = page.locator('a').filter({ hasText: 'Institution Settings' });
     this.configurationSection = page.getByRole('button', {
       name: 'Configuration',
     });
@@ -22,9 +20,7 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
     this.heading = page.getByRole('heading', { name: 'Product Configuration' });
 
     // Toggle Elements
-    this.enforceCountryText = page.getByText(
-      'Enforce Country / State Licensing on Provider Lists Enabled'
-    );
+    this.enforceCountryText = page.getByText('Enforce Country / State Licensing on Provider Lists Enabled');
     this.enforceCountryToggle = page
       .locator('label')
       .filter({
@@ -47,9 +43,7 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
       .filter({ hasText: 'Dispatcher Option' })
       .getByTestId('switch-div');
 
-    this.enableChatAppointmentsText = page.getByText(
-      'Enable Chat Appointment Types'
-    );
+    this.enableChatAppointmentsText = page.getByText('Enable Chat Appointment Types');
     this.enableChatAppointmentsToggle = page
       .locator('label')
       .filter({ hasText: 'Enable Chat Appointment Types' })
@@ -59,10 +53,7 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
     );
 
     // Input Fields
-    this.numberOfTimesToContactText = page.getByText(
-      'Number of Times to Contact Available Providers',
-      { exact: true }
-    );
+    this.numberOfTimesToContactText = page.getByText('Number of Times to Contact Available Providers', { exact: true });
     this.numberOfTimesToContactInput = page.getByRole('textbox', {
       name: 'Number of Times to Contact',
     });
@@ -77,12 +68,8 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
     this.cancelButton = page.getByRole('button', { name: 'Cancel' });
 
     // Error Messages
-    this.formErrorMessage = page.getByText(
-      'Please fix the errors in the form.'
-    );
-    this.zeroValueErrorMessage = page.getByText(
-      'The number cannot be less than or equal to zero'
-    );
+    this.formErrorMessage = page.getByText('Please fix the errors in the form.');
+    this.zeroValueErrorMessage = page.getByText('The number cannot be less than or equal to zero');
   }
 
   // Navigation Methods

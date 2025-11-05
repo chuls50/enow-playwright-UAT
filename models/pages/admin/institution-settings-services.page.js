@@ -16,24 +16,18 @@ export class InstitutionSettingsServicesPage extends BasePage {
     this.serviceNameInput = page.getByText('Service name*').first();
 
     // Form Fields
-    this.serviceNameField = (index = 0) =>
-      page.locator(`input[name="services\\.${index}\\.name"]`);
-    this.descriptionField = (index = 0) =>
-      page.locator(`input[name="services\\.${index}\\.description"]`);
+    this.serviceNameField = (index = 0) => page.locator(`input[name="services\\.${index}\\.name"]`);
+    this.descriptionField = (index = 0) => page.locator(`input[name="services\\.${index}\\.description"]`);
     this.specialtyDropdown = page.getByTestId('dropdown-field').first();
 
     // Toggles
     this.feeEnabledSwitch = page.getByText('Fee enabled').first();
     this.serviceEnabledSwitch = page.getByText('Service Enabled').nth(4);
-    this.allowEncounterNowSwitch = page
-      .getByText("Allow 'See a provider now'")
-      .nth(4);
+    this.allowEncounterNowSwitch = page.getByText("Allow 'See a provider now'").nth(4);
 
     // Buttons
     this.cancelButton = page.getByRole('button', { name: 'Cancel' });
-    this.providerListButton = page
-      .getByRole('button', { name: 'Provider List' })
-      .first();
+    this.providerListButton = page.getByRole('button', { name: 'Provider List' }).first();
     this.saveChangesButton = page.getByRole('button', { name: 'Save Changes' });
 
     // Provider List Section
@@ -47,18 +41,14 @@ export class InstitutionSettingsServicesPage extends BasePage {
     this.selectProviderInput = page.getByRole('textbox', {
       name: 'Select Provider',
     });
-    this.providerDropdownInModal = page
-      .getByTestId('modal')
-      .getByTestId('dropdown-field');
+    this.providerDropdownInModal = page.getByTestId('modal').getByTestId('dropdown-field');
     this.addProviderButton = page.getByRole('button', { name: 'Add Provider' });
     this.closeModalButton = page.getByRole('button', { name: 'XClose' });
     this.trashButton = page.getByRole('button', { name: 'Trash' });
     this.itemsWrapper = page.getByTestId('items-wrapper');
 
     // Fee Price Field
-    this.feePriceField = page
-      .getByRole('textbox', { name: 'Fee price' })
-      .first();
+    this.feePriceField = page.getByRole('textbox', { name: 'Fee price' }).first();
 
     // Duration Dropdown
     this.durationDropdown = page.getByTestId('custom-select-item-wrapper');
@@ -74,36 +64,22 @@ export class InstitutionSettingsServicesPage extends BasePage {
     // Specific provider elements that appear in tests
     this.ashleyFloresItem = page.getByTestId('item Ashley Flores');
     this.johnDoeItem = page.getByTestId('item John Doe');
-    this.johnDoeRemoveButton = page
-      .getByTestId('cell-0-remove')
-      .getByRole('button', { name: 'Trash' });
+    this.johnDoeRemoveButton = page.getByTestId('cell-0-remove').getByRole('button', { name: 'Trash' });
 
     // Messages
     this.successMessage = page.getByText('Info updated successfully');
     this.validationErrorMessage = page.getByText('Text fields can include');
     this.errorMessage = page.getByText('Please fix the errors in the');
     this.errorToast = page.getByText('Please fix the errors in the');
-    this.requiredFieldError = page.getByText(
-      'This field is required - please provide a value'
-    );
-    this.feeErrorMessage = page.getByText(
-      'Fee must be greater than 0 when enabled'
-    );
-    this.ashleyFloresRemovedMessage = page.getByText(
-      'Ashley Flores removed from'
-    );
-    this.ashleyFloresAddedMessage = page.getByText(
-      'Ashley Flores added to service'
-    );
-    this.johnDoeRemovedMessage = page.getByText(
-      'John Doe removed from service'
-    );
+    this.requiredFieldError = page.getByText('This field is required - please provide a value');
+    this.feeErrorMessage = page.getByText('Fee must be greater than 0 when enabled');
+    this.ashleyFloresRemovedMessage = page.getByText('Ashley Flores removed from');
+    this.ashleyFloresAddedMessage = page.getByText('Ashley Flores added to service');
+    this.johnDoeRemovedMessage = page.getByText('John Doe removed from service');
     this.johnDoeAddedMessage = page.getByText('John Doe added to service');
 
     // Dynamic elements that appear in specific tests
-    this.addNewServiceText = page.getByText(
-      'Service name*DescriptionSpecialtySpecialty requiredDuration30 minutesFee'
-    );
+    this.addNewServiceText = page.getByText('Service name*DescriptionSpecialtySpecialty requiredDuration30 minutesFee');
     this.johndoeproviderEmail = page.getByText('chuls+johndoeprovider@');
   }
 
@@ -124,9 +100,7 @@ export class InstitutionSettingsServicesPage extends BasePage {
   }
 
   async fillServiceName(serviceName, index = 1, addTimestamp = false) {
-    const finalName = addTimestamp
-      ? `${serviceName} ${Date.now()}`
-      : serviceName;
+    const finalName = addTimestamp ? `${serviceName} ${Date.now()}` : serviceName;
     await this.serviceNameField(index).click();
     await this.serviceNameField(index).fill(finalName);
     return finalName;
@@ -138,19 +112,13 @@ export class InstitutionSettingsServicesPage extends BasePage {
   }
 
   async clearField(fieldType, index = 0) {
-    const field =
-      fieldType === 'name'
-        ? this.serviceNameField(index)
-        : this.descriptionField(index);
+    const field = fieldType === 'name' ? this.serviceNameField(index) : this.descriptionField(index);
     await field.clear();
   }
 
   async selectSpecialty(specialtyName) {
     await this.specialtyDropdown.click();
-    await this.page
-      .getByTestId('items-wrapper')
-      .getByTestId(`item ${specialtyName}`)
-      .click();
+    await this.page.getByTestId('items-wrapper').getByTestId(`item ${specialtyName}`).click();
   }
 
   async openAddServiceSection() {

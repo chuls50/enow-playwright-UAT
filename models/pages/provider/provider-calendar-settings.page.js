@@ -8,10 +8,7 @@ export class CalendarSettingsPage extends BasePage {
     this.accountSettingsHeader = page.getByRole('heading', {
       name: 'Account settings',
     });
-    this.calendarLabel = page
-      .getByRole('paragraph')
-      .filter({ hasText: 'Calendar' })
-      .first();
+    this.calendarLabel = page.getByRole('paragraph').filter({ hasText: 'Calendar' }).first();
     this.calendarDescription = page.getByText('Manage your time zone and');
 
     // Time Zone section elements
@@ -23,22 +20,15 @@ export class CalendarSettingsPage extends BasePage {
     this.timeZoneModalCloseButton = page.getByRole('button', {
       name: 'XClose',
     });
-    this.modalTimeZone = page
-      .locator('span')
-      .filter({ hasText: /^Time zone$/ });
+    this.modalTimeZone = page.locator('span').filter({ hasText: /^Time zone$/ });
 
     // Time Zone Toggle and form elements
     this.automaticTimeZoneText = page.getByText('Automatic time zone');
-    this.automaticTimeZoneToggle = page
-      .getByTestId('switch-div')
-      .locator('div')
-      .first();
+    this.automaticTimeZoneToggle = page.getByTestId('switch-div').locator('div').first();
 
     // Time Zone Dropdown elements
     this.timeZoneDropdown = page.getByTestId('custom-select-item-wrapper');
-    this.timeZoneDropdownIcon = page
-      .getByRole('img', { name: 'ChevronDown' })
-      .getByTestId('icon');
+    this.timeZoneDropdownIcon = page.getByRole('img', { name: 'ChevronDown' }).getByTestId('icon');
 
     // Time Zone Action buttons
     this.timeZoneCancelButton = page.getByRole('button', { name: 'Cancel' });
@@ -50,9 +40,7 @@ export class CalendarSettingsPage extends BasePage {
     this.timeZoneSuccessMessage = page.getByText('Time zone updated');
 
     // Common timezone display elements
-    this.mountainStandardTime = page
-      .getByText('(GMT-07:00) Mountain Standard')
-      .first();
+    this.mountainStandardTime = page.getByText('(GMT-07:00) Mountain Standard').first();
 
     // Daily Availability section elements
     this.dailyAvailabilityLabel = page.getByText('Daily Availability').first();
@@ -72,34 +60,13 @@ export class CalendarSettingsPage extends BasePage {
     this.dayOffMessage = page.getByText('Day off');
 
     // Weekly availability toggles - only the ones actually used in tests
-    this.availabilityToggleMonday = page
-      .locator('label')
-      .filter({ hasText: 'Monday' })
-      .getByTestId('switch-div');
-    this.availabilityToggleTuesday = page
-      .locator('label')
-      .filter({ hasText: 'Tuesday' })
-      .getByTestId('switch-div');
-    this.availabilityToggleWednesday = page
-      .locator('label')
-      .filter({ hasText: 'Wednesday' })
-      .getByTestId('switch-div');
-    this.availabilityToggleThursday = page
-      .locator('label')
-      .filter({ hasText: 'Thursday' })
-      .getByTestId('switch-div');
-    this.availabilityToggleFriday = page
-      .locator('label')
-      .filter({ hasText: 'Friday' })
-      .getByTestId('switch-div');
-    this.availabilityToggleSaturday = page
-      .locator('label')
-      .filter({ hasText: 'Saturday' })
-      .getByTestId('switch-div');
-    this.availabilityToggleSunday = page
-      .locator('label')
-      .filter({ hasText: 'Sunday' })
-      .getByTestId('switch-div');
+    this.availabilityToggleMonday = page.locator('label').filter({ hasText: 'Monday' }).getByTestId('switch-div');
+    this.availabilityToggleTuesday = page.locator('label').filter({ hasText: 'Tuesday' }).getByTestId('switch-div');
+    this.availabilityToggleWednesday = page.locator('label').filter({ hasText: 'Wednesday' }).getByTestId('switch-div');
+    this.availabilityToggleThursday = page.locator('label').filter({ hasText: 'Thursday' }).getByTestId('switch-div');
+    this.availabilityToggleFriday = page.locator('label').filter({ hasText: 'Friday' }).getByTestId('switch-div');
+    this.availabilityToggleSaturday = page.locator('label').filter({ hasText: 'Saturday' }).getByTestId('switch-div');
+    this.availabilityToggleSunday = page.locator('label').filter({ hasText: 'Sunday' }).getByTestId('switch-div');
 
     // Monday-specific elements used in tests
     this.availabilityAddIconMonday = page
@@ -119,12 +86,8 @@ export class CalendarSettingsPage extends BasePage {
       .nth(1);
 
     // Availability Success/Error messages
-    this.availabilitySuccessMessage = page.getByText(
-      'Profile updated successfully!'
-    );
-    this.availabilityErrorMessage = page.getByText(
-      'All times must have a value selected.'
-    );
+    this.availabilitySuccessMessage = page.getByText('Profile updated successfully!');
+    this.availabilityErrorMessage = page.getByText('All times must have a value selected.');
   }
 
   // Navigation methods

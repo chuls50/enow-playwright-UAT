@@ -12,14 +12,10 @@ export class CoordinatorDashboardPage extends BasePage {
     // Navigation
     this.navigation = page.getByTestId('navigation');
     this.dashboardLink = page.locator('a').filter({ hasText: 'Dashboard' });
-    this.pastSessionsLink = page
-      .locator('a')
-      .filter({ hasText: 'Past sessions' });
+    this.pastSessionsLink = page.locator('a').filter({ hasText: 'Past sessions' });
     this.providersLink = page.locator('a').filter({ hasText: 'Providers' });
     this.patientsLink = page.locator('a').filter({ hasText: 'Patients' });
-    this.waitingRoomsLink = page
-      .locator('a')
-      .filter({ hasText: 'Waiting rooms' });
+    this.waitingRoomsLink = page.locator('a').filter({ hasText: 'Waiting rooms' });
 
     // Action Buttons
     this.scheduleSession = page.getByRole('button', {

@@ -11,24 +11,16 @@ export class DashboardPage extends BasePage {
 
     // Navigation Elements
     this.navbar = page.getByTestId('navigation');
-    this.navbarInstitutionLogo = page
-      .getByTestId('navigation')
-      .getByTestId('avatar')
-      .locator('div')
-      .nth(1);
+    this.navbarInstitutionLogo = page.getByTestId('navigation').getByTestId('avatar').locator('div').nth(1);
     this.navbarDashboard = page.locator('a').filter({ hasText: 'Dashboard' });
-    this.navbarPastSessions = page
-      .locator('a')
-      .filter({ hasText: 'Past Sessions' });
+    this.navbarPastSessions = page.locator('a').filter({ hasText: 'Past Sessions' });
     this.navbarProviders = page.locator('a').filter({ hasText: 'Providers' });
 
     // Your schedule for today
     this.todaySchedule = page.getByRole('heading', {
       name: 'Your schedule for today',
     });
-    this.todayScheduleDropSelect = page
-      .getByTestId('dropselect')
-      .getByTestId('icon');
+    this.todayScheduleDropSelect = page.getByTestId('dropselect').getByTestId('icon');
     this.scheduleSessionButton = page.getByRole('button', {
       name: 'CalendarPlus Schedule session',
     });
@@ -75,9 +67,7 @@ export class DashboardPage extends BasePage {
     this.mainCard = page.getByTestId('main-card');
 
     // Past Sessions
-    this.pastSessionsLink = page
-      .locator('a')
-      .filter({ hasText: 'Past sessions' });
+    this.pastSessionsLink = page.locator('a').filter({ hasText: 'Past sessions' });
     this.pastSessionsHeading = page.getByRole('heading', {
       name: 'Past sessions',
     });
@@ -147,9 +137,7 @@ export class DashboardPage extends BasePage {
     this.modalCheckbox = page.getByTestId('modal').locator('label span');
 
     // Attachments Tab
-    this.uploadFilesDiv = page
-      .locator('div')
-      .filter({ hasText: /^Upload filesChoose files$/ });
+    this.uploadFilesDiv = page.locator('div').filter({ hasText: /^Upload filesChoose files$/ });
     this.chooseFilesLink = page.getByRole('link', { name: 'Choose files' });
 
     // Payments Tab
@@ -160,26 +148,14 @@ export class DashboardPage extends BasePage {
     this.pastSessionsHeadingOnPatient = page.getByRole('heading', {
       name: 'Past sessions',
     });
-    this.dateServiceProviderText = page.getByText(
-      'DateServiceProviderTypeClear'
-    );
-    this.downloadVsrLink = page
-      .getByTestId('cell-0-actions')
-      .getByRole('link', { name: 'Download VSR' });
-    this.viewDetailsFromPatient = page
-      .getByTestId('cell-0-actions')
-      .getByRole('link', { name: 'View details' });
-    this.visitNotesParagraph = page
-      .getByRole('paragraph')
-      .filter({ hasText: 'Visit Notes' });
+    this.dateServiceProviderText = page.getByText('DateServiceProviderTypeClear');
+    this.downloadVsrLink = page.getByTestId('cell-0-actions').getByRole('link', { name: 'Download VSR' });
+    this.viewDetailsFromPatient = page.getByTestId('cell-0-actions').getByRole('link', { name: 'View details' });
+    this.visitNotesParagraph = page.getByRole('paragraph').filter({ hasText: 'Visit Notes' });
 
     // Account Settings
     this.popoverTrigger = page.getByTestId('popover-trigger');
-    this.avatarDiv = page
-      .getByTestId('avatar')
-      .locator('div')
-      .filter({ hasText: 'CP' })
-      .locator('div');
+    this.avatarDiv = page.getByTestId('avatar').locator('div').filter({ hasText: 'CP' }).locator('div');
     this.accountSettingsButton = page.getByRole('button', {
       name: 'SettingsGear Account settings',
     });
@@ -264,10 +240,7 @@ export class DashboardPage extends BasePage {
     await this.exportPdfLink.click();
     await this.modalCheckbox.click();
 
-    const [download] = await Promise.all([
-      this.page.waitForEvent('download'),
-      this.exportPdfButton.click(),
-    ]);
+    const [download] = await Promise.all([this.page.waitForEvent('download'), this.exportPdfButton.click()]);
 
     const fileName = await download.suggestedFilename();
     const filePath = './downloads/' + fileName;
@@ -284,12 +257,7 @@ export class DashboardPage extends BasePage {
   }
 
   async openAccountSettings() {
-    await this.popoverTrigger
-      .getByTestId('avatar')
-      .locator('div')
-      .filter({ hasText: 'CP' })
-      .locator('div')
-      .click();
+    await this.popoverTrigger.getByTestId('avatar').locator('div').filter({ hasText: 'CP' }).locator('div').click();
     await this.accountSettingsButton.click();
   }
 

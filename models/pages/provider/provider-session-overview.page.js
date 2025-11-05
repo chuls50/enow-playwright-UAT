@@ -16,33 +16,23 @@ export class ProviderSessionOverviewPage extends BasePage {
     });
 
     // Toast Messages
-    this.sessionScheduledToast = page
-      .getByTestId('toast')
-      .getByText('Session scheduled', { exact: true });
+    this.sessionScheduledToast = page.getByTestId('toast').getByText('Session scheduled', { exact: true });
     this.successToast = page.getByText('Success');
-    this.sessionRescheduledMessage = page
-      .getByRole('paragraph')
-      .filter({ hasText: 'Session rescheduled' });
+    this.sessionRescheduledMessage = page.getByRole('paragraph').filter({ hasText: 'Session rescheduled' });
     this.sessionCanceledToast = page.getByText('Session canceled');
-    this.sessionRequestAcceptedMessage = page.getByText(
-      'Session request accepted'
-    );
+    this.sessionRequestAcceptedMessage = page.getByText('Session request accepted');
     this.invitationLinkCopiedMessage = page.getByText('Invitation link copied');
 
     // Session Cards and Status
     this.sessionScheduledCard = page.getByText('Session scheduled');
     this.sessionCancelledCard = page.getByText('Session cancelled');
     this.mainCard = page.getByTestId('main-card');
-    this.confirmedAppointmentCard = page.locator(
-      'div[data-testid="main-card"].sc-hlDTgW.enzraZ'
-    );
+    this.confirmedAppointmentCard = page.locator('div[data-testid="main-card"].sc-hlDTgW.enzraZ');
 
     // Session Details Modal
     this.sessionDetailsHeader = page.getByText('Session Details');
     this.scheduledDurationText = page.getByText('Scheduled duration');
-    this.videoIcon = page
-      .getByRole('img', { name: 'Video' })
-      .getByTestId('icon-Video');
+    this.videoIcon = page.getByRole('img', { name: 'Video' }).getByTestId('icon-Video');
     this.clockStopwatchIcon = page.getByTestId('icon-ClockStopwatch');
     this.closeModalButton = page.getByRole('button', { name: 'XClose' });
 
@@ -254,16 +244,14 @@ export class ProviderSessionOverviewPage extends BasePage {
   // State Reset Helper Method
   async resetStateIfSessionScheduled() {
     // Helper to cancel session for a given DotsV button
-    const cancelSessionForDotsV = async dotsVButton => {
+    const cancelSessionForDotsV = async (dotsVButton) => {
       await dotsVButton.click();
       await this.cancelSessionButton.click();
       await this.yesCancelButton.click();
       await this.sessionCanceledToast.first().waitFor({ state: 'visible' });
 
       // Close modal if present
-      const xCloseButtons = await this.page
-        .locator('button[aria-label="XClose"]')
-        .all();
+      const xCloseButtons = await this.page.locator('button[aria-label="XClose"]').all();
       for (const btn of xCloseButtons) {
         if (await btn.isVisible()) {
           await btn.click();

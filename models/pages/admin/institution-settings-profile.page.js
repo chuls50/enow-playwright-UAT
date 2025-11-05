@@ -8,31 +8,21 @@ export class InstitutionSettingsProfilePage extends BasePage {
     this.usersTab = page.locator('a').filter({ hasText: 'Users' });
 
     // Institution Settings
-    this.institutionSettingsText = page
-      .locator('h2')
-      .filter({ hasText: 'Institution settings' });
+    this.institutionSettingsText = page.locator('h2').filter({ hasText: 'Institution settings' });
     this.nameField = page.getByText('Institution name*');
     this.nameInput = page.getByRole('textbox', { name: 'Example Name' });
     this.registrationLinkText = page.getByText('Patient Registration Link');
     this.registrationLink = page.getByRole('link', {
       name: 'https://portal.encounterservices.com/signup/INSLT885R9TQMF8T68OU75M',
     });
-    this.registrationLinkCopyButton = page
-      .getByRole('button', { name: 'Copy link' })
-      .first();
-    this.registrationLinkCopiedMessage = page.getByText(
-      'Link successfully copied'
-    );
+    this.registrationLinkCopyButton = page.getByRole('button', { name: 'Copy link' }).first();
+    this.registrationLinkCopiedMessage = page.getByText('Link successfully copied');
     this.deviceIDAccessLinkText = page.getByText('Device ID Access Link');
     this.deviceIDAccessLink = page.getByRole('link', {
       name: 'https://portal.encounterservices.com/login/device',
     });
-    this.deviceIDAccessLinkCopyButton = page
-      .getByRole('button', { name: 'Copy link' })
-      .nth(1);
-    this.deviceIDAccessLinkCopiedMessage = page.getByText(
-      'Link successfully copied'
-    );
+    this.deviceIDAccessLinkCopyButton = page.getByRole('button', { name: 'Copy link' }).nth(1);
+    this.deviceIDAccessLinkCopiedMessage = page.getByText('Link successfully copied');
     this.phoneNumberText = page.getByText('Phone number').first();
     this.phoneNumberInput = page.locator('input[name="phone\\.number"]');
     this.phoneNumberDropdown = page.locator('.sc-dMpJUC').first();
@@ -49,13 +39,9 @@ export class InstitutionSettingsProfilePage extends BasePage {
     this.institutionAddressCityText = page.getByText('City').first();
     this.institutionAddressCityInput = page.locator('input[name="city"]');
     this.institutionAddressCountryText = page.getByText('Country').first();
-    this.institutionAddressCountryDropdown = page
-      .getByTestId('custom-select-item-wrapper')
-      .first();
+    this.institutionAddressCountryDropdown = page.getByTestId('custom-select-item-wrapper').first();
     this.institutionAddressStateText = page.getByText('State').first();
-    this.institutionAddressStateDropdown = page
-      .getByTestId('custom-select-item-wrapper')
-      .nth(1);
+    this.institutionAddressStateDropdown = page.getByTestId('custom-select-item-wrapper').nth(1);
 
     // Institution Address Dropdown Selections (working locators)
     this.countryDropdownAfghanistan = page
@@ -66,18 +52,10 @@ export class InstitutionSettingsProfilePage extends BasePage {
       .locator('div')
       .filter({ hasText: /^CountryAlbania$/ })
       .getByTestId('custom-select-item-wrapper');
-    this.stateDropdownAfterCountrySelection = page
-      .getByTestId('custom-select-item-wrapper')
-      .nth(2);
-    this.afghanistanCountryOption = page.getByTestId(
-      'custom-dropdown-item-Afghanistan'
-    );
-    this.albaniaCountryOption = page.getByTestId(
-      'custom-dropdown-item-Albania'
-    );
-    this.badakhshanStateOption = page.getByTestId(
-      'custom-dropdown-item-Badakhshan'
-    );
+    this.stateDropdownAfterCountrySelection = page.getByTestId('custom-select-item-wrapper').nth(2);
+    this.afghanistanCountryOption = page.getByTestId('custom-dropdown-item-Afghanistan');
+    this.albaniaCountryOption = page.getByTestId('custom-dropdown-item-Albania');
+    this.badakhshanStateOption = page.getByTestId('custom-dropdown-item-Badakhshan');
     this.beratStateOption = page.getByTestId('custom-dropdown-item-Berat');
     this.diberStateOption = page.getByTestId('custom-dropdown-item-Diber');
 
@@ -88,9 +66,7 @@ export class InstitutionSettingsProfilePage extends BasePage {
     this.pocTitleText = page.getByText('Title');
     this.pocTitleInput = page.getByRole('textbox', { name: 'Title example' });
     this.pocPhoneNumberText = page.getByText('Phone number*');
-    this.pocPhoneNumberInput = page.locator(
-      'input[name="pocSettings\\.phone\\.number"]'
-    );
+    this.pocPhoneNumberInput = page.locator('input[name="pocSettings\\.phone\\.number"]');
     this.pocPhoneNumberDropdown = page.getByText('US (+1)').nth(1);
     this.pocEmailText = page.getByText('Email*');
     this.pocEmailInput = page.getByRole('textbox', {
@@ -101,9 +77,7 @@ export class InstitutionSettingsProfilePage extends BasePage {
     this.pocAddressText = page.getByRole('heading', { name: 'POC Address' });
     this.pocAddressInput = page.locator('input[name="pocSettings\\.street"]');
     this.pocAptSuiteEtcText = page.getByText('Apt, Suite, Etc').nth(1);
-    this.pocAptSuiteEtcInput = page.locator(
-      'input[name="pocSettings\\.address"]'
-    );
+    this.pocAptSuiteEtcInput = page.locator('input[name="pocSettings\\.address"]');
     this.pocZipCodeText = page.getByText('ZIP code').nth(1);
     this.pocZipCodeInput = page.locator('input[name="pocSettings\\.zip"]');
     this.pocCityText = page.getByText('City').nth(1);
@@ -117,12 +91,8 @@ export class InstitutionSettingsProfilePage extends BasePage {
       .getByTestId('custom-dropdown-item-United States of America')
       .getByText('United States of America');
     this.pocStateText = page.getByText('State').nth(2);
-    this.pocStateDropdown = page
-      .getByTestId('custom-select-item-wrapper')
-      .nth(4);
-    this.pocStateDropdownSelection = page.getByTestId(
-      'custom-dropdown-item-Arizona'
-    );
+    this.pocStateDropdown = page.getByTestId('custom-select-item-wrapper').nth(4);
+    this.pocStateDropdownSelection = page.getByTestId('custom-dropdown-item-Arizona');
 
     // Buttons
     this.saveChangesButton = page.getByRole('button', { name: 'Save Changes' });
@@ -132,12 +102,8 @@ export class InstitutionSettingsProfilePage extends BasePage {
     this.successMessage = page.getByText('Info updated successfully');
     this.errorMessage = page.getByText('Please fix the errors in the form');
     this.requiredFieldError = page.getByText('This field is required');
-    this.invalidEmailError = page.getByText(
-      'Email fields can only include alphanumeric characters'
-    );
-    this.invalidTextFieldError = page.getByText(
-      'Text fields can include alphanumeric characters'
-    );
+    this.invalidEmailError = page.getByText('Email fields can only include alphanumeric characters');
+    this.invalidTextFieldError = page.getByText('Text fields can include alphanumeric characters');
   }
 
   async gotoInstitutionSettingsProfile() {

@@ -16,178 +16,94 @@ export class UsersTablePage extends BasePage {
     this.filterByRoleText = page.getByText('Filter by role');
     this.filterByRoleDropdown = page.getByTestId('custom-select-item-wrapper');
     this.filterByRoleDropdownOptions = page.getByTestId('custom-dropdown');
-    this.filterByRoleDropdownOptionAll = page.getByTestId(
-      'custom-dropdown-item-All'
-    );
-    this.filterByRoleDropdownOptionAdmin = page.getByTestId(
-      'custom-dropdown-item-Admin'
-    );
-    this.filterByRoleDropdownOptionPatient = page.getByTestId(
-      'custom-dropdown-item-Patient'
-    );
-    this.filterByRoleDropdownOptionProvider = page.getByTestId(
-      'custom-dropdown-item-Provider'
-    );
-    this.filterByRoleDropdownOptionCoordinator = page.getByTestId(
-      'custom-dropdown-item-Coordinator'
-    );
-    this.filterByRoleDropdownOptionDevice = page.getByTestId(
-      'custom-dropdown-item-Device'
-    );
-    this.inviteUsersInstitutionDropdownOptionGlobalMed = page.getByTestId(
-      'custom-dropdown-item-GM Healthcare Prod'
-    );
+    this.filterByRoleDropdownOptionAll = page.getByTestId('custom-dropdown-item-All');
+    this.filterByRoleDropdownOptionAdmin = page.getByTestId('custom-dropdown-item-Admin');
+    this.filterByRoleDropdownOptionPatient = page.getByTestId('custom-dropdown-item-Patient');
+    this.filterByRoleDropdownOptionProvider = page.getByTestId('custom-dropdown-item-Provider');
+    this.filterByRoleDropdownOptionCoordinator = page.getByTestId('custom-dropdown-item-Coordinator');
+    this.filterByRoleDropdownOptionDevice = page.getByTestId('custom-dropdown-item-Device');
 
     // Table Elements
     this.table = page.getByTestId('table');
     this.tableUsername = page.getByRole('cell', { name: 'User Name' });
     this.tableEmail = page.getByRole('cell', { name: 'Email' });
-    this.tableAssignedRoles = page.getByRole('cell', {
-      name: 'Assigned Roles',
-    });
+    this.tableAssignedRoles = page.getByRole('cell', { name: 'Assigned Roles' });
     this.tableStatus = page.getByRole('cell', { name: 'Active?' });
     this.tableLastUpdated = page.getByRole('cell', { name: 'Last Updated' });
     this.tableSortByLastUpdated = page.getByTestId('sort-button-updated_at');
 
-    this.addRolesButton = page
-      .getByRole('link', { name: 'Plus Add roles' })
-      .first();
+    this.addRolesButton = page.getByRole('link', { name: 'Plus Add roles' }).first();
     this.activeToggleSwitch = page.getByTestId('switch-div').first();
 
     // Pagination Elements
     this.pagination = page.getByTestId('pagination');
-    this.paginationPreviousButton = page.getByRole('button', {
-      name: 'ArrowNarrowLeft Previous',
-    });
-    this.paginationNextButton = page.getByRole('button', {
-      name: 'Next ArrowNarrowRight',
-    });
-    this.paginationPageNumber1 = page
-      .getByTestId('pagination')
-      .getByText('1')
-      .first();
+    this.paginationPreviousButton = page.getByRole('button', { name: 'ArrowNarrowLeft Previous' });
+    this.paginationNextButton = page.getByRole('button', { name: 'Next ArrowNarrowRight' });
+    this.paginationPageNumber1 = page.getByTestId('pagination').getByText('1').first();
     this.paginationPageNumber2 = page.getByTestId('pagination').getByText('2');
     this.paginationPageNumber3 = page.getByTestId('pagination').getByText('3');
     this.paginationPageNumber4 = page.getByTestId('pagination').getByText('4');
 
-    // invite users
-    this.inviteUsersButton = page.getByRole('button', {
-      name: 'UserAdd Invite users',
-    });
+    // Invite Users Elements
+    this.inviteUsersButton = page.getByRole('button', { name: 'UserAdd Invite users' });
     this.inviteUsersModal = page.getByTestId('modal');
-    this.inviteUsersModalHeader = page
-      .getByTestId('modal')
-      .getByText('Invite user');
+    this.inviteUsersModalHeader = page.getByTestId('modal').getByText('Invite user');
     this.inviteUsersFirstNameText = page.getByText('First name*');
-    this.inviteUsersFirstNameField = page.getByRole('textbox', {
-      name: 'John',
-    });
+    this.inviteUsersFirstNameField = page.getByRole('textbox', { name: 'John' });
     this.inviteUsersLastNameText = page.getByText('Last name*');
     this.inviteUsersLastNameField = page.getByRole('textbox', { name: 'Doe' });
     this.inviteUsersEmailText = page.getByText('Email*');
-    this.inviteUsersEmailField = page.getByRole('textbox', {
-      name: 'example@mail.com',
-    });
-    this.inviteUsersInstitutionText = page.getByText('Institution', {
-      exact: true,
-    });
-    this.inviteUsersInstitutionDropdown = page
-      .getByTestId('modal')
-      .getByTestId('custom-select-item-wrapper');
-    this.inviteUsersInstitutionDropdownOptions =
-      page.getByTestId('custom-dropdown');
-    this.inviteUsersInstitutionDropdownOptionGlobalMed = page
-      .getByTestId('custom-dropdown-item-GM Healthcare Prod')
-      .getByText('GM Healthcare Prod');
+    this.inviteUsersEmailField = page.getByRole('textbox', { name: 'example@mail.com' });
+    this.inviteUsersInstitutionText = page.getByText('Institution', { exact: true });
+    this.inviteUsersInstitutionDropdown = page.getByTestId('modal').getByTestId('custom-select-item-wrapper');
+    this.inviteUsersInstitutionDropdownOptions = page.getByTestId('custom-dropdown');
+    this.inviteUsersInstitutionDropdownOptionGlobalMed = page.getByTestId('custom-dropdown-item-GM Healthcare Prod');
+    this.inviteUsersInstitutionDropdownOptionCodyTest = page.getByTestId('custom-dropdown-item-Cody Test');
     this.inviteUsersRoleText = page.getByTestId('modal').getByText('Role');
-    this.inviteUsersRoleDropdown = page.getByRole('textbox', {
-      name: 'Patient, Provider...',
-    });
+    this.inviteUsersRoleDropdown = page.getByRole('textbox', { name: 'Patient, Provider...' });
     this.inviteUsersRoleDropdownOptions = page.getByTestId('items-wrapper');
     this.inviteUsersRoleDropdownOptionAdmin = page.getByTestId('item Admin');
-    this.inviteUsersRoleDropdownOptionPatient =
-      page.getByTestId('item Patient');
-    this.inviteUsersRoleDropdownOptionProvider =
-      page.getByTestId('item Provider');
-    this.inviteUsersRoleDropdownOptionCoordinator =
-      page.getByTestId('item Coordinator');
+    this.inviteUsersRoleDropdownOptionPatient = page.getByTestId('item Patient');
+    this.inviteUsersRoleDropdownOptionProvider = page.getByTestId('item Provider');
+    this.inviteUsersRoleDropdownOptionCoordinator = page.getByTestId('item Coordinator');
     this.inviteUsersCancelButton = page.getByRole('button', { name: 'Cancel' });
-    this.inviteUsersSendInviteButton = page.getByRole('button', {
-      name: 'Send invite',
-    });
+    this.inviteUsersSendInviteButton = page.getByRole('button', { name: 'Send invite' });
     this.inviteUsersXcloseButton = page.getByRole('button', { name: 'XClose' });
 
-    // create device id
-    this.createDeviceIdButton = page.getByRole('button', {
-      name: 'ConsultForm Create Device ID',
-    });
+    // Create Device ID Elements
+    this.createDeviceIdButton = page.getByRole('button', { name: 'ConsultForm Create Device ID' });
     this.createDeviceIdModal = page.getByTestId('modal');
-    this.createDeviceIdModalHeader = page
-      .getByTestId('modal')
-      .getByText('Create Device ID')
-      .first();
+    this.createDeviceIdModalHeader = page.getByTestId('modal').getByText('Create Device ID').first();
     this.createDeviceIdNameText = page.getByText('Name*');
     this.createDeviceIdNameField = page.getByRole('textbox', { name: 'John' });
     this.createDeviceIdDeviceIDText = page.getByText('Device ID*');
-    this.createDeviceIdDeviceIDField = page.getByRole('textbox', {
-      name: '123',
-    });
+    this.createDeviceIdDeviceIDField = page.getByRole('textbox', { name: '123' });
     this.createDeviceIdEmailText = page.getByText('Email*');
-    this.createDeviceIdEmailField = page.getByRole('textbox', {
-      name: 'example@mail.com',
-    });
-    this.createDeviceIdInstitutionText = page.getByText('Institution', {
-      exact: true,
-    });
-    this.createDeviceIdInstitutionDropdown = page
-      .getByTestId('modal')
-      .getByTestId('custom-select-item-wrapper');
-    this.createDeviceIdInstitutionDropdownOptions =
-      page.getByTestId('custom-dropdown');
-    this.createDeviceIdInstitutionDropdownOptionGlobalMed = page.getByTestId(
-      'custom-dropdown-item-GM Healthcare Prod'
-    );
-    this.createDeviceIdCancelButton = page.getByRole('button', {
-      name: 'Cancel',
-    });
-    this.createDeviceIdSendInviteButton = page.getByRole('button', {
-      name: 'Create Device ID',
-    });
-    this.createDeviceIdXcloseButton = page.getByRole('button', {
-      name: 'XClose',
-    });
+    this.createDeviceIdEmailField = page.getByRole('textbox', { name: 'example@mail.com' });
+    this.createDeviceIdInstitutionText = page.getByText('Institution', { exact: true });
+    this.createDeviceIdInstitutionDropdown = page.getByTestId('modal').getByTestId('custom-select-item-wrapper');
+    this.createDeviceIdInstitutionDropdownOptions = page.getByTestId('custom-dropdown');
+    this.createDeviceIdInstitutionDropdownOptionGlobalMed = page.getByTestId('custom-dropdown-item-GM Healthcare Prod');
+    this.createDeviceIdCancelButton = page.getByRole('button', { name: 'Cancel' });
+    this.createDeviceIdSendInviteButton = page.getByRole('button', { name: 'Create Device ID' });
+    this.createDeviceIdXcloseButton = page.getByRole('button', { name: 'XClose' });
 
     // Missing locators for test assertions
-    this.selectedRoleFilterAdmin = page
-      .getByTestId('custom-select-item-wrapper')
-      .getByText('Admin');
-    this.selectedRoleFilterProvider = page
-      .getByTestId('custom-select-item-wrapper')
-      .getByText('Provider');
-    this.selectedRoleFilterAll = page
-      .getByTestId('custom-select-item-wrapper')
-      .getByText('All');
-    this.selectedRoleFilterDevice = page
-      .getByTestId('custom-select-item-wrapper')
-      .getByText('Device');
+    this.selectedRoleFilterAdmin = page.getByTestId('custom-select-item-wrapper').getByText('Admin');
+    this.selectedRoleFilterProvider = page.getByTestId('custom-select-item-wrapper').getByText('Provider');
+    this.selectedRoleFilterAll = page.getByTestId('custom-select-item-wrapper').getByText('All');
+    this.selectedRoleFilterDevice = page.getByTestId('custom-select-item-wrapper').getByText('Device');
 
     // Status messages
     this.userInactiveMessage = page.getByText('User is now inactive');
     this.userActiveMessage = page.getByText('User is now active');
     this.invitationSentMessage = page.getByText('Invitation sent');
-    this.deviceIdExistsError = page
-      .getByText('This Device ID already exists')
-      .first();
+    this.deviceIdExistsError = page.getByText('This Device ID already exists').first();
 
     // Validation error messages
-    this.firstNameValidationError = page.getByText(
-      'First name must contain at'
-    );
+    this.firstNameValidationError = page.getByText('First name must contain at');
     this.lastNameValidationError = page.getByText('Last name must contain at');
-    this.emailValidationError = page.getByText('Email fields can only include');
-    this.invalidEmailFormatError = page.getByText(
-      "Email fields can only include alphanumeric characters, or at sign '@', period '.', blank ' ', hyphen '-', underscore '_'"
-    );
+    this.emailValidationError = page.getByText('Email fields can only include alphanumeric characters');
 
     // Additional elements accessed directly in tests
     this.dropdownField = page.getByTestId('dropdown-field');

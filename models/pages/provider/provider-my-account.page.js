@@ -11,9 +11,7 @@ export class MyAccountPage extends BasePage {
     this.navigationBar = page.getByText('My accountCalendarNotifications');
 
     // My Account Section
-    this.myAccountLabel = page
-      .getByRole('paragraph')
-      .filter({ hasText: 'My account' });
+    this.myAccountLabel = page.getByRole('paragraph').filter({ hasText: 'My account' });
     this.myAccountText = page.getByText('Update and manage your account');
     this.profileIcon = page.getByTestId('avatar').locator('div').nth(1);
     this.profileName = page.getByText('CODY TEST').first();
@@ -75,19 +73,13 @@ export class MyAccountPage extends BasePage {
     });
 
     // Edit Profile Modal Elements
-    this.editProfileDetailsSlideOut = page
-      .locator('div')
-      .filter({ hasText: /^Edit profile details$/ });
+    this.editProfileDetailsSlideOut = page.locator('div').filter({ hasText: /^Edit profile details$/ });
     this.editProfileDetailsFirstName = page.getByText('First name*');
     this.editProfileDetailsFirstNameInput = page.getByPlaceholder('First name');
     this.editProfileDetailsLastName = page.getByText('Last name*');
     this.editProfileDetailsLastNameInput = page.getByPlaceholder('Last name');
-    this.editProfileDetailsMedicalSpecialty = page.getByText(
-      'Medical specialties'
-    );
-    this.editProfileDetailsLanguagesSpoken = page
-      .getByText('Languages spoken')
-      .nth(1);
+    this.editProfileDetailsMedicalSpecialty = page.getByText('Medical specialties');
+    this.editProfileDetailsLanguagesSpoken = page.getByText('Languages spoken').nth(1);
     this.editProfileDetailsCountry = page.getByText('Country').nth(1);
     this.editProfileDetailsState = page.getByText('State').nth(1);
     this.editProfileDetailsPhoneNumber = page.getByText('Phone number').first();
@@ -97,29 +89,18 @@ export class MyAccountPage extends BasePage {
     this.editProfileDetailsPhoneNumberExtensionDropdown = page
       .getByTestId('popover-trigger')
       .getByTestId('icon-ChevronDown');
-    this.editProfileDetailsPhoneNumberExtensionDropdownOptions =
-      page.getByTestId('items-wrapper');
+    this.editProfileDetailsPhoneNumberExtensionDropdownOptions = page.getByTestId('items-wrapper');
     this.editProfileSaveButton = page.getByRole('button', {
       name: 'Save changes',
     });
     this.editProfileCancelButton = page.getByRole('button', { name: 'Cancel' });
-    this.editProfileSuccessMessage = page.getByText(
-      'Profile updated successfully!'
-    );
+    this.editProfileSuccessMessage = page.getByText('Profile updated successfully!');
 
     // Error messages for required fields
-    this.editProfileFirstNameRequiredError = page.getByText(
-      'First name is required'
-    );
-    this.editProfileLastNameRequiredError = page.getByText(
-      'Last name is required'
-    );
-    this.editProfileMedicalSpecialtyRequiredError = page.getByText(
-      'At least one medical'
-    );
-    this.editProfileLanguageRequiredError = page.getByText(
-      'At least one language is'
-    );
+    this.editProfileFirstNameRequiredError = page.getByText('First name is required');
+    this.editProfileLastNameRequiredError = page.getByText('Last name is required');
+    this.editProfileMedicalSpecialtyRequiredError = page.getByText('At least one medical');
+    this.editProfileLanguageRequiredError = page.getByText('At least one language is');
 
     // Medical specialty selection elements
     this.editProfileMedicalSpecialtyDropdownButton = page
@@ -130,32 +111,24 @@ export class MyAccountPage extends BasePage {
       .locator('div')
       .filter({ hasText: /^Medical specialtiesAngiologist$/ })
       .getByRole('button');
-    this.editProfileMedicalSpecialtyCloseTag = page
-      .getByTestId('tag')
-      .getByRole('button', { name: 'XClose' });
+    this.editProfileMedicalSpecialtyCloseTag = page.getByTestId('tag').getByRole('button', { name: 'XClose' });
 
     // Edit License Modal Elements
-    this.editLicenseModal = page
-      .locator('div')
-      .filter({ hasText: /^Edit license$/ });
+    this.editLicenseModal = page.locator('div').filter({ hasText: /^Edit license$/ });
     this.editLicenseModalLicense1 = page.getByText('License 1');
     this.editLicenseModalLicense1Country = page.getByText('Country').nth(1);
     this.editLicenseModalLicense1CountryDropdown = page
       .locator('div')
       .filter({ hasText: /^CountryAfghanistan$/ })
       .getByTestId('custom-select-item-wrapper');
-    this.editLicenseModalLicense1CountryDropdownOptions =
-      page.getByTestId('custom-dropdown');
+    this.editLicenseModalLicense1CountryDropdownOptions = page.getByTestId('custom-dropdown');
     this.editLicenseModalLicense1State = page.getByText('State').nth(1);
     this.editLicenseModalLicense1StateDropdown = page
       .locator('div')
       .filter({ hasText: /^StateSelect state$/ })
       .getByTestId('custom-select-item-wrapper');
-    this.editLicenseModalLicense1StateDropdownOptions =
-      page.getByTestId('custom-dropdown');
-    this.editLicenseModalLicense1StateDropdownSelection = page.getByTestId(
-      'custom-dropdown-item-Badakhshan'
-    );
+    this.editLicenseModalLicense1StateDropdownOptions = page.getByTestId('custom-dropdown');
+    this.editLicenseModalLicense1StateDropdownSelection = page.getByTestId('custom-dropdown-item-Badakhshan');
     this.deleteLicenseButton = page.getByRole('link', {
       name: 'Remove License',
     });
@@ -166,8 +139,7 @@ export class MyAccountPage extends BasePage {
     this.editLicenseSaveButton = page.getByRole('button', {
       name: 'Save changes',
     });
-    this.editLicenseErrorMessageStateRequired =
-      page.getByText('State is required');
+    this.editLicenseErrorMessageStateRequired = page.getByText('State is required');
   }
 
   async gotoProviderMyAccount() {
