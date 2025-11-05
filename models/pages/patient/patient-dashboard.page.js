@@ -1,85 +1,103 @@
 import { BasePage } from '../../base-page.js';
 
 export class DashboardPage extends BasePage {
-    constructor(page) {
-        super(page);
+  constructor(page) {
+    super(page);
 
-        // Dashboard Elements
-        this.profileIcon = page.getByTestId('avatar').nth(1);
+    // Dashboard Elements
+    this.profileIcon = page.getByTestId('avatar').nth(1);
 
-        // Navigation Elements
-        this.navbar = page.getByTestId('navigation');
-        this.navbarInstitutionLogo = page.getByTestId('navigation').getByTestId('avatar').locator('div').nth(1);
-        this.navbarDashboard = page.locator('a').filter({ hasText: 'Dashboard' });
+    // Navigation Elements
+    this.navbar = page.getByTestId('navigation');
+    this.navbarInstitutionLogo = page
+      .getByTestId('navigation')
+      .getByTestId('avatar')
+      .locator('div')
+      .nth(1);
+    this.navbarDashboard = page.locator('a').filter({ hasText: 'Dashboard' });
 
-        // Schedule Appointment
-        this.scheduleAppointment = page.getByText('Schedule an appointment');
-        
-        // See Provider Now
-        this.seeProviderNow = page.getByText('See a provider now');
+    // Schedule Appointment
+    this.scheduleAppointment = page.getByText('Schedule an appointment');
 
-        // Upcoming appointments
-        this.upcomingAppointments = page.getByRole('heading', { name: 'Upcoming appointments' });
+    // See Provider Now
+    this.seeProviderNow = page.getByText('See a provider now');
 
-        // Past Appointments
-        this.pastAppointments = page.getByRole('heading', { name: 'Past appointments' });
+    // Upcoming appointments
+    this.upcomingAppointments = page.getByRole('heading', {
+      name: 'Upcoming appointments',
+    });
 
-        // View Details link in Past Appointments
-        this.pastAppointmentsViewDetailsLink = page.getByTestId('cell-0-actions').getByRole('link', { name: 'View details' });
-        this.sessionDetailsHeading = page.getByText('Session Details');
+    // Past Appointments
+    this.pastAppointments = page.getByRole('heading', {
+      name: 'Past appointments',
+    });
 
-        // Year dropdown
-        this.yearDropdownLink = page.getByRole('link', { name: 'ChevronDown' });
-        this.itemsWrapper = page.getByTestId('items-wrapper');
+    // View Details link in Past Appointments
+    this.pastAppointmentsViewDetailsLink = page
+      .getByTestId('cell-0-actions')
+      .getByRole('link', { name: 'View details' });
+    this.sessionDetailsHeading = page.getByText('Session Details');
 
-        // User profile section Patient
-        this.userProfileSection = page.getByTestId('popover-content');
-        this.userProfileAccountSettings = page.getByRole('button', { name: 'SettingsGear Account settings' });
-        this.userProfileHelp = page.getByRole('button', { name: 'InfoCircle Help' });
-        this.userProfilePrivacyPolicy = page.getByRole('button', { name: 'Policy Privacy policy' });
-        this.userProfileLogout = page.getByRole('button', { name: 'LogOut Log out' });
+    // Year dropdown
+    this.yearDropdownLink = page.getByRole('link', { name: 'ChevronDown' });
+    this.itemsWrapper = page.getByTestId('items-wrapper');
 
-        // Need help modal
-        this.needHelp = page.getByTestId('modal');
-    }
+    // User profile section Patient
+    this.userProfileSection = page.getByTestId('popover-content');
+    this.userProfileAccountSettings = page.getByRole('button', {
+      name: 'SettingsGear Account settings',
+    });
+    this.userProfileHelp = page.getByRole('button', {
+      name: 'InfoCircle Help',
+    });
+    this.userProfilePrivacyPolicy = page.getByRole('button', {
+      name: 'Policy Privacy policy',
+    });
+    this.userProfileLogout = page.getByRole('button', {
+      name: 'LogOut Log out',
+    });
 
-    // Navigation Methods
-    async gotoPatientDashboard() {
-        await this.page.goto(`${process.env.PROD_URL}/dashboard`)
-        await this.waitForSpinnerToDisappear();
-        await this.upcomingAppointments.waitFor({ state: 'visible' });
-    }
+    // Need help modal
+    this.needHelp = page.getByTestId('modal');
+  }
 
-    // Multi-step actions that warrant POM methods
-    async openUserProfileMenu() {
-        await this.profileIcon.click();
-    }
+  // Navigation Methods
+  async gotoPatientDashboard() {
+    await this.page.goto(`${process.env.UAT_URL}/dashboard`);
+    await this.waitForSpinnerToDisappear();
+    await this.upcomingAppointments.waitFor({ state: 'visible' });
+  }
 
-    async clickScheduleAppointment() {
-        await this.scheduleAppointment.click();
-        await this.page.waitForURL(/\/dashboard\/schedule-appointment/);
-    }
+  // Multi-step actions that warrant POM methods
+  async openUserProfileMenu() {
+    await this.profileIcon.click();
+  }
 
-    async clickSeeProviderNow() {
-        await this.seeProviderNow.click();
-        await this.page.waitForURL(/\/dashboard\/see-provider-now/);
-    }
+  async clickScheduleAppointment() {
+    await this.scheduleAppointment.click();
+    await this.page.waitForURL(/\/dashboard\/schedule-appointment/);
+  }
 
-    async navigateToAccountSettings() {
-        await this.profileIcon.click();
-        await this.userProfileAccountSettings.click();
-        await this.page.waitForURL(/\/account-settings\/my-account/);
-    }
+  async clickSeeProviderNow() {
+    await this.seeProviderNow.click();
+    await this.page.waitForURL(/\/dashboard\/see-provider-now/);
+  }
 
-    async openHelpModal() {
-        await this.profileIcon.click();
-        await this.userProfileHelp.click();
-        await this.needHelp.waitFor();
-    }
+  async navigateToAccountSettings() {
+    await this.profileIcon.click();
+    await this.userProfileAccountSettings.click();
+    await this.page.waitForURL(/\/account-settings\/my-account/);
+  }
 
-    async logout() {
-        await this.profileIcon.click();
-        await this.userProfileLogout.click();
-        await this.page.waitForURL(/\/login/);
-    }
+  async openHelpModal() {
+    await this.profileIcon.click();
+    await this.userProfileHelp.click();
+    await this.needHelp.waitFor();
+  }
+
+  async logout() {
+    await this.profileIcon.click();
+    await this.userProfileLogout.click();
+    await this.page.waitForURL(/\/login/);
+  }
 }
