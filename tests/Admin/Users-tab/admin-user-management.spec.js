@@ -1,23 +1,51 @@
 import { test, expect } from '@playwright/test';
 import { UsersTablePage } from '../../../models/pages/admin/admin-users-table.page.js';
-// Total tests 13 (including 1 skipped)
+// Admin User Management - Total Tests 13 (including 1 skipped)
 
 // Use stored auth for admin user
 test.use({ storageState: 'playwright/.auth/admin.json' });
 
-// Constants for test data
+// ========================================
+// TEST DATA CONSTANTS
+// ========================================
+// All test data should be defined here in a centralized manner
+// Use this pattern for consistent data management across tests
 const TEST_DATA = {
+  // User invitation test data
   USER: {
     FIRST_NAME: 'John',
     LAST_NAME: 'Doe',
     EMAIL_PREFIX: 'john.doe',
     ROLE: 'Patient',
+    INSTITUTION: 'Cody Test',
   },
+  // Device creation test data
   DEVICE: {
     NAME: 'Automation Test Device',
     EMAIL_PREFIX: 'test',
     ID_PREFIX: 'device',
     DUPLICATE_ID: '911',
+  },
+  // Search and filter test data
+  SEARCH: {
+    USER_SEARCH_TERM: 'cody test provider-',
+  },
+  // Form validation test data
+  VALIDATION: {
+    VALID_FIRST_NAME: 'John',
+    VALID_LAST_NAME: 'Doe',
+    VALID_EMAIL: 'example@domain.com',
+    INVALID_CHARACTERS: '%^&*',
+  },
+  // Roles and institutions
+  ROLES: {
+    ADMIN: 'Admin',
+    PATIENT: 'Patient',
+    PROVIDER: 'Provider',
+    COORDINATOR: 'Coordinator',
+  },
+  INSTITUTIONS: {
+    CODY_TEST: 'Cody Test',
   },
 };
 
@@ -51,14 +79,13 @@ test.describe('Admin User Managment @regression', () => {
 
   test('Verify Search functionality on Users Tab @[111336] @admin @functional', async () => {
     // search by name
-    const searchTerm = 'cody test provider-';
-    await userTablePage.searchInput.fill(searchTerm);
+    await userTablePage.searchInput.fill(TEST_DATA.SEARCH.USER_SEARCH_TERM);
 
     // capture the inner text of cell-0
     const firstUsername = await userTablePage.page.getByTestId('cell-0-name').innerText();
 
     // verify the search result contains the search term
-    expect(firstUsername.toLowerCase()).toContain(searchTerm.toLowerCase());
+    expect(firstUsername.toLowerCase()).toContain(TEST_DATA.SEARCH.USER_SEARCH_TERM.toLowerCase());
   });
 
   test('Verify Role filtering functionality on Users Tab @[111337] @admin @functional', async () => {
@@ -86,8 +113,7 @@ test.describe('Admin User Managment @regression', () => {
 
   test('Verify Active toggle behavior on Users Tab @[111339] @admin @functional', async () => {
     // Search for specific user to test toggle behavior
-    const userToToggle = 'cody test provider-';
-    await userTablePage.searchInput.fill(userToToggle);
+    await userTablePage.searchInput.fill(TEST_DATA.SEARCH.USER_SEARCH_TERM);
 
     // Toggle user to inactive state
     await userTablePage.activeToggleSwitch.click();
@@ -159,28 +185,23 @@ test.describe('Admin User Managment @regression', () => {
     await userTablePage.inviteUsersButton.click();
 
     // Fill valid names and verify button remains disabled without complete form
-    const validFirstName = 'John';
-    const validLastName = 'Doe';
-    await userTablePage.inviteUsersFirstNameField.fill(validFirstName);
-    await userTablePage.inviteUsersLastNameField.fill(validLastName);
+    await userTablePage.inviteUsersFirstNameField.fill(TEST_DATA.VALIDATION.VALID_FIRST_NAME);
+    await userTablePage.inviteUsersLastNameField.fill(TEST_DATA.VALIDATION.VALID_LAST_NAME);
     await expect(userTablePage.inviteUsersSendInviteButton).toBeDisabled();
 
     // Fill invalid characters in name fields
-    const invalidName = '%^&*';
     await userTablePage.inviteUsersFirstNameField.click();
-    await userTablePage.inviteUsersFirstNameField.fill(invalidName);
+    await userTablePage.inviteUsersFirstNameField.fill(TEST_DATA.VALIDATION.INVALID_CHARACTERS);
     await userTablePage.inviteUsersLastNameField.click();
-    await userTablePage.inviteUsersLastNameField.fill(invalidName);
+    await userTablePage.inviteUsersLastNameField.fill(TEST_DATA.VALIDATION.INVALID_CHARACTERS);
 
     // Fill invalid characters in email field
     await userTablePage.inviteUsersEmailField.click();
-    await userTablePage.inviteUsersEmailField.fill(invalidName);
+    await userTablePage.inviteUsersEmailField.fill(TEST_DATA.VALIDATION.INVALID_CHARACTERS);
 
     // Select institution and role to complete form
-    await userTablePage.inviteUsersInstitutionDropdown.click();
-    await userTablePage.inviteUsersInstitutionDropdownOptionCodyTest.click();
-    await userTablePage.dropdownField.click();
-    await userTablePage.inviteUsersRoleDropdownOptionPatient.click();
+    await userTablePage.selectInviteUserInstitution(TEST_DATA.INSTITUTIONS.CODY_TEST);
+    await userTablePage.selectInviteUserRole(TEST_DATA.ROLES.PATIENT);
 
     // Submit form and verify validation errors
     await userTablePage.inviteUsersSendInviteButton.click();
@@ -196,7 +217,7 @@ test.describe('Admin User Managment @regression', () => {
     // Click institution dropdown and verify options are visible
     await userTablePage.inviteUsersInstitutionDropdown.click();
     await expect(userTablePage.inviteUsersInstitutionDropdownOptions).toBeVisible();
-    await expect(userTablePage.inviteUsersInstitutionDropdownOptionGlobalMed).toBeVisible();
+    await expect(userTablePage.inviteUsersInstitutionDropdownOptionCodyTest).toBeVisible();
 
     // Select Cody Test option and verify selection
     await userTablePage.inviteUsersInstitutionDropdownOptionCodyTest.click();
@@ -223,15 +244,13 @@ test.describe('Admin User Managment @regression', () => {
   test('Validate Clicking Cancel button on Invite Users Modal @[111699] @admin @functional', async () => {
     // Open the invite users modal and fill out form
     await userTablePage.inviteUsersButton.click();
-    await userTablePage.inviteUsersFirstNameField.fill('John');
-    await userTablePage.inviteUsersLastNameField.fill('Doe');
-    await userTablePage.inviteUsersEmailField.fill('example@domain.com');
+    await userTablePage.inviteUsersFirstNameField.fill(TEST_DATA.VALIDATION.VALID_FIRST_NAME);
+    await userTablePage.inviteUsersLastNameField.fill(TEST_DATA.VALIDATION.VALID_LAST_NAME);
+    await userTablePage.inviteUsersEmailField.fill(TEST_DATA.VALIDATION.VALID_EMAIL);
 
     // Select institution and role
-    await userTablePage.inviteUsersInstitutionDropdown.click();
-    await userTablePage.inviteUsersInstitutionDropdownOptionGlobalMed.click();
-    await userTablePage.inviteUsersRoleDropdown.click();
-    await userTablePage.inviteUsersRoleDropdownOptionPatient.click();
+    await userTablePage.selectInviteUserInstitution(TEST_DATA.INSTITUTIONS.CODY_TEST);
+    await userTablePage.selectInviteUserRole(TEST_DATA.ROLES.PATIENT);
 
     // Cancel the form and verify modal closes
     await userTablePage.inviteUsersCancelButton.click();
@@ -245,28 +264,26 @@ test.describe('Admin User Managment @regression', () => {
   });
 
   test('Validate Successful invite Submission on Invite Users Modal @[111700] @admin @functional', async () => {
-    // Open the invite users modal
-    await userTablePage.inviteUsersButton.click();
-
-    // Generate test data for unique user invitation
-    const firstName = TEST_DATA.USER.FIRST_NAME;
-    const lastName = TEST_DATA.USER.LAST_NAME;
+    // Generate unique email for this test run
     const email = `${TEST_DATA.USER.EMAIL_PREFIX}.${Date.now()}@example.com`;
-    const role = TEST_DATA.USER.ROLE;
 
-    // Fill out complete form using helper methods
-    await userTablePage.fillInviteUserForm(firstName, lastName, email);
-    await userTablePage.selectInviteUserInstitution();
-    await userTablePage.selectInviteUserRole(role);
+    // Use comprehensive helper method that encapsulates all invitation steps
+    await userTablePage.inviteUser(
+      TEST_DATA.USER.FIRST_NAME,
+      TEST_DATA.USER.LAST_NAME,
+      email,
+      TEST_DATA.USER.INSTITUTION,
+      TEST_DATA.USER.ROLE
+    );
 
-    // Submit invitation and verify success
-    await expect(userTablePage.inviteUsersSendInviteButton).toBeEnabled();
-    await userTablePage.inviteUsersSendInviteButton.click();
+    // Explicit assertions make the test's purpose clear
     await userTablePage.invitationSentMessage.waitFor({
       state: 'visible',
       timeout: 10000,
     });
     await expect(userTablePage.invitationSentMessage).toBeVisible();
-    console.log(`User invited: ${firstName} ${lastName} (${email}) - Role: ${role}`);
+    console.log(
+      `User invited: ${TEST_DATA.USER.FIRST_NAME} ${TEST_DATA.USER.LAST_NAME} (${email}) - Role: ${TEST_DATA.USER.ROLE}`
+    );
   });
 });

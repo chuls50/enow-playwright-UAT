@@ -57,7 +57,6 @@ export class UsersTablePage extends BasePage {
     this.inviteUsersInstitutionText = page.getByText('Institution', { exact: true });
     this.inviteUsersInstitutionDropdown = page.getByTestId('modal').getByTestId('custom-select-item-wrapper');
     this.inviteUsersInstitutionDropdownOptions = page.getByTestId('custom-dropdown');
-    this.inviteUsersInstitutionDropdownOptionGlobalMed = page.getByTestId('custom-dropdown-item-GM Healthcare Prod');
     this.inviteUsersInstitutionDropdownOptionCodyTest = page.getByTestId('custom-dropdown-item-Cody Test');
     this.inviteUsersRoleText = page.getByTestId('modal').getByText('Role');
     this.inviteUsersRoleDropdown = page.getByRole('textbox', { name: 'Patient, Provider...' });
@@ -133,10 +132,12 @@ export class UsersTablePage extends BasePage {
   /**
    * Helper method to select institution in the Create Device ID form
    */
-  async selectInstitution() {
+  async selectCreateDeviceIdInstitution(institutionName) {
     await this.createDeviceIdInstitutionDropdown.click();
-    await this.createDeviceIdInstitutionDropdownOptionGlobalMed.click();
-    await this.createDeviceIdInstitutionDropdown.click();
+
+    // Use a dynamic locator based on the institution name
+    const institutionOption = this.page.getByTestId(`custom-dropdown-item-${institutionName}`);
+    await institutionOption.click();
   }
 
   /**
@@ -151,9 +152,12 @@ export class UsersTablePage extends BasePage {
   /**
    * Helper method to select institution in Invite User form
    */
-  async selectInviteUserInstitution() {
+  async selectInviteUserInstitution(institutionName) {
     await this.inviteUsersInstitutionDropdown.click();
-    await this.inviteUsersInstitutionDropdownOptionGlobalMed.click();
+
+    // Use a dynamic locator based on the institution name
+    const institutionOption = this.page.getByTestId(`custom-dropdown-item-${institutionName}`);
+    await institutionOption.click();
   }
 
   /**
@@ -178,5 +182,17 @@ export class UsersTablePage extends BasePage {
       default:
         await this.inviteUsersRoleDropdownOptionPatient.click();
     }
+  }
+
+  /**
+   * Complete helper method to invite a user (multi-step action)
+   * Encapsulates the entire invitation process as recommended by POM best practices
+   */
+  async inviteUser(firstName, lastName, email, institutionName, role) {
+    await this.inviteUsersButton.click();
+    await this.fillInviteUserForm(firstName, lastName, email);
+    await this.selectInviteUserInstitution(institutionName);
+    await this.selectInviteUserRole(role);
+    await this.inviteUsersSendInviteButton.click();
   }
 }
