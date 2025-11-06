@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { UsersTablePage } from '../../../models/pages/admin/admin-users-table.page.js';
+import { UsersTablePage } from '../../models/pages/admin/admin-users-table.page.js';
 // Admin User Management - Total Tests 13 (including 1 skipped)
 
 // Use stored auth for admin user

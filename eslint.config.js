@@ -22,12 +22,12 @@ export default [
       'prettier/prettier': [
         'error',
         {
-          printWidth: 120, // Set line length to 120 characters
+          printWidth: 140, // Set line length to 140 characters
           singleQuote: true,
           trailingComma: 'es5',
         }
       ],
-      'max-len': ['error', { code: 120 }], // ESLint max line length
+      'max-len': ['error', { code: 140 }], // ESLint max line length
       'no-unused-vars': 'warn',
       'no-console': 'off',
       'prefer-const': 'error',
@@ -46,7 +46,7 @@ export default [
     },
     rules: {
       'no-unused-vars': 'warn',
-      'max-len': ['error', { code: 120 }], // Also apply to test files
+      'max-len': ['error', { code: 140 }], // Also apply to test files
     },
   },
 ];

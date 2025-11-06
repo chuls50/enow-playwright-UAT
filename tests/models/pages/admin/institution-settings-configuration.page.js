@@ -1,7 +1,4 @@
 import { BasePage } from '../../base-page.js';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 export class InstitutionSettingsConfigurationPage extends BasePage {
   constructor(page) {
@@ -9,12 +6,8 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
 
     // Settings Navigation
     this.institutionSettingsTab = page.locator('a').filter({ hasText: 'Institution Settings' });
-    this.configurationSection = page.getByRole('button', {
-      name: 'Configuration',
-    });
-    this.insurancePaymentsSection = page.getByRole('button', {
-      name: 'Insurance & Payments',
-    });
+    this.configurationSection = page.getByRole('button', { name: 'Configuration' });
+    this.insurancePaymentsSection = page.getByRole('button', { name: 'Insurance & Payments' });
 
     // Configuration Page Elements
     this.heading = page.getByRole('heading', { name: 'Product Configuration' });
@@ -30,20 +23,12 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
 
     // Waiting Room toggle
     this.waitingRoomOptionText = page.getByText('Waiting Room Option');
-    this.waitingRoomOptionToggle = page
-      .locator('label')
-      .filter({ hasText: 'Waiting Room Option' })
-      .getByTestId('switch-div');
-    this.waitingRoomOptionDescription = page.getByText(
-      'When this value is set, users joining an appointment will be in a waiting room'
-    );
+    this.waitingRoomOptionToggle = page.locator('label').filter({ hasText: 'Waiting Room Option' }).getByTestId('switch-div');
+    this.waitingRoomOptionDescription = page.getByText('When this value is set, users joining an appointment will be in a waiting room');
 
     // Dispatcher Option toggle
     this.dispatcherOptionText = page.getByText('Dispatcher Option');
-    this.dispatcherOptionToggle = page
-      .locator('label')
-      .filter({ hasText: 'Dispatcher Option' })
-      .getByTestId('switch-div');
+    this.dispatcherOptionToggle = page.locator('label').filter({ hasText: 'Dispatcher Option' }).getByTestId('switch-div');
 
     // Enable Chat Appointments toggle
     this.enableChatAppointmentsText = page.getByText('Enable Chat Appointment Types');
@@ -57,14 +42,10 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
 
     // Input Fields
     this.numberOfTimesToContactText = page.getByText('Number of Times to Contact Available Providers', { exact: true });
-    this.numberOfTimesToContactInput = page.getByRole('textbox', {
-      name: 'Number of Times to Contact',
-    });
+    this.numberOfTimesToContactInput = page.getByRole('textbox', { name: 'Number of Times to Contact' });
 
     this.numberOfMinutesText = page.getByText('Number of Minutes Before Re-');
-    this.numberOfMinutesInput = page.getByRole('textbox', {
-      name: 'Number of Minutes Before Re-',
-    });
+    this.numberOfMinutesInput = page.getByRole('textbox', { name: 'Number of Minutes Before Re-' });
 
     // Buttons
     this.saveChangesButton = page.getByRole('button', { name: 'Save Changes' });

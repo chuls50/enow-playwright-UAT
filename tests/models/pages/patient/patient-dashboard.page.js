@@ -12,26 +12,16 @@ export class DashboardPage extends BasePage {
     this.navbarInstitutionLogo = page.getByTestId('navigation').getByTestId('avatar').locator('div').nth(1);
     this.navbarDashboard = page.locator('a').filter({ hasText: 'Dashboard' });
 
-    // Schedule Appointment
+    // Appointment Scheduling Options
     this.scheduleAppointment = page.getByText('Schedule an appointment');
-
-    // See Provider Now
     this.seeProviderNow = page.getByText('See a provider now');
 
-    // Upcoming appointments
-    this.upcomingAppointments = page.getByRole('heading', {
-      name: 'Upcoming appointments',
-    });
-
-    // Past Appointments
-    this.pastAppointments = page.getByRole('heading', {
-      name: 'Past appointments',
-    });
+    // Upcomming/Past Appointments Sections
+    this.upcomingAppointments = page.getByRole('heading', { name: 'Upcoming appointments' });
+    this.pastAppointments = page.getByRole('heading', { name: 'Past appointments' });
 
     // View Details link in Past Appointments
-    this.pastAppointmentsViewDetailsLink = page
-      .getByTestId('cell-0-actions')
-      .getByRole('link', { name: 'View details' });
+    this.pastAppointmentsViewDetailsLink = page.getByTestId('cell-0-actions').getByRole('link', { name: 'View details' });
     this.sessionDetailsHeading = page.getByText('Session Details');
 
     // Year dropdown
@@ -40,18 +30,10 @@ export class DashboardPage extends BasePage {
 
     // User profile section Patient
     this.userProfileSection = page.getByTestId('popover-content');
-    this.userProfileAccountSettings = page.getByRole('button', {
-      name: 'SettingsGear Account settings',
-    });
-    this.userProfileHelp = page.getByRole('button', {
-      name: 'InfoCircle Help',
-    });
-    this.userProfilePrivacyPolicy = page.getByRole('button', {
-      name: 'Policy Privacy policy',
-    });
-    this.userProfileLogout = page.getByRole('button', {
-      name: 'LogOut Log out',
-    });
+    this.userProfileAccountSettings = page.getByRole('button', { name: 'SettingsGear Account settings' });
+    this.userProfileHelp = page.getByRole('button', { name: 'InfoCircle Help' });
+    this.userProfilePrivacyPolicy = page.getByRole('button', { name: 'Policy Privacy policy' });
+    this.userProfileLogout = page.getByRole('button', { name: 'LogOut Log out' });
 
     // Need help modal
     this.needHelp = page.getByTestId('modal');

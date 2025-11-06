@@ -39,10 +39,6 @@ export class UsersTablePage extends BasePage {
     this.pagination = page.getByTestId('pagination');
     this.paginationPreviousButton = page.getByRole('button', { name: 'ArrowNarrowLeft Previous' });
     this.paginationNextButton = page.getByRole('button', { name: 'Next ArrowNarrowRight' });
-    this.paginationPageNumber1 = page.getByTestId('pagination').getByText('1').first();
-    this.paginationPageNumber2 = page.getByTestId('pagination').getByText('2');
-    this.paginationPageNumber3 = page.getByTestId('pagination').getByText('3');
-    this.paginationPageNumber4 = page.getByTestId('pagination').getByText('4');
 
     // Invite Users Elements
     this.inviteUsersButton = page.getByRole('button', { name: 'UserAdd Invite users' });
@@ -67,7 +63,6 @@ export class UsersTablePage extends BasePage {
     this.inviteUsersRoleDropdownOptionCoordinator = page.getByTestId('item Coordinator');
     this.inviteUsersCancelButton = page.getByRole('button', { name: 'Cancel' });
     this.inviteUsersSendInviteButton = page.getByRole('button', { name: 'Send invite' });
-    this.inviteUsersXcloseButton = page.getByRole('button', { name: 'XClose' });
 
     // Create Device ID Elements
     this.createDeviceIdButton = page.getByRole('button', { name: 'ConsultForm Create Device ID' });
@@ -81,11 +76,8 @@ export class UsersTablePage extends BasePage {
     this.createDeviceIdEmailField = page.getByRole('textbox', { name: 'example@mail.com' });
     this.createDeviceIdInstitutionText = page.getByText('Institution', { exact: true });
     this.createDeviceIdInstitutionDropdown = page.getByTestId('modal').getByTestId('custom-select-item-wrapper');
-    this.createDeviceIdInstitutionDropdownOptions = page.getByTestId('custom-dropdown');
-    this.createDeviceIdInstitutionDropdownOptionGlobalMed = page.getByTestId('custom-dropdown-item-GM Healthcare Prod');
     this.createDeviceIdCancelButton = page.getByRole('button', { name: 'Cancel' });
     this.createDeviceIdSendInviteButton = page.getByRole('button', { name: 'Create Device ID' });
-    this.createDeviceIdXcloseButton = page.getByRole('button', { name: 'XClose' });
 
     // Missing locators for test assertions
     this.selectedRoleFilterAdmin = page.getByTestId('custom-select-item-wrapper').getByText('Admin');
@@ -105,7 +97,6 @@ export class UsersTablePage extends BasePage {
     this.emailValidationError = page.getByText('Email fields can only include alphanumeric characters');
 
     // Additional elements accessed directly in tests
-    this.dropdownField = page.getByTestId('dropdown-field');
     this.deviceRoleOption = page.getByTestId('item Device');
   }
 
@@ -138,6 +129,7 @@ export class UsersTablePage extends BasePage {
     // Use a dynamic locator based on the institution name
     const institutionOption = this.page.getByTestId(`custom-dropdown-item-${institutionName}`);
     await institutionOption.click();
+    await this.createDeviceIdInstitutionDropdown.click();
   }
 
   /**
@@ -158,6 +150,7 @@ export class UsersTablePage extends BasePage {
     // Use a dynamic locator based on the institution name
     const institutionOption = this.page.getByTestId(`custom-dropdown-item-${institutionName}`);
     await institutionOption.click();
+    await this.inviteUsersInstitutionDropdown.click();
   }
 
   /**
@@ -194,5 +187,16 @@ export class UsersTablePage extends BasePage {
     await this.selectInviteUserInstitution(institutionName);
     await this.selectInviteUserRole(role);
     await this.inviteUsersSendInviteButton.click();
+  }
+
+  /**
+   * Complete helper method to create a device ID (multi-step action)
+   * Encapsulates the entire device creation process as recommended by POM best practices
+   */
+  async createDeviceId(deviceName, email, deviceId, institutionName) {
+    await this.createDeviceIdButton.click();
+    await this.fillCreateDeviceIdForm(deviceName, email, deviceId);
+    await this.selectCreateDeviceIdInstitution(institutionName);
+    await this.createDeviceIdSendInviteButton.click();
   }
 }

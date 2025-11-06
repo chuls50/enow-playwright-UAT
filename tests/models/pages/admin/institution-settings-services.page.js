@@ -10,9 +10,7 @@ export class InstitutionSettingsServicesPage extends BasePage {
 
     // Add Service Section
     this.addServiceButton = page.getByRole('button', { name: 'Add Service' });
-    this.addNewServiceSection = page.getByText(
-      'Service name*DescriptionSpecialtyFee enabledFee priceAllow Encounter nowService'
-    );
+    this.addNewServiceSection = page.getByText('Service name*DescriptionSpecialtyFee enabledFee priceAllow Encounter nowService');
     this.serviceNameInput = page.getByText('Service name*').first();
 
     // Form Fields
@@ -31,16 +29,10 @@ export class InstitutionSettingsServicesPage extends BasePage {
     this.saveChangesButton = page.getByRole('button', { name: 'Save Changes' });
 
     // Provider List Section
-    this.providerListHeading = page.getByRole('heading', {
-      name: 'Manage Providers',
-    });
+    this.providerListHeading = page.getByRole('heading', { name: 'Manage Providers' });
     this.manageProvidersModal = page.getByText('Manage Providers');
-    this.searchProviderInput = page.getByRole('textbox', {
-      name: 'Search by name',
-    });
-    this.selectProviderInput = page.getByRole('textbox', {
-      name: 'Select Provider',
-    });
+    this.searchProviderInput = page.getByRole('textbox', { name: 'Search by name' });
+    this.selectProviderInput = page.getByRole('textbox', { name: 'Select Provider' });
     this.providerDropdownInModal = page.getByTestId('modal').getByTestId('dropdown-field');
     this.addProviderButton = page.getByRole('button', { name: 'Add Provider' });
     this.closeModalButton = page.getByRole('button', { name: 'XClose' });
@@ -85,10 +77,6 @@ export class InstitutionSettingsServicesPage extends BasePage {
 
   // Navigation Methods
   async gotoServiceSettings() {
-    // const currentUrl = this.page.url();
-    // const baseUrl = currentUrl.replace(/(\/[^\/?#]*)?([?#].*)?$/, '');
-    // await this.page.goto(`${baseUrl}/institution-settings`);
-
     await this.page.goto(`${process.env.UAT_URL}/institution-settings`);
 
     // Wait for spinner to disappear if present
