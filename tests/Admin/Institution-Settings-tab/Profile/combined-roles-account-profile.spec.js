@@ -32,7 +32,7 @@ test.describe('Coordinator @regression', () => {
   });
 });
 
-test.describe('Provider + Admin @regression', () => {
+test.describe('Provider+Admin @regression', () => {
   // Login as a Provider + Admin
   test.use(useRole(ROLES.PROVIDER_ADMIN));
 
@@ -68,7 +68,7 @@ test.describe('Provider + Admin @regression', () => {
   });
 });
 
-test.describe('Provider + Coordinator  @regression', () => {
+test.describe('Provider+Coordinator  @regression', () => {
   // Login as a Provider + Coordinator
   test.use(useRole(ROLES.PROVIDER_COORDINATOR));
 
@@ -95,7 +95,7 @@ test.describe('Provider + Coordinator  @regression', () => {
   });
 });
 
-test.describe('Coordinator + Admin @regression', () => {
+test.describe('Coordinator+Admin @regression', () => {
   // Login as a Admin + Coordinator
   test.use(useRole(ROLES.ADMIN_COORDINATOR));
 
@@ -127,7 +127,7 @@ test.describe('Coordinator + Admin @regression', () => {
   });
 });
 
-test.describe('Coordinator + Admin @regression', () => {
+test.describe('Provider+Admin+Coordinator @regression', () => {
   // Login as a Provider + Coordinator + Admin
   test.use(useRole(ROLES.PROVIDER_ADMIN_COORDINATOR));
 
