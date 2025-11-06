@@ -4,7 +4,7 @@ import { useRole, ROLES } from '../../utils/auth-helpers.js';
 
 // Admin Coordinator - Total Tests 10
 
-test.describe('Admin Coordinator Edit Profile @regression', () => {
+test.describe('Admin+Coordinator @regression', () => {
   test.use(useRole(ROLES.ADMIN_COORDINATOR));
   let myAccountPage;
 

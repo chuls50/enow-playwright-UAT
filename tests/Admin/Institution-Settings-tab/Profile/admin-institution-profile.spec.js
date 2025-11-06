@@ -42,7 +42,7 @@ const TEST_DATA = {
   },
 };
 
-test.describe('Admin Institution Profile @regression', () => {
+test.describe('Admin @regression', () => {
   test.use(useRole(ROLES.ADMIN));
   let institutionSettingsProfilePage;
 

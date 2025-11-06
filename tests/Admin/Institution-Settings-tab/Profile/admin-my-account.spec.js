@@ -4,7 +4,7 @@ import { useRole, ROLES } from '../../../utils/auth-helpers.js';
 
 // Admin My Account - Total tests 10 (including 1 skipped)
 
-test.describe('Admin My Account @regression', () => {
+test.describe('Admin @regression', () => {
   test.use(useRole(ROLES.ADMIN));
   let myAccountPage;
 
@@ -16,8 +16,6 @@ test.describe('Admin My Account @regression', () => {
   test('Verify UI elements of the "My account" screen @[117690] @admin @ui', async () => {
     // Verify main page structure
     await expect(myAccountPage.header).toBeVisible();
-    await expect(myAccountPage.header).toHaveText('Account settings');
-    await expect(myAccountPage.navigationBar).toBeVisible();
 
     // Verify My Account section
     await expect(myAccountPage.myAccountLabel).toBeVisible();

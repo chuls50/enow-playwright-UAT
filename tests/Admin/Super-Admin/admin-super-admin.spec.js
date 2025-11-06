@@ -7,7 +7,7 @@ dotenv.config();
 
 // Skip tests for now as they are one-way door actions
 
-test.describe('Admin Super Admin @regression', () => {
+test.describe('Super Admin @regression', () => {
   let usersTablePage;
 
   test.beforeEach(async ({ page }) => {

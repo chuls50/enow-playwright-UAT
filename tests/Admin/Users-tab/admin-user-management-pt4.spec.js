@@ -16,7 +16,7 @@ const TEST_DATA = {
   },
 };
 
-test.describe('Admin User Managment Part 4 - Admin @regression', () => {
+test.describe('Admin @regression', () => {
   test.use(useRole(ROLES.ADMIN));
 
   let userTablePage;
@@ -61,8 +61,8 @@ test.describe('Admin User Managment Part 4 - Admin @regression', () => {
   });
 });
 
-test.describe('Admin User Managment Part 4 - Admin+Provider @regression', () => {
-  test.use(useRole(ROLES.PROVIDER)); // Provider account has both Admin and Provider roles
+test.describe('Admin+Provider @regression', () => {
+  test.use(useRole(ROLES.PROVIDER_ADMIN));
 
   let userTablePage;
 
@@ -72,9 +72,7 @@ test.describe('Admin User Managment Part 4 - Admin+Provider @regression', () => 
     await page.goto(process.env.UAT_URL);
   });
 
-  test('Verify Users with Multiple Administrator-Provider Role Display and Permissions @[117680] @dual-user @functional', async ({
-    page,
-  }) => {
+  test('Verify Users with Multiple Admin-Provider Role Display and Permissions @[117680] @dual-user @functional', async ({ page }) => {
     // Verify main navigation UI elements
     await expect(page.getByRole('listitem').filter({ hasText: 'Dashboard' }).locator('a')).toBeVisible();
     await expect(page.locator('a').filter({ hasText: 'Past sessions' })).toBeVisible();
@@ -185,7 +183,7 @@ test.describe('Admin User Managment Part 4 - Admin+Provider @regression', () => 
   });
 });
 
-test.describe('Admin User Managment Part 4 - Admin+Coordinator @regression', () => {
+test.describe('Admin+Coordinator @regression', () => {
   test.use(useRole(ROLES.ADMIN_COORDINATOR)); // Admin+Coordinator account with both roles
 
   let userTablePage;

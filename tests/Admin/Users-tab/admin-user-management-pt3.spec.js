@@ -1,8 +1,10 @@
 import { test } from '@playwright/test';
 import { UsersTablePage } from '../../models/pages/admin/admin-users-table.page.js';
-// Total tests 7 (all skipped)
+import { useRole, ROLES } from '../../utils/auth-helpers.js';
+// Admin User Management pt 3 - Total tests 7 (all skipped)
 
-test.describe('Admin User Managment Part 3 @regression', () => {
+test.describe('Admin @regression', () => {
+  test.use(useRole(ROLES.ADMIN));
   let userTablePage;
 
   test.beforeEach(async ({ page }) => {

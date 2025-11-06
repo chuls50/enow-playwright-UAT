@@ -16,12 +16,10 @@ export class MyAccountPage extends BasePage {
     this.profileIcon = page.getByTestId('avatar').locator('div').nth(1);
     this.profileName = page.getByText('CODY TEST').first();
     this.profileEmail = page.getByText('chuls+providerprod@globalmed.com');
-    this.uploadPhotoButton = page.getByRole('button', {
-      name: 'Download Upload photo',
-    });
-    this.deletePhotoButton = page.getByRole('button', {
-      name: 'Trash Delete photo',
-    }); //Profile Details Section
+    this.uploadPhotoButton = page.getByRole('button', { name: 'Download Upload photo' });
+    this.deletePhotoButton = page.getByRole('button', { name: 'Trash Delete photo' });
+
+    //Profile Details Section
     this.profileDetailsSection = page.getByText('Profile details');
     this.profileDetailsFirstName = page.getByText('First name');
     this.profileDetailsLastName = page.getByText('Last name');
@@ -50,27 +48,17 @@ export class MyAccountPage extends BasePage {
 
     // Time zone section
     this.timeZoneSection = page.getByText('Time zone', { exact: true });
-    this.changeTimeZoneButton = page.getByRole('link', {
-      name: 'Change time zone',
-    });
+    this.changeTimeZoneButton = page.getByRole('link', { name: 'Change time zone' });
 
     // Account Deletion Section
     this.accountDeletionSection = page.getByText('Account', { exact: true });
-    this.accountDeletionButton = page.getByText('Delete account', {
-      exact: true,
-    });
+    this.accountDeletionButton = page.getByText('Delete account', { exact: true });
     this.accountDeletionModal = page.getByTestId('modal');
     this.accountDeletionHeader = page.getByText('Delete account?');
     this.accountDeleteText = page.getByText('Deleting your account will');
-    this.accountDeletionModalXCloseButton = page.getByRole('button', {
-      name: 'XClose',
-    });
-    this.accountDeletionNoCancelButton = page.getByRole('button', {
-      name: 'No, cancel',
-    });
-    this.accountDeletionConfirmButton = page.getByRole('button', {
-      name: 'Yes, delete',
-    });
+    this.accountDeletionModalXCloseButton = page.getByRole('button', { name: 'XClose' });
+    this.accountDeletionNoCancelButton = page.getByRole('button', { name: 'No, cancel' });
+    this.accountDeletionConfirmButton = page.getByRole('button', { name: 'Yes, delete' });
 
     // Edit Profile Modal Elements
     this.editProfileDetailsSlideOut = page.locator('div').filter({ hasText: /^Edit profile details$/ });
@@ -83,16 +71,10 @@ export class MyAccountPage extends BasePage {
     this.editProfileDetailsCountry = page.getByText('Country').nth(1);
     this.editProfileDetailsState = page.getByText('State').nth(1);
     this.editProfileDetailsPhoneNumber = page.getByText('Phone number').first();
-    this.editProfileDetailsPhoneNumberInput = page.getByRole('textbox', {
-      name: '(555) 000-',
-    });
-    this.editProfileDetailsPhoneNumberExtensionDropdown = page
-      .getByTestId('popover-trigger')
-      .getByTestId('icon-ChevronDown');
+    this.editProfileDetailsPhoneNumberInput = page.getByRole('textbox', { name: '(555) 000-' });
+    this.editProfileDetailsPhoneNumberExtensionDropdown = page.getByTestId('popover-trigger').getByTestId('icon-ChevronDown');
     this.editProfileDetailsPhoneNumberExtensionDropdownOptions = page.getByTestId('items-wrapper');
-    this.editProfileSaveButton = page.getByRole('button', {
-      name: 'Save changes',
-    });
+    this.editProfileSaveButton = page.getByRole('button', { name: 'Save changes' });
     this.editProfileCancelButton = page.getByRole('button', { name: 'Cancel' });
     this.editProfileSuccessMessage = page.getByText('Profile updated successfully!');
 
@@ -129,16 +111,10 @@ export class MyAccountPage extends BasePage {
       .getByTestId('custom-select-item-wrapper');
     this.editLicenseModalLicense1StateDropdownOptions = page.getByTestId('custom-dropdown');
     this.editLicenseModalLicense1StateDropdownSelection = page.getByTestId('custom-dropdown-item-Badakhshan');
-    this.deleteLicenseButton = page.getByRole('link', {
-      name: 'Remove License',
-    });
-    this.editLicenseAddLicenseButton = page.getByRole('link', {
-      name: 'Plus Add license',
-    });
+    this.deleteLicenseButton = page.getByRole('link', { name: 'Remove License' });
+    this.editLicenseAddLicenseButton = page.getByRole('link', { name: 'Plus Add license' });
     this.editLicenseCancelButton = page.getByRole('button', { name: 'Cancel' });
-    this.editLicenseSaveButton = page.getByRole('button', {
-      name: 'Save changes',
-    });
+    this.editLicenseSaveButton = page.getByRole('button', { name: 'Save changes' });
     this.editLicenseErrorMessageStateRequired = page.getByText('State is required');
   }
 

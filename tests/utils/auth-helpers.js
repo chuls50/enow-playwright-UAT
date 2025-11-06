@@ -20,7 +20,7 @@ export const ROLES = {
 
 /**
  * Get the storage state path for a specific role
- * @param {string} role - The role name (admin, provider, patient, coordinator, admin-coordinator, provider-coordinator, provider-admin, provider-admin-coordinator)
+ * @param {string} role - The role name
  * @returns {string} The path to the storage state file
  */
 export function getStorageStatePath(role) {

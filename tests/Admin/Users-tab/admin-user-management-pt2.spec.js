@@ -1,9 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { UsersTablePage } from '../../models/pages/admin/admin-users-table.page.js';
-// Admin User Management pt2 - Total Tests
+import { useRole, ROLES } from '../../utils/auth-helpers.js';
 
-// Use stored auth for admin user
-test.use({ storageState: 'playwright/.auth/admin.json' });
+// Admin User Management pt2 - Total Tests 12 (including 2 skipped)
 
 // ========================================
 // TEST DATA CONSTANTS
@@ -23,7 +22,8 @@ const TEST_DATA = {
   },
 };
 
-test.describe('Admin User Managment Part 2 @regression', () => {
+test.describe('Admin @regression', () => {
+  test.use(useRole(ROLES.ADMIN));
   let userTablePage;
 
   test.beforeEach(async ({ page }) => {
@@ -118,12 +118,7 @@ test.describe('Admin User Managment Part 2 @regression', () => {
     const deviceIdUserEmail = `${TEST_DATA.DEVICE.EMAIL_PREFIX}-${Date.now()}@example.com`;
 
     // Use comprehensive helper method with known duplicate Device ID
-    await userTablePage.createDeviceId(
-      TEST_DATA.DEVICE.NAME,
-      deviceIdUserEmail,
-      TEST_DATA.DEVICE.DUPLICATE_ID,
-      TEST_DATA.INSTITUTION.NAME
-    );
+    await userTablePage.createDeviceId(TEST_DATA.DEVICE.NAME, deviceIdUserEmail, TEST_DATA.DEVICE.DUPLICATE_ID, TEST_DATA.INSTITUTION.NAME);
 
     // Verify duplicate ID error is displayed
     await expect(userTablePage.deviceIdExistsError).toBeVisible({ timeout: 15000 });
@@ -134,12 +129,7 @@ test.describe('Admin User Managment Part 2 @regression', () => {
     const deviceId = `${TEST_DATA.DEVICE.ID_PREFIX}-${Date.now()}`;
 
     // Use comprehensive helper method with invalid email format
-    await userTablePage.createDeviceId(
-      TEST_DATA.DEVICE.NAME,
-      'invalid-email-format',
-      deviceId,
-      TEST_DATA.INSTITUTION.NAME
-    );
+    await userTablePage.createDeviceId(TEST_DATA.DEVICE.NAME, 'invalid-email-format', deviceId, TEST_DATA.INSTITUTION.NAME);
 
     // Verify email format error is displayed
     await expect(userTablePage.emailValidationError).toBeVisible();

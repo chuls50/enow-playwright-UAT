@@ -3,7 +3,7 @@ import { InstitutionSettingsProfilePage } from '../../../models/pages/admin/inst
 import { useRole, ROLES } from '../../../utils/auth-helpers.js';
 
 // Admin Institution Profile pt2 - Total tests 5
-test.describe('Admin Institution Profile pt2 @regression', () => {
+test.describe('Admin @regression', () => {
   test.use(useRole(ROLES.ADMIN));
   let institutionSettingsProfilePage;
 

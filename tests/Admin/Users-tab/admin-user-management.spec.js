@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { UsersTablePage } from '../../models/pages/admin/admin-users-table.page.js';
+import { useRole, ROLES } from '../../utils/auth-helpers.js';
 // Admin User Management - Total Tests 13 (including 1 skipped)
 
 // Use stored auth for admin user
@@ -49,7 +50,8 @@ const TEST_DATA = {
   },
 };
 
-test.describe('Admin User Managment @regression', () => {
+test.describe('Admin @regression', () => {
+  test.use(useRole(ROLES.ADMIN));
   let userTablePage;
 
   test.beforeEach(async ({ page }) => {
@@ -282,8 +284,6 @@ test.describe('Admin User Managment @regression', () => {
       timeout: 10000,
     });
     await expect(userTablePage.invitationSentMessage).toBeVisible();
-    console.log(
-      `User invited: ${TEST_DATA.USER.FIRST_NAME} ${TEST_DATA.USER.LAST_NAME} (${email}) - Role: ${TEST_DATA.USER.ROLE}`
-    );
+    console.log(`User invited: ${TEST_DATA.USER.FIRST_NAME} ${TEST_DATA.USER.LAST_NAME} (${email}) - Role: ${TEST_DATA.USER.ROLE}`);
   });
 });

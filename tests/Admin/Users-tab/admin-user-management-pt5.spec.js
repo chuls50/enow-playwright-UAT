@@ -5,7 +5,7 @@ import { useRole, ROLES } from '../../utils/auth-helpers.js';
 
 // Admin User Managment pt 5 - Total tests 5
 
-test.describe('Admin User Managment Part 5 - Admin @regression', () => {
+test.describe('Admin @regression', () => {
   test.use(useRole(ROLES.ADMIN));
 
   let institutionSettingsServicesPage;
@@ -68,7 +68,7 @@ test.describe('Admin User Managment Part 5 - Admin @regression', () => {
   });
 });
 
-test.describe('Admin User Managment Part 5 - Patient @regression', () => {
+test.describe('Patient @regression', () => {
   test.use(useRole(ROLES.PATIENT));
 
   let dashboardPage;
