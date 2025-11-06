@@ -13,13 +13,13 @@ export class InstitutionSettingsProfilePage extends BasePage {
     this.nameInput = page.getByRole('textbox', { name: 'Example Name' });
     this.registrationLinkText = page.getByText('Patient Registration Link');
     this.registrationLink = page.getByRole('link', {
-      name: 'https://portal.encounterservices.com/signup/INSLT885R9TQMF8T68OU75M',
+      name: 'https://xj9.sandbox-encounterservices.com/signup/INSFDJUBZOIFOQCIIAUWXPQ',
     });
     this.registrationLinkCopyButton = page.getByRole('button', { name: 'Copy link' }).first();
     this.registrationLinkCopiedMessage = page.getByText('Link successfully copied');
     this.deviceIDAccessLinkText = page.getByText('Device ID Access Link');
     this.deviceIDAccessLink = page.getByRole('link', {
-      name: 'https://portal.encounterservices.com/login/device',
+      name: 'https://xj9.sandbox-encounterservices.com/login/device',
     });
     this.deviceIDAccessLinkCopyButton = page.getByRole('button', { name: 'Copy link' }).nth(1);
     this.deviceIDAccessLinkCopiedMessage = page.getByText('Link successfully copied');
@@ -69,9 +69,7 @@ export class InstitutionSettingsProfilePage extends BasePage {
     this.pocPhoneNumberInput = page.locator('input[name="pocSettings\\.phone\\.number"]');
     this.pocPhoneNumberDropdown = page.getByText('US (+1)').nth(1);
     this.pocEmailText = page.getByText('Email*');
-    this.pocEmailInput = page.getByRole('textbox', {
-      name: 'example@mail.com',
-    });
+    this.pocEmailInput = page.getByRole('textbox', { name: 'example@mail.com' });
 
     // POC Address
     this.pocAddressText = page.getByRole('heading', { name: 'POC Address' });

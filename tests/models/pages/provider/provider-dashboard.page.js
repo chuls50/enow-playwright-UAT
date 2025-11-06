@@ -17,43 +17,27 @@ export class DashboardPage extends BasePage {
     this.navbarProviders = page.locator('a').filter({ hasText: 'Providers' });
 
     // Your schedule for today
-    this.todaySchedule = page.getByRole('heading', {
-      name: 'Your schedule for today',
-    });
+    this.todaySchedule = page.getByRole('heading', { name: 'Your schedule for today' });
     this.todayScheduleDropSelect = page.getByTestId('dropselect').getByTestId('icon');
-    this.scheduleSessionButton = page.getByRole('button', {
-      name: 'CalendarPlus Schedule session',
-    });
+    this.scheduleSessionButton = page.getByRole('button', { name: 'CalendarPlus Schedule session' });
 
     // Session requests
     this.sessionRequests = page.getByText('Session requests');
-    this.allRequests = page.getByRole('link', {
-      name: 'All requests ArrowNarrowRight',
-    });
-    this.sessionRequestsLeft = page.getByRole('button', {
-      name: 'ChevronLeft',
-    });
-    this.sessionRequestsRight = page.getByRole('button', {
-      name: 'ChevronRight',
-    });
+    this.allRequests = page.getByRole('link', { name: 'All requests ArrowNarrowRight' });
+    this.sessionRequestsLeft = page.getByRole('button', { name: 'ChevronLeft' });
+    this.sessionRequestsRight = page.getByRole('button', { name: 'ChevronRight' });
 
     // User profile section Providers
     this.userProfileSection = page.getByTestId('popover-content');
 
     // Notifications
     this.notificationBell = page.getByRole('link', { name: 'Bell' });
-    this.notificationPopover = page.getByRole('heading', {
-      name: 'Notifications',
-    });
-    this.notificationsClearAllButton = page.getByRole('link', {
-      name: 'Eraser Clear all',
-    });
+    this.notificationPopover = page.getByRole('heading', { name: 'Notifications' });
+    this.notificationsClearAllButton = page.getByRole('link', { name: 'Eraser Clear all' });
     this.notificationsXClose = page.getByRole('button', { name: 'XClose' });
 
     // OnDemand Availability Panel
-    this.onDemandButton = page.getByRole('button', {
-      name: 'OnDemand On demand requests',
-    });
+    this.onDemandButton = page.getByRole('button', { name: 'OnDemand On demand requests' });
     this.availableToggle = page.getByText('Available');
     this.availabilitySwitch = page.getByTestId('switch-div');
     this.onDemandCloseButton = page.getByRole('button', { name: 'XClose' });
@@ -68,9 +52,7 @@ export class DashboardPage extends BasePage {
 
     // Past Sessions
     this.pastSessionsLink = page.locator('a').filter({ hasText: 'Past sessions' });
-    this.pastSessionsHeading = page.getByRole('heading', {
-      name: 'Past sessions',
-    });
+    this.pastSessionsHeading = page.getByRole('heading', { name: 'Past sessions' });
     this.table = page.getByTestId('table');
     this.viewDetailsLink = page.getByRole('link', { name: 'View details' });
 
@@ -97,39 +79,23 @@ export class DashboardPage extends BasePage {
 
     // Summary Tab
     this.visitSummaryText = page.getByText('Visit Summary reportExport PDF');
-    this.exportPdfLink = page.getByRole('link', {
-      name: 'Download Export PDF',
-    });
+    this.exportPdfLink = page.getByRole('link', { name: 'Download Export PDF' });
     this.visitNotesText = page.getByText('Visit Notes');
-    this.addVisitNoteLink = page.getByRole('link', {
-      name: 'Plus Add visit note',
-    });
+    this.addVisitNoteLink = page.getByRole('link', { name: 'Plus Add visit note' });
     this.modal = page.getByTestId('modal');
     this.accordionElement = page.getByTestId('accordion');
 
     // Visit Note Modal
-    this.subjectiveTextbox = page.getByRole('textbox', {
-      name: 'Type Subjective here',
-    });
-    this.objectiveTextbox = page.getByRole('textbox', {
-      name: 'Type Objective here',
-    });
-    this.assessmentTextbox = page.getByRole('textbox', {
-      name: 'Type Assessment here',
-    });
+    this.subjectiveTextbox = page.getByRole('textbox', { name: 'Type Subjective here' });
+    this.objectiveTextbox = page.getByRole('textbox', { name: 'Type Objective here' });
+    this.assessmentTextbox = page.getByRole('textbox', { name: 'Type Assessment here' });
     this.planTextbox = page.getByRole('textbox', { name: 'Type Plan here' });
-    this.addVisitNoteButton = page.getByRole('button', {
-      name: 'Add visit note',
-    });
+    this.addVisitNoteButton = page.getByRole('button', { name: 'Add visit note' });
 
     // Discharge Instructions
-    this.dischargeInstructionsText = page.getByText('Discharge instructions', {
-      exact: true,
-    });
+    this.dischargeInstructionsText = page.getByText('Discharge instructions', { exact: true });
     this.editDischargeLink = page.getByRole('link', { name: 'Edit Edit' });
-    this.dischargeInstructionsTextbox = page.getByRole('textbox', {
-      name: 'Type discharge instructions',
-    });
+    this.dischargeInstructionsTextbox = page.getByRole('textbox', { name: 'Type discharge instructions' });
     this.saveChangesButton = page.getByRole('button', { name: 'Save changes' });
 
     // PDF Export
@@ -145,9 +111,7 @@ export class DashboardPage extends BasePage {
 
     // Patient Details
     this.patientCard = page.getByTestId('card');
-    this.pastSessionsHeadingOnPatient = page.getByRole('heading', {
-      name: 'Past sessions',
-    });
+    this.pastSessionsHeadingOnPatient = page.getByRole('heading', { name: 'Past sessions' });
     this.dateServiceProviderText = page.getByText('DateServiceProviderTypeClear');
     this.downloadVsrLink = page.getByTestId('cell-0-actions').getByRole('link', { name: 'Download VSR' });
     this.viewDetailsFromPatient = page.getByTestId('cell-0-actions').getByRole('link', { name: 'View details' });
@@ -156,9 +120,7 @@ export class DashboardPage extends BasePage {
     // Account Settings
     this.popoverTrigger = page.getByTestId('popover-trigger');
     this.avatarDiv = page.getByTestId('avatar').locator('div').filter({ hasText: 'CP' }).locator('div');
-    this.accountSettingsButton = page.getByRole('button', {
-      name: 'SettingsGear Account settings',
-    });
+    this.accountSettingsButton = page.getByRole('button', { name: 'SettingsGear Account settings' });
   }
 
   // Navigation Methods

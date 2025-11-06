@@ -114,6 +114,14 @@ export default defineConfig({
       name: 'auth-provider-coordinator',
       testMatch: '**/setup/auth-provider-coordinator.js',
     },
+    {
+      name: 'auth-provider-admin',
+      testMatch: '**/setup/auth-provider-admin.js',
+    },
+    {
+      name: 'auth-provider-admin-coordinator',
+      testMatch: '**/setup/auth-provider-admin-coordinator.js',
+    },
 
 
     // Desktop Chrome project for /tests folder that depends on auth-setup projects
@@ -122,7 +130,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
       },
-      dependencies: ['auth-admin', 'auth-provider', 'auth-patient', 'auth-coordinator', 'auth-admin-coordinator', 'auth-provider-coordinator'],
+      dependencies: ['auth-admin', 'auth-provider', 'auth-patient', 'auth-coordinator', 'auth-admin-coordinator', 'auth-provider-coordinator', 'auth-provider-admin', 'auth-provider-admin-coordinator'],
       testMatch: '**/*.spec.js',
       testIgnore: ['**/setup/**', '**/utils/**', '**/documentation-examples/**'], // Exclude setup, utils, and examples from main test execution
     },

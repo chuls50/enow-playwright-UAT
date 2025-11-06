@@ -14,27 +14,25 @@ export const ROLES = {
   COORDINATOR: 'coordinator',
   ADMIN_COORDINATOR: 'admin-coordinator',
   PROVIDER_COORDINATOR: 'provider-coordinator',
+  PROVIDER_ADMIN: 'provider-admin',
+  PROVIDER_ADMIN_COORDINATOR: 'provider-admin-coordinator',
 };
 
 /**
  * Get the storage state path for a specific role
- * @param {string} role - The role name (admin, provider, patient, coordinator, admin-coordinator, provider-coordinator)
+ * @param {string} role - The role name (admin, provider, patient, coordinator, admin-coordinator, provider-coordinator, provider-admin, provider-admin-coordinator)
  * @returns {string} The path to the storage state file
  */
 export function getStorageStatePath(role) {
   if (!Object.values(ROLES).includes(role)) {
-    throw new Error(
-      `Invalid role: ${role}. Available roles: ${Object.values(ROLES).join(', ')}`
-    );
+    throw new Error(`Invalid role: ${role}. Available roles: ${Object.values(ROLES).join(', ')}`);
   }
 
   const authPath = `playwright/.auth/${role}.json`;
 
   // Check if the auth file exists
   if (!fs.existsSync(authPath)) {
-    throw new Error(
-      `Authentication file not found: ${authPath}. Make sure the setup has run first.`
-    );
+    throw new Error(`Authentication file not found: ${authPath}. Make sure the setup has run first.`);
   }
 
   return authPath;
@@ -98,9 +96,7 @@ export function verifyAuthFiles(requiredRoles = Object.values(ROLES)) {
   for (const role of requiredRoles) {
     getStorageStatePath(role); // This will throw if file doesn't exist
   }
-  console.log(
-    `✅ All authentication files verified: ${requiredRoles.join(', ')}`
-  );
+  console.log(`✅ All authentication files verified: ${requiredRoles.join(', ')}`);
 }
 
 /**

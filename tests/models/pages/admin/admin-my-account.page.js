@@ -12,14 +12,14 @@ export class MyAccountPage extends BasePage {
     super(page);
 
     this.header = page.getByRole('heading', { name: 'Account settings' });
-    this.navigationBar = page.getByText('My accountNotifications');
+    // this.navigationBar = page.getByText('My accountNotifications');
 
     // My Account Section
     this.myAccountLabel = page.getByRole('paragraph').filter({ hasText: 'My account' });
     this.myAccountText = page.getByText('Update and manage your account');
     this.profileIcon = page.getByTestId('avatar').locator('div').nth(1);
-    this.profileName = page.getByText('CODY TEST USER ADMIN');
-    this.profileEmail = page.getByText('chuls+adminprod@globalmed.com');
+    this.profileName = page.getByText('cody test admin Cody Test Institution');
+    this.profileEmail = page.getByText('chuls+admincodytest@globalmed');
     this.uploadPhotoButton = page.getByRole('button', { name: 'Download Upload photo' });
     this.deletePhotoButton = page.getByRole('button', { name: 'Trash Delete photo' });
 
@@ -69,7 +69,7 @@ export class MyAccountPage extends BasePage {
   async gotoMyAccount() {
     await this.page.goto(`${process.env.UAT_URL}/account-settings/my-account`);
     await this.waitForSpinnerToDisappear();
-    await this.navigationBar.waitFor({ state: 'visible' });
+    await this.myAccountLabel.waitFor({ state: 'visible' });
   }
 
   async uploadFile(filePath) {
