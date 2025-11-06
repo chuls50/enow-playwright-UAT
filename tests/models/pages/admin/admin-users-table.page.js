@@ -32,7 +32,11 @@ export class UsersTablePage extends BasePage {
     this.tableLastUpdated = page.getByRole('cell', { name: 'Last Updated' });
     this.tableSortByLastUpdated = page.getByTestId('sort-button-updated_at');
 
+    // Add roles button, role options, and active toggle
     this.addRolesButton = page.getByRole('link', { name: 'Plus Add roles' }).first();
+    this.addRolesButtonProvider = page.getByRole('button', { name: 'Provider' });
+    this.addRolesButtonAdmin = page.getByRole('button', { name: 'Admin' });
+    this.addRolesButtonCoordinator = page.getByRole('button', { name: 'Coordinator' });
     this.activeToggleSwitch = page.getByTestId('switch-div').first();
 
     // Pagination Elements

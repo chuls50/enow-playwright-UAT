@@ -3,8 +3,18 @@ import { UsersTablePage } from '../../models/pages/admin/admin-users-table.page.
 import { InstitutionSettingsConfigurationPage } from '../../models/pages/admin/institution-settings-configuration.page.js';
 import { useRole, ROLES } from '../../utils/auth-helpers.js';
 
-// total tests 5 (including 1 skipped)
-test.setTimeout(90000); // Set a higher timeout for all tests in this file
+// Admin User Managment pt 4 - Total tests 5 (including 1 skipped)
+
+// ========================================
+// TEST DATA CONSTANTS
+// ========================================
+// All test data should be defined here in a centralized manner
+// Use this pattern for consistent data management across tests
+const TEST_DATA = {
+  SEARCH: {
+    USER_WITH_ALL_ROLES: 'cody all roles',
+  },
+};
 
 test.describe('Admin User Managment Part 4 - Admin @regression', () => {
   test.use(useRole(ROLES.ADMIN));
@@ -22,36 +32,32 @@ test.describe('Admin User Managment Part 4 - Admin @regression', () => {
     await userTablePage.gotoUsersTable();
 
     // Select Device role filter
-    await page.getByTestId('custom-select-item-wrapper').click();
-    await page.getByTestId('custom-dropdown-item-Device').click();
-    await page.getByTestId('custom-select-item-wrapper').getByTestId('icon-ChevronDown').click();
+    await userTablePage.filterByRoleDropdown.click();
+    await userTablePage.filterByRoleDropdownOptionDevice.click();
+    await userTablePage.filterByRoleDropdown.click();
 
     // "Add roles" button should NOT be visible for device roles
-    await expect(page.getByRole('link', { name: 'Plus Add roles' })).not.toBeVisible();
+    await expect(userTablePage.addRolesButton).not.toBeVisible();
   });
 
-  test('Verify "Add Roles" button is disabled for Users with all Roles @[117679] @admin @functional', async ({
-    page,
-  }) => {
+  test('Verify "Add Roles" button is disabled for Users with all Roles @[117679] @admin @functional', async ({ page }) => {
     // Admin goto Users table
     await userTablePage.gotoUsersTable();
 
     // Search for user with all roles
-    const allRolesUser = 'cody all roles';
-    await page.getByRole('textbox', { name: 'John Doe' }).click();
-    await page.getByRole('textbox', { name: 'John Doe' }).fill(allRolesUser);
+    await userTablePage.searchInput.click();
+    await userTablePage.searchInput.fill(TEST_DATA.SEARCH.USER_WITH_ALL_ROLES);
 
     // "Add roles" button should be visible
-    await expect(page.getByRole('link', { name: 'Plus Add roles' })).toBeVisible();
+    await expect(userTablePage.addRolesButton).toBeVisible();
 
     // Click "Add roles" button
-    await page.getByRole('link', { name: 'Plus Add roles' }).click();
+    await userTablePage.addRolesButton.click();
 
     // All role options should NOT be visible (since user already has all roles)
-    await expect(page.getByRole('menu').locator('div').filter({ hasText: 'Coordinator' })).not.toBeVisible();
-    await expect(page.getByRole('menu').locator('div').filter({ hasText: 'Provider' })).not.toBeVisible();
-    await expect(page.getByRole('menu').locator('div').filter({ hasText: 'Patient' })).not.toBeVisible();
-    await expect(page.getByRole('menu').locator('div').filter({ hasText: 'Admin' })).not.toBeVisible();
+    await expect(userTablePage.addRolesButtonCoordinator).not.toBeVisible();
+    await expect(userTablePage.addRolesButtonProvider).not.toBeVisible();
+    await expect(userTablePage.addRolesButtonAdmin).not.toBeVisible();
   });
 });
 
@@ -62,14 +68,13 @@ test.describe('Admin User Managment Part 4 - Admin+Provider @regression', () => 
 
   test.beforeEach(async ({ page }) => {
     userTablePage = new UsersTablePage(page);
+    // Already authenticated as admin+provider via stored auth
+    await page.goto(process.env.UAT_URL);
   });
 
   test('Verify Users with Multiple Administrator-Provider Role Display and Permissions @[117680] @dual-user @functional', async ({
     page,
   }) => {
-    // Already authenticated as admin+provider via stored auth
-    await page.goto(process.env.UAT_URL);
-
     // Verify main navigation UI elements
     await expect(page.getByRole('listitem').filter({ hasText: 'Dashboard' }).locator('a')).toBeVisible();
     await expect(page.locator('a').filter({ hasText: 'Past sessions' })).toBeVisible();
@@ -128,13 +133,7 @@ test.describe('Admin User Managment Part 4 - Admin+Provider @regression', () => 
     await expect(page.getByRole('button', { name: 'Save changes' })).toBeEnabled();
 
     // Change account settings and verify edit permissions
-    await page
-      .getByTestId('popover-trigger')
-      .getByTestId('avatar')
-      .locator('div')
-      .filter({ hasText: 'CC' })
-      .locator('div')
-      .click();
+    await page.getByTestId('popover-trigger').getByTestId('avatar').locator('div').filter({ hasText: 'CC' }).locator('div').click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
     await page.getByRole('button', { name: 'Edit Edit' }).first().click();
 
@@ -269,13 +268,7 @@ test.describe('Admin User Managment Part 4 - Admin+Coordinator @regression', () 
     await expect(page.getByRole('button', { name: 'Save changes' })).toBeEnabled();
 
     // Change account settings and verify edit permissions
-    await page
-      .getByTestId('popover-trigger')
-      .getByTestId('avatar')
-      .locator('div')
-      .filter({ hasText: 'CC' })
-      .locator('div')
-      .click();
+    await page.getByTestId('popover-trigger').getByTestId('avatar').locator('div').filter({ hasText: 'CC' }).locator('div').click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
     await page.getByRole('button', { name: 'Edit Edit' }).click();
 

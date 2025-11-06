@@ -19,11 +19,11 @@ test.describe('Admin User Managment Part 5 - Admin @regression', () => {
     await institutionSettingsServicesPage.gotoServiceSettings();
 
     // Check how many services are listed by counting the number of times 'Service name*' appears
-    const serviceCount = await institutionSettingsServicesPage.page.getByText('Service name*').count();
+    const serviceCount = await page.getByText('Service name*').count();
     expect(serviceCount).toBeGreaterThan(0); // Ensure there is at least one service
 
     for (let i = 0; i < serviceCount; i++) {
-      const toggle = institutionSettingsServicesPage.page.getByText("Allow 'See a provider now'", { exact: true }).nth(i);
+      const toggle = page.getByText("Allow 'See a provider now'", { exact: true }).nth(i);
       await expect(toggle).toBeVisible();
     }
   });
@@ -33,13 +33,13 @@ test.describe('Admin User Managment Part 5 - Admin @regression', () => {
     await institutionSettingsServicesPage.gotoServiceSettings();
 
     // verify save changes is disabled initially
-    await expect(institutionSettingsServicesPage.page.getByRole('button', { name: 'Save changes' })).toBeDisabled();
+    await expect(institutionSettingsServicesPage.saveChangesButton).toBeDisabled();
 
     // toggle the first service's "Allow 'See a provider now'" switch
     await page.getByText("Allow 'See a provider now'").first().click();
 
     // verify save changes is enabled after toggle
-    await expect(institutionSettingsServicesPage.page.getByRole('button', { name: 'Save changes' })).toBeEnabled();
+    await expect(institutionSettingsServicesPage.saveChangesButton).toBeEnabled();
   });
 
   test('Verify Cancel Button Reverts Unsaved Changes to "Allow Encounter now" Toggle @[115890] @admin @functional', async ({ page }) => {
@@ -47,7 +47,7 @@ test.describe('Admin User Managment Part 5 - Admin @regression', () => {
     await institutionSettingsServicesPage.gotoServiceSettings();
 
     // verify save changes is disabled initially
-    await expect(institutionSettingsServicesPage.page.getByRole('button', { name: 'Save changes' })).toBeDisabled();
+    await expect(institutionSettingsServicesPage.saveChangesButton).toBeDisabled();
 
     // capture the initial state of the toggle
     const firstToggle = page.locator('[data-testid="switch-div"]').nth(1);
@@ -57,10 +57,10 @@ test.describe('Admin User Managment Part 5 - Admin @regression', () => {
     await page.getByText("Allow 'See a provider now'").first().click();
 
     // verify save changes is enabled after toggle
-    await expect(institutionSettingsServicesPage.page.getByRole('button', { name: 'Save changes' })).toBeEnabled();
+    await expect(institutionSettingsServicesPage.saveChangesButton).toBeEnabled();
 
     // click cancel button
-    await institutionSettingsServicesPage.page.getByRole('button', { name: 'Cancel' }).click();
+    await institutionSettingsServicesPage.cancelButton.click();
 
     // verify the toggle state has reverted to its initial state
     const revertedState = await firstToggle.isChecked();
@@ -75,61 +75,38 @@ test.describe('Admin User Managment Part 5 - Patient @regression', () => {
 
   test.beforeEach(async ({ page }) => {
     dashboardPage = new DashboardPage(page);
+    // Patient goto dashboard
+    await dashboardPage.gotoPatientDashboard();
+
+    await dashboardPage.seeProviderNow.click();
+    await dashboardPage.page.waitForLoadState('networkidle');
+
+    // Manual symptom checker
+    // if continue is visible, then click it
+    const continueButton = page.getByRole('button', { name: 'Continue' });
+    if (await continueButton.isVisible()) {
+      await continueButton.click();
+    }
+
+    // Infermetica symptom checker
+    // if skip button is visible, then click it
+    const skipButton = page.getByRole('button', { name: 'Skip' });
+    if (await skipButton.isVisible()) {
+      await skipButton.click();
+    }
+    // Click on Select service link
+    await page.getByRole('link', { name: 'Select service' }).click();
   });
 
   test('Verify Services with Toggle ON Are Shown in "See a Provider Now" Flow @[115887] @patient @functional', async ({ page }) => {
-    // Patient goto dashboard
-    await dashboardPage.gotoPatientDashboard();
-
-    await dashboardPage.seeProviderNow.click();
-    await dashboardPage.page.waitForLoadState('networkidle');
-
-    // Manual symptom checker
-    // if continue is visible, then click it
-    const continueButton = page.getByRole('button', { name: 'Continue' });
-    if (await continueButton.isVisible()) {
-      await continueButton.click();
-    }
-
-    // Infermetica symptom checker
-    // if skip button is visible, then click it
-    const skipButton = page.getByRole('button', { name: 'Skip' });
-    if (await skipButton.isVisible()) {
-      await skipButton.click();
-    }
-
-    // Click on Select service link
-    await page.getByRole('link', { name: 'Select service' }).click();
-
     // Verify that services with the toggle ON are displayed
-    await expect(page.locator('label').filter({ hasText: 'Toxicology' })).toBeVisible();
+    const toggledOnService = page.locator('label').filter({ hasText: 'Toxicology' });
+    await expect(toggledOnService).toBeVisible();
   });
 
   test('Verify Services with Toggle OFF Are Not Shown even if Previously Used @[115888] @patient @functional', async ({ page }) => {
-    // Patient goto dashboard
-    await dashboardPage.gotoPatientDashboard();
-
-    await dashboardPage.seeProviderNow.click();
-    await dashboardPage.page.waitForLoadState('networkidle');
-
-    // Manual symptom checker
-    // if continue is visible, then click it
-    const continueButton = page.getByRole('button', { name: 'Continue' });
-    if (await continueButton.isVisible()) {
-      await continueButton.click();
-    }
-
-    // Infermetica symptom checker
-    // if skip button is visible, then click it
-    const skipButton = page.getByRole('button', { name: 'Skip' });
-    if (await skipButton.isVisible()) {
-      await skipButton.click();
-    }
-
-    // Click on Select service link
-    await page.getByRole('link', { name: 'Select service' }).click();
-
     // Verify that services with the toggle OFF are not displayed
-    await expect(page.locator('label').filter({ hasText: 'Pediatrics' })).not.toBeVisible();
+    const toggledOffService = page.locator('label').filter({ hasText: 'Pediatrics' });
+    await expect(toggledOffService).not.toBeVisible();
   });
 });
