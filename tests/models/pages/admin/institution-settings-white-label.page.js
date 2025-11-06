@@ -18,23 +18,16 @@ export class InstitutionSettingsWhiteLabelPage extends BasePage {
 
     // White Label Configuration
     this.whiteLabelEnabledText = page.getByText('White Label Enabled');
-    this.whiteLabelEnabledToggle = page
-      .locator('label')
-      .filter({ hasText: 'White Label Enabled' })
-      .getByTestId('switch-div');
+    this.whiteLabelEnabledToggle = page.locator('label').filter({ hasText: 'White Label Enabled' }).getByTestId('switch-div');
     this.whiteLabelDescription = page.getByText('Enabling White Label will');
 
     this.whiteLabelHeader = page.getByRole('heading', { name: 'White label' });
     this.organizationNameLabel = page.getByText('Organization name');
-    this.organizationNameInput = page.getByRole('textbox', {
-      name: 'Organization example',
-    });
+    this.organizationNameInput = page.getByRole('textbox', { name: 'Organization example' });
     this.productNameLabel = page.getByText('Product name').nth(1);
     this.productNameInput = page.getByRole('textbox', { name: 'Name example' });
     this.subdomainLabel = page.getByText('Subdomain');
-    this.subdomainInput = page.getByRole('textbox', {
-      name: 'Subdomain example',
-    });
+    this.subdomainInput = page.getByRole('textbox', { name: 'Subdomain example' });
 
     // Organization Logo
     this.organizationLogoHeader = page.getByText('Organization logo');
@@ -44,9 +37,7 @@ export class InstitutionSettingsWhiteLabelPage extends BasePage {
       .getByTestId('avatar')
       .locator('div')
       .nth(1);
-    this.uploadPhotoButtonOrganizationLogo = page.getByRole('link', {
-      name: 'Upload Upload logo',
-    });
+    this.uploadPhotoButtonOrganizationLogo = page.getByRole('link', { name: 'Upload Upload logo' });
     this.uploadPhotoDescription = page.getByText('You can upload your logo in');
 
     // Favicon
@@ -57,17 +48,13 @@ export class InstitutionSettingsWhiteLabelPage extends BasePage {
       .getByTestId('avatar')
       .locator('div')
       .nth(1);
-    this.uploadPhotoButtonFavicon = page.getByRole('link', {
-      name: 'Upload Upload favicon',
-    });
+    this.uploadPhotoButtonFavicon = page.getByRole('link', { name: 'Upload Upload favicon' });
     this.uploadPhotoDescriptionFavicon = page.getByText('We suggest using a 32x32');
 
     // Cover image
     this.coverImageHeader = page.getByText('Cover image').first();
     this.coverImageAvatar = page.locator('div').filter({ hasText: /^Cover image preview$/ });
-    this.uploadPhotoButtonCoverImage = page.getByRole('link', {
-      name: 'Upload Upload cover image',
-    });
+    this.uploadPhotoButtonCoverImage = page.getByRole('link', { name: 'Upload Upload cover image' });
     this.resetPhotoButtonCoverImage = page.getByRole('link', { name: 'DeferredPayment Reset to' }).first();
     this.uploadPhotoDescriptionCoverImage = page.getByText('Upload a new cover image to');
 
@@ -105,12 +92,12 @@ export class InstitutionSettingsWhiteLabelPage extends BasePage {
     this.invalidImageErrorMessage = page.getByText('Please upload a valid image file (JPEG, PNG, SVG).').first();
     this.organizationNameRequiredError = page.getByText('Organization name is required');
     this.productNameRequiredError = page.getByText('Product name is required');
-    this.subdomainRequiredError = page.getByText(
-      'A valid subdomain value must be defined prior to turning on White Labeling'
-    );
+    this.subdomainRequiredError = page.getByText('A valid subdomain value must be defined prior to turning on White Labeling');
     this.alphanumericValidationError = page.getByText('Text fields can include alphanumeric characters');
     this.subdomainValidationError = page.getByText('A subdomain can only contain letters, numbers, or hyphens');
     this.fileSizeExceedsError = page.getByText('File size exceeds the maximum limit of 5MB').first();
+    this.coverImageSizeError = page.getByText('File size exceeds the limit of 10 MB.');
+    this.faviconSizeError = page.getByText('File size exceeds the limit of 10 MB.');
 
     // Additional locators for elements accessed directly in tests
     this.solidButton = page.getByRole('button', { name: 'Solid' });
@@ -133,7 +120,7 @@ export class InstitutionSettingsWhiteLabelPage extends BasePage {
 
     await this.institutionSettingsTab.click();
     await this.whiteLabelSection.click();
-    await this.page.waitForLoadState('networkidle');
+    // await this.page.waitForLoadState('networkidle');
     await this.whiteLabelHeader.waitFor({ state: 'visible' });
   }
 
@@ -168,7 +155,7 @@ export class InstitutionSettingsWhiteLabelPage extends BasePage {
   }
 
   getLargeImagePath() {
-    return path.join(__dirname, '../../../images/large-image.jpg');
+    return path.join(__dirname, '../../../images/30mb.jpg');
   }
 
   // Helper methods for toggle operations
