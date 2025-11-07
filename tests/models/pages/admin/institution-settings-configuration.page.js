@@ -36,9 +36,7 @@ export class InstitutionSettingsConfigurationPage extends BasePage {
       .locator('label')
       .filter({ hasText: 'Enable Chat Appointment Types' })
       .getByTestId('switch-div');
-    this.enableChatAppointmentsDescription = page.getByText(
-      'When this value is set, users will be able to schedule both Video Call and Chat'
-    );
+    this.enableChatAppointmentsDescription = page.getByText('When this value is set, users will be able to');
 
     // Input Fields
     this.numberOfTimesToContactText = page.getByText('Number of Times to Contact Available Providers', { exact: true });

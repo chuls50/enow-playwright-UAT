@@ -20,8 +20,8 @@ export class InstitutionSettingsServicesPage extends BasePage {
 
     // Toggles
     this.feeEnabledSwitch = page.getByText('Fee enabled').first();
-    this.serviceEnabledSwitch = page.getByText('Service Enabled').nth(4);
-    this.allowEncounterNowSwitch = page.getByText("Allow 'See a provider now'").nth(4);
+    this.serviceEnabledSwitch = page.getByText('Service Enabled').nth(3);
+    this.allowEncounterNowSwitch = page.getByText("Allow 'See a provider now'").nth(3);
 
     // Buttons
     this.cancelButton = page.getByRole('button', { name: 'Cancel' });
@@ -39,6 +39,11 @@ export class InstitutionSettingsServicesPage extends BasePage {
     this.trashButton = page.getByRole('button', { name: 'Trash' });
     this.itemsWrapper = page.getByTestId('items-wrapper');
 
+    // Specialty Dropdown
+    this.specialtyDropdownRequiredText = page.getByText('Specialty required');
+    this.specialtyDropdownItemsWrapper = page.getByTestId('items-wrapper');
+    this.specialtyGeneralPractitionerItem = page.getByTestId('item General Practitioner');
+
     // Fee Price Field
     this.feePriceField = page.getByRole('textbox', { name: 'Fee price' }).first();
 
@@ -53,11 +58,6 @@ export class InstitutionSettingsServicesPage extends BasePage {
     this.searchProviderText = page.getByText('Search Provider');
     this.selectProviderText = page.getByText('Select Provider');
 
-    // Specific provider elements that appear in tests
-    this.ashleyFloresItem = page.getByTestId('item Ashley Flores');
-    this.johnDoeItem = page.getByTestId('item John Doe');
-    this.johnDoeRemoveButton = page.getByTestId('cell-0-remove').getByRole('button', { name: 'Trash' });
-
     // Messages
     this.successMessage = page.getByText('Info updated successfully');
     this.validationErrorMessage = page.getByText('Text fields can include');
@@ -65,14 +65,9 @@ export class InstitutionSettingsServicesPage extends BasePage {
     this.errorToast = page.getByText('Please fix the errors in the');
     this.requiredFieldError = page.getByText('This field is required - please provide a value');
     this.feeErrorMessage = page.getByText('Fee must be greater than 0 when enabled');
-    this.ashleyFloresRemovedMessage = page.getByText('Ashley Flores removed from');
-    this.ashleyFloresAddedMessage = page.getByText('Ashley Flores added to service');
-    this.johnDoeRemovedMessage = page.getByText('John Doe removed from service');
-    this.johnDoeAddedMessage = page.getByText('John Doe added to service');
 
     // Dynamic elements that appear in specific tests
     this.addNewServiceText = page.getByText('Service name*DescriptionSpecialtySpecialty requiredDuration30 minutesFee');
-    this.johndoeproviderEmail = page.getByText('chuls+johndoeprovider@');
   }
 
   // Navigation Methods
@@ -83,7 +78,7 @@ export class InstitutionSettingsServicesPage extends BasePage {
     await this.waitForSpinnerToDisappear();
 
     await this.servicesTab.click();
-    await this.page.waitForLoadState('networkidle');
+    // await this.page.waitForLoadState('networkidle');
     await this.pageHeading.waitFor({ state: 'visible' });
   }
 
