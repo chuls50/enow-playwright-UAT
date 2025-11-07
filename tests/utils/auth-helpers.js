@@ -16,6 +16,7 @@ export const ROLES = {
   PROVIDER_COORDINATOR: 'provider-coordinator',
   PROVIDER_ADMIN: 'provider-admin',
   PROVIDER_ADMIN_COORDINATOR: 'provider-admin-coordinator',
+  DEVICE_USER: 'device',
 };
 
 /**

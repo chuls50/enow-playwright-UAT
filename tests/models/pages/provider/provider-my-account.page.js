@@ -14,8 +14,8 @@ export class MyAccountPage extends BasePage {
     this.myAccountLabel = page.getByRole('paragraph').filter({ hasText: 'My account' });
     this.myAccountText = page.getByText('Update and manage your account');
     this.profileIcon = page.getByTestId('avatar').locator('div').nth(1);
-    this.profileName = page.getByText('CODY TEST').first();
-    this.profileEmail = page.getByText('chuls+providerprod@globalmed.com');
+    this.profileName = page.getByText('cody prov').first();
+    this.profileEmail = page.getByText('chuls+prov1codytest@globalmed.com');
     this.uploadPhotoButton = page.getByRole('button', { name: 'Download Upload photo' });
     this.deletePhotoButton = page.getByRole('button', { name: 'Trash Delete photo' });
 
