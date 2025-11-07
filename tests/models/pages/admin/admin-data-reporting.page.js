@@ -138,27 +138,27 @@ export class AdminDataReportingPage extends BasePage {
 
   // Direct URL Navigation for Detail Pages
   async navigateToTotalCallsDetails() {
-    await this.page.goto('https://portal.encounterservices.com/data-reporting/total-calls-details');
+    await this.page.goto('https://xj9.sandbox-encounterservices.com/data-reporting/total-calls-details');
     await this.page.waitForLoadState('networkidle');
   }
 
   async navigateToTotalEncountersDetails() {
-    await this.page.goto('https://portal.encounterservices.com/data-reporting/total-encounters-details');
+    await this.page.goto('https://xj9.sandbox-encounterservices.com/data-reporting/total-encounters-details');
     await this.page.waitForLoadState('networkidle');
   }
 
   async navigateToTotalAppointmentsDetails() {
-    await this.page.goto('https://portal.encounterservices.com/data-reporting/total-appointments-details');
+    await this.page.goto('https://xj9.sandbox-encounterservices.com/data-reporting/total-appointments-details');
     await this.page.waitForLoadState('networkidle');
   }
 
   async navigateToTotalCallsSummary() {
-    await this.page.goto('https://portal.encounterservices.com/data-reporting/total-calls-summary');
+    await this.page.goto('https://xj9.sandbox-encounterservices.com/data-reporting/total-calls-summary');
     await this.page.waitForLoadState('networkidle');
   }
 
   async navigateToTotalEncountersSummary() {
-    await this.page.goto('https://portal.encounterservices.com/data-reporting/total-encounters-summary');
+    await this.page.goto('https://xj9.sandbox-encounterservices.com/data-reporting/total-encounters-summary');
     await this.page.waitForLoadState('networkidle');
   }
 
