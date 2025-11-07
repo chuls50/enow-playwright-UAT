@@ -5,13 +5,9 @@ export class InstitutionSettingsInsurancePage extends BasePage {
     super(page);
 
     // Define locators directly as properties for clarity and easier usage
-    this.insurancePaymentsTab = page.getByRole('button', {
-      name: 'Insurance & Payments',
-    });
+    this.insurancePaymentsTab = page.getByRole('button', { name: 'Insurance & Payments' });
     this.heading = page.getByRole('heading', { name: 'Institution Settings' });
-    this.insuranceSection = page.getByRole('heading', {
-      name: 'Insurance Setup',
-    });
+    this.insuranceSection = page.getByRole('heading', { name: 'Insurance Setup' });
     this.servicesTab = page.getByRole('button', { name: 'Services' });
 
     // Premium Package section
@@ -28,16 +24,11 @@ export class InstitutionSettingsInsurancePage extends BasePage {
     this.insuranceInput = page.locator('div').filter({ hasText: /^Add$/ }).getByPlaceholder('Example');
     this.copayAmount = page.getByText('Co-pay amount');
     this.copayInput = page.getByRole('textbox', { name: '0' });
-    this.deleteButton = page
-      .locator('div')
-      .filter({ hasText: /^Aetna20Delete$/ })
-      .getByRole('button');
+    this.deleteButton = page.getByRole('button', { name: 'Delete' });
     this.addInsuranceButton = page.getByRole('button', { name: 'Plus Add' });
 
     // Payment setup
-    this.paymentSetupSection = page.getByRole('heading', {
-      name: 'Payments Setup',
-    });
+    this.paymentSetupSection = page.getByRole('heading', { name: 'Payments Setup' });
     this.selfPaymentLabel = page.getByText('Self Payment');
     this.selfPaymentToggleSwitch = page.locator('label').filter({ hasText: 'Self Payment' }).getByTestId('switch-div');
     this.selfPaymentCheckbox = page.locator('label').filter({ hasText: 'Self Payment' }).getByTestId('switch-div');
@@ -60,26 +51,17 @@ export class InstitutionSettingsInsurancePage extends BasePage {
     this.merchantIdLabel = page.getByText('Merchant ID*');
     this.merchantIdInput = page.getByRole('textbox', { name: '123-XXX-XXX' });
     this.merchantNameLabel = page.getByText('Merchant Name*');
-    this.merchantNameInput = page.getByRole('textbox', {
-      name: 'Merchant name example',
-    });
+    this.merchantNameInput = page.getByRole('textbox', { name: 'Merchant name example' });
 
     this.authorizationKeyLabel = page.getByText('Authorization key*');
-    this.authorizationKeyInput = page.getByRole('textbox', {
-      name: 'XX-XXX-XXX',
-    });
+    this.authorizationKeyInput = page.getByRole('textbox', { name: 'XX-XXX-XXX' });
 
     this.editAccountButton = page.getByRole('button', { name: 'Edit account' });
-    this.paymentReportingButton = page.getByRole('button', {
-      name: 'Payment reporting',
-    });
+    this.paymentReportingButton = page.getByRole('button', { name: 'Payment reporting' });
 
     // Patient payment reminders
     this.patientPaymentRemindersLabel = page.getByText('Patient payment reminders');
-    this.patientPaymentRemindersToggle = page
-      .locator('label')
-      .filter({ hasText: 'Patient payment reminders' })
-      .getByTestId('switch-div');
+    this.patientPaymentRemindersToggle = page.locator('label').filter({ hasText: 'Patient payment reminders' }).getByTestId('switch-div');
     this.serviceRemindersLabel = page.getByText('Service reminder');
     this.serviceReminderDropdown = page.getByTestId('dropdown-field').nth(2);
     this.serviceReminderDropdownSelection = page.getByTestId('item 48 hours before appointment');
@@ -109,7 +91,6 @@ export class InstitutionSettingsInsurancePage extends BasePage {
     await this.waitForSpinnerToDisappear();
 
     await this.insurancePaymentsTab.click();
-    await this.page.waitForLoadState('networkidle');
     await this.insuranceSection.waitFor({ state: 'visible' });
   }
 
