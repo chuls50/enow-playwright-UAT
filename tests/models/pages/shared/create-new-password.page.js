@@ -63,16 +63,8 @@ export class CreateNewPasswordPage extends BasePage {
     this.copyrightText = this.page.getByText('© 2002-2025 GlobalMed®. All');
   }
 
-  async navigate(url) {
-    // If a specific URL is provided (like a redirect token), use it
-    // Otherwise, use the base URL approach
-    if (url) {
-      await this.page.goto(url);
-    } else {
-      // This might need to be adjusted based on the actual application routing
-      // For now, we'll use the redirect URL pattern but make it configurable
-      await this.page.goto('https://api.encounterservices.com/redirect/wqAyTzXTtxorkckFrNajiKuFMZcUXeLI');
-    }
+  async gotoChangePassword() {
+    await this.page.goto('https://api.sandbox-encounterservices.com/redirect/jBqiyxptlYVChzlVxbmlwtaIKXlHSfoK');
   }
 
   async fillPassword(password) {

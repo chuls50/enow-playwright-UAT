@@ -27,7 +27,7 @@ export class LoginPage extends BasePage {
     // Forgot Password Elements
     this.forgotPasswordHeading = page.getByRole('heading', { name: 'Forgot Password?' });
     this.passwordResetHeading = page.getByRole('heading', { name: 'Your reset password link was' });
-    this.emailDisplay = page.locator('div').filter({ hasText: /^chuls\+smokeprod@globalmed\.com$/ });
+    this.emailDisplay = page.locator('div').filter({ hasText: /^chuls\+patcodytest@globalmed\.com$/ });
     this.sendEmailButton = page.getByRole('button', { name: 'Send email' });
     this.confirmationHeading = page.getByRole('heading', { name: 'Your reset password link was sent' });
     this.resendLink = page.getByRole('link', { name: 'Resend link' });
@@ -72,7 +72,7 @@ export class LoginPage extends BasePage {
     await this.passwordLabel.waitFor();
   }
 
-  async goToForgotPasswordPage(email = process.env.SMOKE_PROD_USERNAME) {
+  async goToForgotPasswordPage(email = process.env.UAT_PATIENT_USERNAME) {
     await this.goto();
     await this.emailField.fill(email);
     await this.nextButton.click();

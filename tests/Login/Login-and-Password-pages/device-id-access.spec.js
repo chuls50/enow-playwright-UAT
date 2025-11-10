@@ -12,7 +12,7 @@ const TEST_DATA = {
   PRODUCT_NAME: 'UAT Automation',
 };
 
-test.describe('Unauthenticated Device_ID @regression', () => {
+test.describe('Device_ID @regression', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(TEST_DATA.DEVICE_SANDBOX_URL);
     await page.waitForLoadState('networkidle');
