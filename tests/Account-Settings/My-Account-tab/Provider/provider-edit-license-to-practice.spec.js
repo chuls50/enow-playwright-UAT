@@ -24,12 +24,12 @@ test.describe('Provider @regression', () => {
     await expect(providerMyAccountPage.editLicenseSaveButton).toBeDisabled();
   });
 
-  test('Verify Country dropdown functionality in Edit License to Practice modal @[111210] @provider @functional', async ({ page }) => {
+  test('Verify Country dropdown functionality in Edit License to Practice modal @[111210] @provider @functional', async () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
 
     // Desktop Chrome test logic
     await providerMyAccountPage.editLicenseModalLicense1CountryDropdown.click();
-    await expect(providerMyAccountPage.editLicenseModalLicense1CountryDropdownOptions).toBeVisible();
+    await expect(providerMyAccountPage.customDropdown).toBeVisible();
     await providerMyAccountPage.page.getByTestId('custom-dropdown-item-Afghanistan').click();
     await expect(
       providerMyAccountPage.page
@@ -40,7 +40,7 @@ test.describe('Provider @regression', () => {
     await expect(providerMyAccountPage.editLicenseModalLicense1StateDropdown).toBeEnabled();
   });
 
-  test('Verify State dropdown functionality in Edit License to Practice modal @[111211] @provider @functional', async ({ page }) => {
+  test('Verify State dropdown functionality in Edit License to Practice modal @[111211] @provider @functional', async () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
 
     // First select a country to enable state dropdown
@@ -55,8 +55,8 @@ test.describe('Provider @regression', () => {
 
     // Test state dropdown functionality
     await providerMyAccountPage.editLicenseModalLicense1StateDropdown.click();
-    await expect(providerMyAccountPage.editLicenseModalLicense1StateDropdownOptions).toBeVisible();
-    await providerMyAccountPage.editLicenseModalLicense1StateDropdownSelection.click();
+    await expect(providerMyAccountPage.customDropdown).toBeVisible();
+    await providerMyAccountPage.page.getByTestId('custom-dropdown-item-Badakhshan').click();
     await expect(
       providerMyAccountPage.page
         .locator('div')
@@ -65,74 +65,47 @@ test.describe('Provider @regression', () => {
     ).toHaveText('Badakhshan');
   });
 
-  test('Verify Delete License Functionality on Edit License to Practice modal @[111212] @provider @functional', async ({ page }) => {
+  test('Verify Delete License Functionality on Edit License to Practice modal @[111212] @provider @functional', async () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
 
-    // add license
-    await page.getByRole('link', { name: 'Plus Add license' }).click();
-    await expect(page.getByText('License 2')).toBeVisible();
-    await page.getByTestId('custom-select-item-wrapper').nth(2).click();
-    await page.getByTestId('custom-dropdown-item-Albania').click();
-    await page.getByTestId('custom-select-item-wrapper').nth(3).click();
-    await page.getByTestId('custom-dropdown-item-Berat').click();
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
+    // Add license
+    await providerMyAccountPage.addLicense2();
+    await providerMyAccountPage.editLicenseSaveButton.click();
+    await expect(providerMyAccountPage.successMessage).toBeVisible();
 
     // Now delete the added license
     await providerMyAccountPage.openEditLicenseToPracticeModal();
-    await page.getByRole('link', { name: 'Remove License' }).click();
-    await expect(page.getByText('License 2')).not.toBeVisible();
+    await providerMyAccountPage.deleteLicenseButton.click();
+    await expect(providerMyAccountPage.editLicenseModalLicense2).not.toBeVisible();
 
     // Save changes after deletion
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
+    await providerMyAccountPage.editLicenseSaveButton.click();
+    await expect(providerMyAccountPage.successMessage).toBeVisible();
   });
 
-  test('Verify Add License Functionality on Edit License to Practice modal @[111213] @provider @functional', async ({ page }) => {
+  test('Verify Add License Functionality on Edit License to Practice modal @[111213] @provider @functional', async () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
 
-    // add license
-    await page.getByRole('link', { name: 'Plus Add license' }).click();
-    await expect(page.getByText('License 2')).toBeVisible();
-    await page.getByTestId('custom-select-item-wrapper').nth(2).click();
-    await page.getByTestId('custom-dropdown-item-Albania').click();
-    await page.getByTestId('custom-select-item-wrapper').nth(3).click();
-    await page.getByTestId('custom-dropdown-item-Berat').click();
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
-    await page.waitForTimeout(1000);
-
-    // Now delete the added license
-    await providerMyAccountPage.openEditLicenseToPracticeModal();
-    await page.getByRole('link', { name: 'Remove License' }).click();
-    await expect(page.getByText('License 2')).not.toBeVisible();
-
-    // Save changes after deletion
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
+    // Add and then delete license to test full workflow
+    await providerMyAccountPage.addAndDeleteLicense();
   });
 
-  test('Verify Cancel Button functionality on Edit License to Practice modal @[111214] @provider @functional', async ({ page }) => {
+  test('Verify Cancel Button functionality on Edit License to Practice modal @[111214] @provider @functional', async () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
 
-    // add license
-    await page.getByRole('link', { name: 'Plus Add license' }).click();
-    await expect(page.getByText('License 2')).toBeVisible();
-    await page.getByTestId('custom-select-item-wrapper').nth(2).click();
-    await page.getByTestId('custom-dropdown-item-Albania').click();
-    await page.getByTestId('custom-select-item-wrapper').nth(3).click();
-    await page.getByTestId('custom-dropdown-item-Berat').click();
+    // Add license
+    await providerMyAccountPage.addLicense2();
 
-    // click cancel
-    await page.getByText('Cancel').click();
-    await page.waitForTimeout(1000);
+    // Click cancel
+    await providerMyAccountPage.editLicenseCancelButton.click();
+    await providerMyAccountPage.page.waitForTimeout(1000);
 
     // Reopen modal to verify changes were not saved
     await providerMyAccountPage.openEditLicenseToPracticeModal();
-    await expect(page.getByText('License 2')).not.toBeVisible();
+    await expect(providerMyAccountPage.editLicenseModalLicense2).not.toBeVisible();
   });
 
-  test('Verify Save Changes Validation for Empty Fields on Edit License to Practice @[111215] @provider @functional', async ({ page }) => {
+  test('Verify Save Changes Validation for Empty Fields on Edit License to Practice @[111215] @provider @functional', async () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
 
     // Select country but leave state empty to test validation
@@ -147,27 +120,11 @@ test.describe('Provider @regression', () => {
     await expect(providerMyAccountPage.editLicenseSaveButton).toBeDisabled();
   });
 
-  test('Verify Save Changes Functionality with All Fields Populated on Edit License @[111216] @provider @functional', async ({ page }) => {
+  test('Verify Save Changes Functionality with All Fields Populated on Edit License @[111216] @provider @functional', async () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
 
-    // add license
-    await page.getByRole('link', { name: 'Plus Add license' }).click();
-    await expect(page.getByText('License 2')).toBeVisible();
-    await page.getByTestId('custom-select-item-wrapper').nth(2).click();
-    await page.getByTestId('custom-dropdown-item-Albania').click();
-    await page.getByTestId('custom-select-item-wrapper').nth(3).click();
-    await page.getByTestId('custom-dropdown-item-Berat').click();
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
-
-    // Now delete the added license
-    await providerMyAccountPage.openEditLicenseToPracticeModal();
-    await page.getByRole('link', { name: 'Remove License' }).click();
-    await expect(page.getByText('License 2')).not.toBeVisible();
-
-    // Save changes after deletion
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
+    // Add and then delete license to test full workflow
+    await providerMyAccountPage.addAndDeleteLicense();
   });
 
   test('Verify Content on Account Settings Page @[111219] @provider @ui', async () => {

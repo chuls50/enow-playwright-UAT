@@ -25,52 +25,20 @@ test.describe('Provider @regression', () => {
     await expect(providerMyAccountPage.editLicenseSaveButton).toBeVisible();
   });
 
-  test('Verify adding a New License in Edit License to practice slide out @[111396] @provider @functional', async ({ page }) => {
+  test('Verify adding a New License in Edit License to practice slide out @[111396] @provider @functional', async () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
+    await providerMyAccountPage.resetEditLicenseModalStateIfNeeded();
 
-    // add license
-    await page.getByRole('link', { name: 'Plus Add license' }).click();
-    await expect(page.getByText('License 2')).toBeVisible();
-    await page.getByTestId('custom-select-item-wrapper').nth(2).click();
-    await page.getByTestId('custom-dropdown-item-Albania').click();
-    await page.getByTestId('custom-select-item-wrapper').nth(3).click();
-    await page.getByTestId('custom-dropdown-item-Berat').click();
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
-    await page.waitForTimeout(1000);
-
-    // Now delete the added license
-    await providerMyAccountPage.openEditLicenseToPracticeModal();
-    await page.getByRole('link', { name: 'Remove License' }).click();
-    await expect(page.getByText('License 2')).not.toBeVisible();
-
-    // Save changes after deletion
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
+    // Add and then delete license to test full workflow
+    await providerMyAccountPage.addAndDeleteLicense();
   });
 
-  test('Verify deleting a License in Edit License to practice slide out @[111397] @provider @functional', async ({ page }) => {
+  test('Verify deleting a License in Edit License to practice slide out @[111397] @provider @functional', async () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
+    await providerMyAccountPage.resetEditLicenseModalStateIfNeeded();
 
-    // add license
-    await page.getByRole('link', { name: 'Plus Add license' }).click();
-    await expect(page.getByText('License 2')).toBeVisible();
-    await page.getByTestId('custom-select-item-wrapper').nth(2).click();
-    await page.getByTestId('custom-dropdown-item-Albania').click();
-    await page.getByTestId('custom-select-item-wrapper').nth(3).click();
-    await page.getByTestId('custom-dropdown-item-Berat').click();
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
-    await page.waitForTimeout(1000);
-
-    // Now delete the added license
-    await providerMyAccountPage.openEditLicenseToPracticeModal();
-    await page.getByRole('link', { name: 'Remove License' }).click();
-    await expect(page.getByText('License 2')).not.toBeVisible();
-
-    // Save changes after deletion
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
+    // Add and then delete license to test full workflow
+    await providerMyAccountPage.addAndDeleteLicense();
   });
 
   test('Verify state dropwdown behavior in Edit license to practice modal @[111398] @provider @functional', async () => {
@@ -82,8 +50,8 @@ test.describe('Provider @regression', () => {
 
     // Test state dropdown functionality
     await providerMyAccountPage.editLicenseModalLicense1StateDropdown.click();
-    await expect(providerMyAccountPage.editLicenseModalLicense1StateDropdownOptions).toBeVisible();
-    await providerMyAccountPage.editLicenseModalLicense1StateDropdownSelection.click();
+    await expect(providerMyAccountPage.customDropdown).toBeVisible();
+    await providerMyAccountPage.page.getByTestId('custom-dropdown-item-Badakhshan').click();
     await expect(
       providerMyAccountPage.page
         .locator('div')
@@ -92,48 +60,28 @@ test.describe('Provider @regression', () => {
     ).toHaveText('Badakhshan');
   });
 
-  test('Verify Save Changes behavior for licenses in Edit License slide out @[111399] @provider @functional', async ({ page }) => {
+  test('Verify Save Changes behavior for licenses in Edit License slide out @[111399] @provider @functional', async () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
+    await providerMyAccountPage.resetEditLicenseModalStateIfNeeded();
 
-    // add license
-    await page.getByRole('link', { name: 'Plus Add license' }).click();
-    await expect(page.getByText('License 2')).toBeVisible();
-    await page.getByTestId('custom-select-item-wrapper').nth(2).click();
-    await page.getByTestId('custom-dropdown-item-Albania').click();
-    await page.getByTestId('custom-select-item-wrapper').nth(3).click();
-    await page.getByTestId('custom-dropdown-item-Berat').click();
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
-    await page.waitForTimeout(1000);
-
-    // Now delete the added license
-    await providerMyAccountPage.openEditLicenseToPracticeModal();
-    await page.getByRole('link', { name: 'Remove License' }).click();
-    await expect(page.getByText('License 2')).not.toBeVisible();
-
-    // Save changes after deletion
-    await page.getByText('Save changes').click();
-    await expect(page.getByText('SuccessProfile updated')).toBeVisible();
+    // Add and then delete license to test full workflow
+    await providerMyAccountPage.addAndDeleteLicense();
   });
 
-  test('Verify Edit Licenses Cancel button behavior in Edit License @[111400] @provider @functional', async ({ page }) => {
+  test('Verify Edit Licenses Cancel button behavior in Edit License @[111400] @provider @functional', async () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
+    await providerMyAccountPage.resetEditLicenseModalStateIfNeeded();
 
-    // add license
-    await page.getByRole('link', { name: 'Plus Add license' }).click();
-    await expect(page.getByText('License 2')).toBeVisible();
-    await page.getByTestId('custom-select-item-wrapper').nth(2).click();
-    await page.getByTestId('custom-dropdown-item-Albania').click();
-    await page.getByTestId('custom-select-item-wrapper').nth(3).click();
-    await page.getByTestId('custom-dropdown-item-Berat').click();
+    // Add license
+    await providerMyAccountPage.addLicense2();
 
-    // click cancel
-    await page.getByText('Cancel').click();
-    await page.waitForTimeout(1000);
+    // Click cancel
+    await providerMyAccountPage.editLicenseCancelButton.click();
+    await providerMyAccountPage.page.waitForTimeout(1000);
 
     // Reopen modal to verify changes were not saved
     await providerMyAccountPage.openEditLicenseToPracticeModal();
-    await expect(page.getByText('License 2')).not.toBeVisible();
+    await expect(providerMyAccountPage.editLicenseModalLicense2).not.toBeVisible();
   });
 
   test('Verify alphabetical order for Country and State dropdowns in Edit License to practice slide out @[111401] @provider @ui', async () => {
@@ -141,7 +89,7 @@ test.describe('Provider @regression', () => {
 
     // Test country dropdown
     await providerMyAccountPage.editLicenseModalLicense1CountryDropdown.click();
-    await expect(providerMyAccountPage.editLicenseModalLicense1CountryDropdownOptions).toBeVisible();
+    await expect(providerMyAccountPage.customDropdown).toBeVisible();
     await providerMyAccountPage.page.getByTestId('custom-dropdown-item-Afghanistan').click();
     await providerMyAccountPage.editLicenseCancelButton.click();
 
@@ -149,7 +97,7 @@ test.describe('Provider @regression', () => {
     await providerMyAccountPage.openEditLicenseToPracticeModal();
     await providerMyAccountPage.selectCountryInEditLicense('Afghanistan');
     await providerMyAccountPage.editLicenseModalLicense1StateDropdown.click();
-    await expect(providerMyAccountPage.editLicenseModalLicense1StateDropdownOptions).toBeVisible();
+    await expect(providerMyAccountPage.customDropdown).toBeVisible();
   });
 
   test('Verify field validation for Phone number in Edit profile details slide out @[111732] @provider @functional', async () => {
@@ -184,7 +132,7 @@ test.describe('Provider @regression', () => {
     await expect(providerMyAccountPage.editProfileSaveButton).toBeVisible();
   });
 
-  test('Verify entering text into the First Name field in Edit profile details @[114113] @provider @functional', async ({ page }) => {
+  test('Verify entering text into the First Name field in Edit profile details @[114113] @provider @functional', async () => {
     await providerMyAccountPage.openEditProfileSlideOut();
 
     // Test first name field functionality
@@ -192,10 +140,10 @@ test.describe('Provider @regression', () => {
     await expect(providerMyAccountPage.editProfileDetailsFirstNameInput).toBeVisible();
     await providerMyAccountPage.editProfileDetailsFirstNameInput.fill('');
     await providerMyAccountPage.editProfileSaveButton.click();
-    await expect(page.getByText('First name is required')).toBeVisible();
+    await expect(providerMyAccountPage.firstNameRequiredError).toBeVisible();
 
     await providerMyAccountPage.editProfileDetailsFirstNameInput.type('Cody&');
-    await expect(page.getByText('First name must contain at least one letter and can only include')).toBeVisible();
+    await expect(providerMyAccountPage.firstNameValidationError).toBeVisible();
 
     await providerMyAccountPage.editProfileDetailsFirstNameInput.clear();
     await providerMyAccountPage.editProfileDetailsFirstNameInput.type('cody');
@@ -210,10 +158,10 @@ test.describe('Provider @regression', () => {
     await expect(providerMyAccountPage.editProfileDetailsLastNameInput).toBeVisible();
     await providerMyAccountPage.editProfileDetailsLastNameInput.clear();
     await providerMyAccountPage.editProfileSaveButton.click();
-    await expect(providerMyAccountPage.page.getByText('Last name is required')).toBeVisible();
+    await expect(providerMyAccountPage.lastNameRequiredError).toBeVisible();
 
     await providerMyAccountPage.editProfileDetailsLastNameInput.type('PROVIDER&');
-    await expect(providerMyAccountPage.page.getByText('Last name must contain at least one letter and can only include')).toBeVisible();
+    await expect(providerMyAccountPage.lastNameValidationError).toBeVisible();
 
     await providerMyAccountPage.editProfileDetailsLastNameInput.clear();
     await providerMyAccountPage.editProfileDetailsLastNameInput.type('prov');
@@ -256,9 +204,8 @@ test.describe('Provider @regression', () => {
 
     // Test languages spoken dropdown
     await expect(providerMyAccountPage.editProfileDetailsLanguagesSpoken).toBeVisible();
-    const languagesSpokenDropdown = providerMyAccountPage.page.getByRole('textbox', { name: 'Languages spoken' });
-    await expect(languagesSpokenDropdown).toBeVisible();
-    await languagesSpokenDropdown.click();
+    await expect(providerMyAccountPage.languagesSpokenDropdown).toBeVisible();
+    await providerMyAccountPage.languagesSpokenDropdown.click();
     const languageOptionSpanish = providerMyAccountPage.page.getByTestId('custom-dropdown-item-Spanish');
     await expect(languageOptionSpanish).toBeVisible();
     await languageOptionSpanish.click();
@@ -290,14 +237,14 @@ test.describe('Provider @regression', () => {
 
   test('Verify "Country" dropdown functionality, and "State" dropdown functionality in Edit profile details slide out @[114237] @provider @functional', async () => {
     await providerMyAccountPage.openEditProfileSlideOut();
-    await providerMyAccountPage.page.getByTestId('custom-select-item-wrapper').nth(2).click();
-    await expect(providerMyAccountPage.page.getByTestId('custom-dropdown')).toBeVisible();
+    await providerMyAccountPage.editLicenseModalLicense2CountryDropdown.click();
+    await expect(providerMyAccountPage.customDropdown).toBeVisible();
     await providerMyAccountPage.page.getByTestId('custom-dropdown-item-Afghanistan').click();
-    await providerMyAccountPage.page.getByTestId('custom-select-item-wrapper').nth(3).click();
-    await expect(providerMyAccountPage.page.getByTestId('custom-dropdown')).toBeVisible();
+    await providerMyAccountPage.editLicenseModalLicense2StateDropdown.click();
+    await expect(providerMyAccountPage.customDropdown).toBeVisible();
     await providerMyAccountPage.page.getByTestId('custom-dropdown-item-Badakhshan').click();
     await expect(providerMyAccountPage.page.getByText('CountryAfghanistanStateBadakhshan')).toBeVisible();
-    await providerMyAccountPage.page.getByRole('button', { name: 'Cancel' }).click();
+    await providerMyAccountPage.editProfileCancelButton.click();
   });
 
   test('Verify the Phone number extension dropdown functionality in Edit profile details slide out @[114240] @provider @functional', async () => {
@@ -305,11 +252,21 @@ test.describe('Provider @regression', () => {
     // Test phone number extension dropdown
     await expect(providerMyAccountPage.editProfileDetailsPhoneNumberExtensionDropdown).toBeVisible();
     await providerMyAccountPage.editProfileDetailsPhoneNumberExtensionDropdown.click();
-    await expect(providerMyAccountPage.editProfileDetailsPhoneNumberExtensionDropdownOptions).toBeVisible();
-    const firstOption = providerMyAccountPage.page.getByTestId('items-wrapper').locator('div').first();
+    await expect(providerMyAccountPage.itemsWrapper).toBeVisible();
+    const firstOption = providerMyAccountPage.itemsWrapper.locator('div').first();
     await firstOption.click();
     await expect(providerMyAccountPage.editProfileSaveButton).toBeEnabled();
   });
 
-  test.skip('Verify Error Message Displays When Saving Phone Number Currently Being Used @[118975] @provider @functional', async () => {});
+  test('Verify Error Message Displays When Saving Phone Number Currently Being Used @[118975] @provider @functional', async () => {
+    await providerMyAccountPage.openEditProfileSlideOut();
+
+    // Test phone number field functionality
+    await expect(providerMyAccountPage.editProfileDetailsPhoneNumber).toBeVisible();
+    await expect(providerMyAccountPage.editProfileDetailsPhoneNumberInput).toBeVisible();
+    await providerMyAccountPage.editProfileDetailsPhoneNumberInput.fill('');
+    await providerMyAccountPage.fillPhoneNumberInEditProfile('1234567890');
+    await providerMyAccountPage.editProfileSaveButton.click();
+    await expect(providerMyAccountPage.phoneNumberNotUniqueError).toBeVisible();
+  });
 });

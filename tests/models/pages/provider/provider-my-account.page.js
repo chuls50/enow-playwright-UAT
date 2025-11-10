@@ -73,16 +73,9 @@ export class MyAccountPage extends BasePage {
     this.editProfileDetailsPhoneNumber = page.getByText('Phone number').first();
     this.editProfileDetailsPhoneNumberInput = page.getByRole('textbox', { name: '(555) 000-' });
     this.editProfileDetailsPhoneNumberExtensionDropdown = page.getByTestId('popover-trigger').getByTestId('icon-ChevronDown');
-    this.editProfileDetailsPhoneNumberExtensionDropdownOptions = page.getByTestId('items-wrapper');
     this.editProfileSaveButton = page.getByRole('button', { name: 'Save changes' });
     this.editProfileCancelButton = page.getByRole('button', { name: 'Cancel' });
     this.editProfileSuccessMessage = page.getByText('Profile updated successfully!');
-
-    // Error messages for required fields
-    this.editProfileFirstNameRequiredError = page.getByText('First name is required');
-    this.editProfileLastNameRequiredError = page.getByText('Last name is required');
-    this.editProfileMedicalSpecialtyRequiredError = page.getByText('At least one medical');
-    this.editProfileLanguageRequiredError = page.getByText('At least one language is');
 
     // Medical specialty selection elements
     this.editProfileMedicalSpecialtyDropdownButton = page
@@ -98,33 +91,49 @@ export class MyAccountPage extends BasePage {
     // Edit License Modal Elements
     this.editLicenseModal = page.locator('div').filter({ hasText: /^Edit license$/ });
     this.editLicenseModalLicense1 = page.getByText('License 1');
+    this.editLicenseModalLicense2 = page.getByText('License 2');
     this.editLicenseModalLicense1Country = page.getByText('Country').nth(1);
     this.editLicenseModalLicense1CountryDropdown = page
       .locator('div')
       .filter({ hasText: /^CountryAfghanistan$/ })
       .getByTestId('custom-select-item-wrapper');
-    this.editLicenseModalLicense1CountryDropdownOptions = page.getByTestId('custom-dropdown');
     this.editLicenseModalLicense1State = page.getByText('State').nth(1);
     this.editLicenseModalLicense1StateDropdown = page
       .locator('div')
       .filter({ hasText: /^StateSelect state$/ })
       .getByTestId('custom-select-item-wrapper');
-    this.editLicenseModalLicense1StateDropdownOptions = page.getByTestId('custom-dropdown');
-    this.editLicenseModalLicense1StateDropdownSelection = page.getByTestId('custom-dropdown-item-Badakhshan');
     this.deleteLicenseButton = page.getByRole('link', { name: 'Remove License' });
     this.editLicenseAddLicenseButton = page.getByRole('link', { name: 'Plus Add license' });
     this.editLicenseCancelButton = page.getByRole('button', { name: 'Cancel' });
     this.editLicenseSaveButton = page.getByRole('button', { name: 'Save changes' });
-    this.editLicenseErrorMessageStateRequired = page.getByText('State is required');
+
+    // License 2 Dropdown Elements
+    this.editLicenseModalLicense2CountryDropdown = page.getByTestId('custom-select-item-wrapper').nth(2);
+    this.editLicenseModalLicense2StateDropdown = page.getByTestId('custom-select-item-wrapper').nth(3);
+
+    // Shared Dropdown Elements (reusable across license and profile modals)
+    this.customDropdown = page.getByTestId('custom-dropdown');
+    this.itemsWrapper = page.getByTestId('items-wrapper');
+
+    // Success/Error Messages
+    this.successMessage = page.getByText('SuccessProfile updated');
+    this.profileUpdatedSuccessMessage = page.getByText('Profile updated successfully!');
+
+    // Validation Error Messages
+    this.firstNameRequiredError = page.getByText('First name is required');
+    this.lastNameRequiredError = page.getByText('Last name is required');
+    this.firstNameValidationError = page.getByText('First name must contain at least one letter and can only include');
+    this.lastNameValidationError = page.getByText('Last name must contain at least one letter and can only include');
+    this.phoneNumberNotUniqueError = page.getByText('This phone number is already being used.');
+
+    // Shared Dropdown for Languages
+    this.languagesSpokenDropdown = page.getByRole('textbox', { name: 'Languages spoken' });
   }
 
   async gotoProviderMyAccount() {
     await this.page.goto(`${process.env.UAT_URL}/account-settings/my-account`);
 
-    // Wait for spinner to disappear if present
     await this.waitForSpinnerToDisappear();
-
-    // Wait for Provider account settings page to load
     await this.header.waitFor({ state: 'visible' });
   }
 
@@ -262,5 +271,43 @@ export class MyAccountPage extends BasePage {
 
     // Attempt to save to trigger validation errors
     await this.editProfileSaveButton.click();
+  }
+
+  // Helper method to reset the Edit License modal to a known state
+  async resetEditLicenseModalStateIfNeeded() {
+    // If license 2 is visible then reset state by removing it
+    const license2Text = this.page.getByText('License 2');
+    if (await license2Text.isVisible()) {
+      await this.deleteLicenseButton.click();
+      await this.editLicenseSaveButton.click();
+      await this.editProfileSuccessMessage.waitFor({ state: 'visible' });
+      await this.page.waitForTimeout(1000);
+      await this.openEditLicenseToPracticeModal();
+    }
+  }
+
+  // Helper method to add a license (Albania, Berat)
+  async addLicense2() {
+    await this.editLicenseAddLicenseButton.click();
+    await this.editLicenseModalLicense2CountryDropdown.click();
+    await this.page.getByTestId('custom-dropdown-item-Albania').click();
+    await this.editLicenseModalLicense2StateDropdown.click();
+    await this.page.getByTestId('custom-dropdown-item-Berat').click();
+  }
+
+  // Helper method to add and then delete a license (full workflow)
+  async addAndDeleteLicense() {
+    // Add license
+    await this.addLicense2();
+    await this.editLicenseSaveButton.click();
+    await this.successMessage.waitFor({ state: 'visible' });
+
+    // Delete the added license
+    await this.openEditLicenseToPracticeModal();
+    await this.deleteLicenseButton.click();
+
+    // Save changes after deletion
+    await this.editLicenseSaveButton.click();
+    await this.successMessage.waitFor({ state: 'visible' });
   }
 }

@@ -22,7 +22,7 @@ export default defineConfig({
   fullyParallel: false, // Changed to false since you mentioned no parallel execution
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 0 : 0,
-  workers: process.env.CI ? 1 : 2,
+  workers: process.env.CI ? 1 : 1,
   timeout: 60000, // Default timeout for each test
   expect: {
     timeout: 15000, // Expect timeout of 15 seconds
