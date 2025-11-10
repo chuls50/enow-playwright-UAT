@@ -1,6 +1,4 @@
-import dotenv from 'dotenv';
 import { BasePage } from '../../base-page.js';
-dotenv.config();
 
 export class LoginPage extends BasePage {
   constructor(page) {
@@ -67,7 +65,7 @@ export class LoginPage extends BasePage {
     await this.page.waitForURL(/.*\/login/);
   }
 
-  async goToPasswordStep(email = process.env.PAT_PROD_USERNAME) {
+  async goToPasswordStep(email = process.env.UAT_PATIENT_USERNAME) {
     await this.goto();
     await this.emailField.fill(email);
     await this.nextButton.click();

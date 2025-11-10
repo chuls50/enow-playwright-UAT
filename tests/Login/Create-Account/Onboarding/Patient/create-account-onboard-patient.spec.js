@@ -70,31 +70,3 @@ test.describe('Patient @regression', () => {
     await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
   });
 });
-
-// test.describe('Create Account Onboard Patient pt2 @regression', () => {
-//     let basePage;
-//     let onboardingPage;
-
-//     test.beforeEach(async ({ page }) => {
-//         basePage = new BasePage(page);
-//         onboardingPage = new BeforeWeGetStartedPage(page);
-//     });
-
-//     test('Verify Additional Content on "Before we get started" Page @[118057] @patient @ui', async ({ page }) => {
-//         // login as patient
-//         await basePage.performPatientLogin();
-
-//         // navigate to onboarding page
-//         await onboardingPage.navigateToOnboarding();
-
-//         // Verify insurance information section using POM
-//         await expect(onboardingPage.insuranceInfoHeading).toBeVisible();
-//         await expect(onboardingPage.taxIdLabel).toBeVisible();
-//         await expect(onboardingPage.insurancePolicyNumberLabel).toBeVisible();
-//         await expect(onboardingPage.insuranceLabel).toBeVisible();
-//         await expect(onboardingPage.taxIdInput).toBeVisible();
-//         await expect(onboardingPage.insurancePolicyNumberInput).toBeVisible();
-//         await expect(onboardingPage.insuranceInput).toBeVisible();
-//     });
-
-// });

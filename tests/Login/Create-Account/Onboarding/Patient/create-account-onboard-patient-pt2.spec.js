@@ -5,7 +5,7 @@ import { ROLES, useRole } from '../../../../utils/auth-helpers.js';
 
 // Create Account Onboard Patient - Total tests 1
 
-test.describe('Create Account Onboard Patient @regression', () => {
+test.describe('Patient @regression', () => {
   test.use(useRole(ROLES.PATIENT));
   let eulaPage;
   let onboardingPage;
