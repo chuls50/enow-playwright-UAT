@@ -46,7 +46,9 @@ test.describe('Patient Edit Profile pt2 @regression', () => {
     await expect(myAccountPage.profileUpdatedSuccessMessage).toBeVisible();
   });
 
-  test('Verify validation for Insurance policy number valid input in Edit Profile Details @[118045] @patient @functional', async ({}) => {
+  test('Verify validation for Insurance policy number valid input in Edit Profile Details @[118045] @patient @functional', async ({
+    page,
+  }) => {
     // Open edit profile modal
     await myAccountPage.openEditProfileModal();
 

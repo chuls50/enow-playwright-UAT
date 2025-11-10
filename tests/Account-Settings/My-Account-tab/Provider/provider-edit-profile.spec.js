@@ -142,11 +142,11 @@ test.describe('Provider @regression', () => {
     await providerMyAccountPage.editProfileSaveButton.click();
     await expect(providerMyAccountPage.firstNameRequiredError).toBeVisible();
 
-    await providerMyAccountPage.editProfileDetailsFirstNameInput.type('Cody&');
+    await providerMyAccountPage.editProfileDetailsFirstNameInput.type('cody prov&');
     await expect(providerMyAccountPage.firstNameValidationError).toBeVisible();
 
     await providerMyAccountPage.editProfileDetailsFirstNameInput.clear();
-    await providerMyAccountPage.editProfileDetailsFirstNameInput.type('cody');
+    await providerMyAccountPage.editProfileDetailsFirstNameInput.type('cody prov');
     await expect(providerMyAccountPage.editProfileSaveButton).toBeDisabled();
   });
 
@@ -160,11 +160,11 @@ test.describe('Provider @regression', () => {
     await providerMyAccountPage.editProfileSaveButton.click();
     await expect(providerMyAccountPage.lastNameRequiredError).toBeVisible();
 
-    await providerMyAccountPage.editProfileDetailsLastNameInput.type('PROVIDER&');
+    await providerMyAccountPage.editProfileDetailsLastNameInput.type('Cody Test Institution&');
     await expect(providerMyAccountPage.lastNameValidationError).toBeVisible();
 
     await providerMyAccountPage.editProfileDetailsLastNameInput.clear();
-    await providerMyAccountPage.editProfileDetailsLastNameInput.type('prov');
+    await providerMyAccountPage.editProfileDetailsLastNameInput.type('Cody Test Institution');
     await expect(providerMyAccountPage.editProfileSaveButton).toBeDisabled();
   });
 
