@@ -8,9 +8,9 @@ export class BasePage {
   async goto(url) {
     const defaultOptions = {
       waitUntil: 'networkidle',
-      timeout: 30000
+      timeout: 30000,
     };
-    
+
     await this.page.goto(url, defaultOptions);
     await this.page.waitForLoadState('networkidle', { timeout: 45000 });
     await this.page.waitForLoadState('domcontentloaded');
@@ -27,7 +27,7 @@ export class BasePage {
   async _performLogin(usernameEnv, passwordEnv, userType) {
     try {
       // Navigate to base URL and wait for login page
-      await this.page.goto(process.env.PROD_URL);
+      await this.page.goto(process.env.UAT_URL);
       await this.page.waitForURL(/.*\/login/);
 
       // Fill email
@@ -45,44 +45,43 @@ export class BasePage {
 
       console.log(`✅ Successfully logged in as ${userType}`);
       return true;
-
     } catch (error) {
       console.error(`❌ Failed to login as ${userType}:`, error.message);
       throw error;
     }
   }
 
-  async performAdminLogin() {
-    return this._performLogin('ADMIN_2_PROD_USERNAME', 'ADMIN_2_PROD_PASSWORD', 'admin2');
-  }
+  // async performAdminLogin() {
+  //   return this._performLogin('ADMIN_2_PROD_USERNAME', 'ADMIN_2_PROD_PASSWORD', 'admin2');
+  // }
 
-  async performProviderLogin() {
-    return this._performLogin('PROV_2_PROD_USERNAME', 'PROV_2_PROD_PASSWORD', 'provider2');
-  }
+  // async performProviderLogin() {
+  //   return this._performLogin('UAT_PROVIDER_USERNAME', 'UAT_PROVIDER_PASSWORD', 'provider-CodyTest(UAT)');
+  // }
 
-  async performPatientLogin() {
-    return this._performLogin('PAT_2_PROD_USERNAME', 'PAT_2_PROD_PASSWORD', 'patient2');
-  }
+  // async performPatientLogin() {
+  //   return this._performLogin('UAT_PATIENT_USERNAME', 'UAT_PATIENT_PASSWORD', 'patient-CodyTest(UAT)');
+  // }
 
-  async performCoordinatorLogin() {
-    return this._performLogin('CORD_2_PROD_USERNAME', 'CORD_2_PROD_PASSWORD', 'coordinator2');
-  }
+  // async performCoordinatorLogin() {
+  //   return this._performLogin('CORD_2_PROD_USERNAME', 'CORD_2_PROD_PASSWORD', 'coordinator2');
+  // }
 
-  async performProviderCoordinatorLogin() {
-    return this._performLogin('PROV_CORD_PROD_USERNAME', 'PROV_CORD_PROD_PASSWORD', 'provider+coordinator');
-  }
+  // async performProviderCoordinatorLogin() {
+  //   return this._performLogin('PROV_CORD_PROD_USERNAME', 'PROV_CORD_PROD_PASSWORD', 'provider+coordinator');
+  // }
 
-  async performAdminCoordinatorLogin() {
-    return this._performLogin('ADMIN_CORD_PROD_USERNAME', 'ADMIN_CORD_PROD_PASSWORD', 'admin+coordinator');
-  }
+  // async performAdminCoordinatorLogin() {
+  //   return this._performLogin('ADMIN_CORD_PROD_USERNAME', 'ADMIN_CORD_PROD_PASSWORD', 'admin+coordinator');
+  // }
 
-  async performAdminProviderLogin() {
-    return this._performLogin('ADMIN_PROV_PROD_USERNAME', 'ADMIN_PROV_PROD_PASSWORD', 'admin+provider');
-  }
+  // async performAdminProviderLogin() {
+  //   return this._performLogin('ADMIN_PROV_PROD_USERNAME', 'ADMIN_PROV_PROD_PASSWORD', 'admin+provider');
+  // }
 
-  async performAdminCoordinatorProviderLogin() {
-    return this._performLogin('ADMIN_CORD_PROV_PROD_USERNAME', 'ADMIN_CORD_PROV_PROD_PASSWORD', 'admin+coordinator+provider');
-  }
+  // async performAdminCoordinatorProviderLogin() {
+  //   return this._performLogin('ADMIN_CORD_PROV_PROD_USERNAME', 'ADMIN_CORD_PROV_PROD_PASSWORD', 'admin+coordinator+provider');
+  // }
 
   async performDeviceIdLogin(deviceId) {
     try {
@@ -94,7 +93,7 @@ export class BasePage {
       await this.page.getByRole('textbox', { name: '1234' }).click();
       await this.page.getByRole('textbox', { name: '1234' }).fill(deviceId);
       await this.page.getByRole('button', { name: 'Verify Device ID' }).click();
-      
+
       // Wait for successful verification
       await this.page.getByText('Welcome back!').waitFor({ state: 'visible' });
       await this.page.waitForTimeout(2000);
@@ -102,7 +101,6 @@ export class BasePage {
 
       console.log(`✅ Successfully logged in with device ID: ${deviceId}`);
       return true;
-
     } catch (error) {
       console.error(`❌ Failed to login with device ID ${deviceId}:`, error.message);
       throw error;
@@ -137,7 +135,6 @@ export class BasePage {
 
       console.log(`✅ Successfully logged in as ${userType}`);
       return true;
-
     } catch (error) {
       console.error(`❌ Failed to login as ${userType}:`, error.message);
       throw error;
@@ -163,5 +160,4 @@ export class BasePage {
   async performUATsuperAdminLogin() {
     return this._performUATLogin('SUPER_ADMIN_USERNAME', 'SUPER_ADMIN_PASSWORD', 'superadmin-CodyTest(UAT)');
   }
-
 }

@@ -3,7 +3,7 @@ import { LoginPage } from '../../models/pages/shared/login.page.js';
 
 // Forgot Password - Total Tests 8 (including 2 skipped)
 
-test.describe('Forgot Password @regression', () => {
+test.describe('Unauthenticated @regression', () => {
   let loginPage;
 
   // Initialize LoginPage before each test
