@@ -5,9 +5,7 @@ export class CalendarSettingsPage extends BasePage {
     super(page);
 
     // Main page elements
-    this.accountSettingsHeader = page.getByRole('heading', {
-      name: 'Account settings',
-    });
+    this.accountSettingsHeader = page.getByRole('heading', { name: 'Account settings' });
     this.calendarLabel = page.getByRole('paragraph').filter({ hasText: 'Calendar' }).first();
     this.calendarDescription = page.getByText('Manage your time zone and');
 
@@ -17,9 +15,7 @@ export class CalendarSettingsPage extends BasePage {
 
     // Time Zone Modal elements
     this.timeZoneModalTitle = page.getByText('Change time zone').nth(1);
-    this.timeZoneModalCloseButton = page.getByRole('button', {
-      name: 'XClose',
-    });
+    this.timeZoneModalCloseButton = page.getByRole('button', { name: 'XClose' });
     this.modalTimeZone = page.locator('span').filter({ hasText: /^Time zone$/ });
 
     // Time Zone Toggle and form elements
@@ -32,9 +28,7 @@ export class CalendarSettingsPage extends BasePage {
 
     // Time Zone Action buttons
     this.timeZoneCancelButton = page.getByRole('button', { name: 'Cancel' });
-    this.timeZoneSaveChangesButton = page.getByRole('button', {
-      name: 'Save changes',
-    });
+    this.timeZoneSaveChangesButton = page.getByRole('button', { name: 'Save changes' });
 
     // Time Zone Success/Error messages
     this.timeZoneSuccessMessage = page.getByText('Time zone updated');
@@ -44,18 +38,12 @@ export class CalendarSettingsPage extends BasePage {
 
     // Daily Availability section elements
     this.dailyAvailabilityLabel = page.getByText('Daily Availability').first();
-    this.editDailyAvailabilityButton = page.getByRole('button', {
-      name: 'Edit',
-    });
+    this.editDailyAvailabilityButton = page.getByRole('button', { name: 'Edit' });
 
     // Edit Daily Availability Modal elements
     this.editDailyAvailabilityModal = page.getByText('Edit Daily Availability');
-    this.availabilitySaveChangesButton = page.getByRole('button', {
-      name: 'Save Changes',
-    });
-    this.availabilityCancelButton = page.getByRole('button', {
-      name: 'Cancel',
-    });
+    this.availabilitySaveChangesButton = page.getByRole('button', { name: 'Save Changes' });
+    this.availabilityCancelButton = page.getByRole('button', { name: 'Cancel' });
     this.availabilityXCloseButton = page.getByRole('button', { name: 'X' });
     this.dayOffMessage = page.getByText('Day off');
 

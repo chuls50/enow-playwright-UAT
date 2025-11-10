@@ -16,7 +16,7 @@ export class NotificationsPage extends BasePage {
     this.smsNotificationSwitch = page.getByTestId('switch-div').nth(1);
     this.pushNotification = page.getByText('In-app');
     this.pushNotificationSwitch = page.getByTestId('switch-div').nth(2);
-    this.displayedEmail = page.getByText('chuls+providerprod@globalmed.com');
+    this.displayedEmail = page.getByText('chuls+prov1codytest@globalmed.com');
     this.displayedPhone = page.getByText('US (+1)');
     this.sessionReminder = page.getByText('Session reminder');
     this.sessionReminderText = page.getByText("Set the time you'd like to be");
@@ -37,12 +37,8 @@ export class NotificationsPage extends BasePage {
       .getByTestId('custom-select-item-wrapper')
       .locator('div')
       .filter({ hasText: 'minutes before' });
-    this.sessionRemindersCancelButton = page.getByRole('button', {
-      name: 'Cancel',
-    });
-    this.sessionRemindersSaveButton = page.getByRole('button', {
-      name: 'Save',
-    });
+    this.sessionRemindersCancelButton = page.getByRole('button', { name: 'Cancel' });
+    this.sessionRemindersSaveButton = page.getByRole('button', { name: 'Save' });
     this.sessionRemindersXClose = page.getByRole('button', { name: 'XClose' });
 
     // success message

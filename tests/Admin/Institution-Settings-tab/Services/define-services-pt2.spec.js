@@ -4,7 +4,7 @@ import { useRole, ROLES } from '../../../utils/auth-helpers.js';
 
 // Define Services pt2 - Total tests 3
 
-test.describe('Define Services pt2 @regression', () => {
+test.describe('Admin @regression', () => {
   test.use(useRole(ROLES.ADMIN));
   let institutionSettingsServicesPage;
 
@@ -18,29 +18,29 @@ test.describe('Define Services pt2 @regression', () => {
 
     // click duration dropdown and select multiple options
     await institutionSettingsServicesPage.durationDropdown.first().click();
-    await institutionSettingsServicesPage.page.getByTestId('custom-dropdown-item-45 minutes').click();
-    await institutionSettingsServicesPage.page.getByTestId('custom-dropdown-item-60 minutes').click();
+    await page.getByTestId('custom-dropdown-item-45 minutes').click();
+    await page.getByTestId('custom-dropdown-item-60 minutes').click();
 
     // save changes
-    await institutionSettingsServicesPage.page.getByRole('button', { name: 'Save changes' }).click();
-    await institutionSettingsServicesPage.page.getByText('SuccessInfo updated').waitFor({ state: 'visible' });
-    await expect(institutionSettingsServicesPage.page.getByText('SuccessInfo updated')).toBeVisible();
+    await page.getByRole('button', { name: 'Save changes' }).click();
+    await page.getByText('SuccessInfo updated').waitFor({ state: 'visible' });
+    await expect(page.getByText('SuccessInfo updated')).toBeVisible();
 
     // remove selections
-    await institutionSettingsServicesPage.page
+    await page
       .locator('div')
       .filter({ hasText: /^45 minutes$/ })
       .getByRole('button')
       .click();
-    await institutionSettingsServicesPage.page
+    await page
       .locator('div')
       .filter({ hasText: /^60 minutes$/ })
       .getByRole('button')
       .click();
 
     // save changes
-    await institutionSettingsServicesPage.page.getByRole('button', { name: 'Save changes' }).click();
-    await expect(institutionSettingsServicesPage.page.getByText('SuccessInfo updated').first()).toBeVisible();
+    await page.getByRole('button', { name: 'Save changes' }).click();
+    await expect(page.getByText('SuccessInfo updated').first()).toBeVisible();
   });
 
   test('Verify error message for missing "Duration" selection @[118064] @admin @functional', async () => {

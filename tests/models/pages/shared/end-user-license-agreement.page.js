@@ -48,7 +48,7 @@ export class EndUserLicenseAgreementPage extends BasePage {
   }
 
   async navigateToEula() {
-    await this.goto('https://portal.encounterservices.com/first-login');
+    await this.goto('https://xj9.sandbox-encounterservices.com/first-login');
   }
 
   async acceptEula() {

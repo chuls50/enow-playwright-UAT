@@ -122,6 +122,8 @@ export class MyAccountPage extends BasePage {
     // Validation Error Messages
     this.firstNameRequiredError = page.getByText('First name is required');
     this.lastNameRequiredError = page.getByText('Last name is required');
+    this.medicalSpecialtyRequiredError = page.getByText('At least one medical specialty is required');
+    this.languageRequiredError = page.getByText('At least one language is required');
     this.firstNameValidationError = page.getByText('First name must contain at least one letter and can only include');
     this.lastNameValidationError = page.getByText('Last name must contain at least one letter and can only include');
     this.phoneNumberNotUniqueError = page.getByText('This phone number is already being used.');

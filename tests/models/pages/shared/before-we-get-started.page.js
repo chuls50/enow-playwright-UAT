@@ -69,7 +69,7 @@ export class BeforeWeGetStartedPage extends BasePage {
   }
 
   async navigateToOnboarding() {
-    await this.goto('https://portal.encounterservices.com/first-login/participant-form');
+    await this.goto('https://xj9.sandbox-encounterservices.com/first-login/participant-form');
     // await this.pageTitle.waitFor({ state: 'visible' });
   }
 

@@ -7,19 +7,13 @@ export class MyAccountPage extends BasePage {
     // Main page elements
     this.header = page.getByRole('heading', { name: 'Account settings' });
     this.myAccountButton = page.getByRole('button', { name: 'My account' });
-    this.notificationsButton = page.getByRole('button', {
-      name: 'Notifications',
-    });
+    this.notificationsButton = page.getByRole('button', { name: 'Notifications' });
     this.myAccountText = page.getByText('Update and manage your account');
 
     // Profile section
     this.profileIcon = page.getByTestId('avatar');
-    this.profileIconUploadButton = page.getByRole('button', {
-      name: 'Download Upload photo',
-    });
-    this.profileIconDeleteButton = page.getByRole('button', {
-      name: 'Trash Delete photo',
-    });
+    this.profileIconUploadButton = page.getByRole('button', { name: 'Download Upload photo' });
+    this.profileIconDeleteButton = page.getByRole('button', { name: 'Trash Delete photo' });
     this.profileIconSuccessMessage = page.getByText('Photo picture uploaded successfully.');
     this.deleteProfilePictureSuccessMessage = page.getByText('Profile picture deleted successfully.');
     this.editProfileButton = page.getByRole('button', { name: 'Edit Edit' });
@@ -34,26 +28,14 @@ export class MyAccountPage extends BasePage {
 
     // Edit profile modal elements
     this.editProfileDetailsModal = page.getByRole('dialog');
-    this.editProfileDetailsModalXCloseButton = page.getByRole('button', {
-      name: 'XClose',
-    });
+    this.editProfileDetailsModalXCloseButton = page.getByRole('button', { name: 'XClose' });
     this.editProfileDetailsModalHeader = page.getByText('Edit profile details');
-    this.editProfileDetailsModalFirstNameInput = page.getByRole('textbox', {
-      name: 'First name',
-    });
-    this.editProfileDetailsModalLastNameInput = page.getByRole('textbox', {
-      name: 'Last name',
-    });
-    this.editProfileDetailsModalDOBInput = page.getByRole('textbox', {
-      name: 'MM/DD/YYYY',
-    });
+    this.editProfileDetailsModalFirstNameInput = page.getByRole('textbox', { name: 'First name' });
+    this.editProfileDetailsModalLastNameInput = page.getByRole('textbox', { name: 'Last name' });
+    this.editProfileDetailsModalDOBInput = page.getByRole('textbox', { name: 'MM/DD/YYYY' });
     this.editProfileDetailsModalGenderSelect = page.getByTestId('custom-select-item-wrapper').first();
-    this.editProfileDetailsModalSaveButton = page.getByRole('button', {
-      name: 'Save changes',
-    });
-    this.editProfileDetailsModalCancelButton = page.getByRole('button', {
-      name: 'Cancel',
-    });
+    this.editProfileDetailsModalSaveButton = page.getByRole('button', { name: 'Save changes' });
+    this.editProfileDetailsModalCancelButton = page.getByRole('button', { name: 'Cancel' });
 
     // Taxes
     this.taxIdText = page.getByText('Tax ID');
@@ -71,37 +53,26 @@ export class MyAccountPage extends BasePage {
       .getByRole('paragraph');
 
     this.insurancePolicyNumberText = page.getByText('Insurance policy number');
-    this.insurancePolicyNumberInput = page.getByRole('textbox', {
-      name: 'Insurance policy number',
-    });
-    this.insurancePolicyNumberFieldError = page.getByText(
-      "Field must contain only numbers, letters and symbols '-' and '/'"
-    );
+    this.insurancePolicyNumberInput = page.getByRole('textbox', { name: 'Insurance policy number' });
+    this.insurancePolicyNumberFieldError = page.getByText("Field must contain only numbers, letters and symbols '-' and '/'");
 
     // Language section
     this.applicationLanguageSection = page.getByText('Application language');
-    this.changeLanguageButton = page.getByRole('link', {
-      name: 'Change language',
-    });
+    this.changeLanguageButton = page.getByRole('link', { name: 'Change language' });
     this.changeLanguageModal = page.getByTestId('modal');
 
     // Time zone section
     this.timeZoneSection = page.getByText('Time zone', { exact: true });
-    this.timeZoneChangeButton = page.getByRole('link', {
-      name: 'Change time zone',
-    });
+    this.timeZoneChangeButton = page.getByRole('link', { name: 'Change time zone' });
+    this.timeZoneAutomaticToggle = page.getByText('Automatic time zone');
 
     // Account deletion section
     this.accountDeletionSection = page.getByText('Account', { exact: true });
     this.accountDeletionButton = page.getByText('Delete account');
     this.accountDeletionModal = page.getByTestId('modal');
     this.accountDeletionHeader = page.getByText('Delete account?');
-    this.accountDeletionNoCancelButton = page.getByRole('button', {
-      name: 'No, cancel',
-    });
-    this.accountDeletionConfirmButton = page.getByRole('button', {
-      name: 'Yes, delete',
-    });
+    this.accountDeletionNoCancelButton = page.getByRole('button', { name: 'No, cancel' });
+    this.accountDeletionConfirmButton = page.getByRole('button', { name: 'Yes, delete' });
   }
 
   // Navigation method
