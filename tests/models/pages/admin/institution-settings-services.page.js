@@ -26,6 +26,7 @@ export class InstitutionSettingsServicesPage extends BasePage {
     // Buttons
     this.cancelButton = page.getByRole('button', { name: 'Cancel' });
     this.providerListButton = page.getByRole('button', { name: 'Provider List' }).first();
+    this.providerListButton2 = page.getByRole('button', { name: 'Provider List' }).nth(1);
     this.saveChangesButton = page.getByRole('button', { name: 'Save Changes' });
 
     // Provider List Section
@@ -115,6 +116,12 @@ export class InstitutionSettingsServicesPage extends BasePage {
 
   async openProviderListModal() {
     await this.providerListButton.click();
+    await this.page.waitForTimeout(1000);
+    await this.manageProvidersModal.waitFor({ state: 'visible' });
+  }
+
+  async openProviderListModal2() {
+    await this.providerListButton2.click();
     await this.page.waitForTimeout(1000);
     await this.manageProvidersModal.waitFor({ state: 'visible' });
   }

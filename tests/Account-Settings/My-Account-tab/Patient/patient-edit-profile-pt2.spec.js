@@ -2,20 +2,19 @@ import { test, expect } from '@playwright/test';
 import { MyAccountPage } from '../../../models/pages/patient/patient-my-account.page.js';
 import { ROLES, useRole } from '../../../utils/auth-helpers.js';
 
-// Patient Edit Profile - Total tests
+// Patient Edit Profile - Total tests 6
 
 const TEST_DATA = {
   // Insurance and Tax ID test data
-  VALID_INSURANCE_POLICY: '1234/abcd-efgh',
+  VALID_INSURANCE_POLICY: `${Math.floor(Math.random() * 9000) + 1000}/abcd-efgh`,
   VALID_INSURANCE_POLICY_2: '1111',
-  VALID_INSURANCE: '1234abcdefgh',
+  VALID_INSURANCE: `${Math.floor(Math.random() * 9000) + 1000}abcdefgh`,
   VALID_INSURANCE_2: '2222',
-  VALID_TAX_ID: '12345qwerty',
+  VALID_TAX_ID: `${Math.floor(Math.random() * 90000) + 10000}qwerty`,
   VALID_TAX_ID_2: '0000',
   INVALID_SPECIAL_CHARS: '!@#$%^&*(',
 };
 
-// total tests 6/6
 test.describe('Patient Edit Profile pt2 @regression', () => {
   test.use(useRole(ROLES.PATIENT));
   let myAccountPage;

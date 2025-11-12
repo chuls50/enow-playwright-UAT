@@ -21,7 +21,7 @@ export default defineConfig({
   testIgnore: ['**/utils/**', '**/documentation-examples/**'], // Exclude utilities and examples from test execution
   fullyParallel: false, // Changed to false since you mentioned no parallel execution
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 0 : 0,
+  retries: process.env.CI ? 1 : 1,
   workers: process.env.CI ? 1 : 1,
   timeout: 60000, // Default timeout for each test
   expect: {

@@ -204,10 +204,10 @@ test.describe('Admin @regression', () => {
 
   test('Verify (manage providers) removing a provider from service @[114089] @admin @functional', async ({ page }) => {
     // Open provider list modal
-    await institutionSettingsServicesPage.openProviderListModal();
+    await institutionSettingsServicesPage.openProviderListModal2();
 
     // Remove a provider
-    await page.getByRole('button', { name: 'Trash' }).click();
+    await page.getByRole('button', { name: 'Trash' }).first().click();
 
     // Verify error message
     await page.getByText('cody test provider Cody Test').waitFor({ state: 'visible' });
@@ -223,7 +223,7 @@ test.describe('Admin @regression', () => {
 
   test('Verify (manage providers) adding a provider from service @[114090] @admin @functional', async ({ page }) => {
     // Open provider list modal
-    await institutionSettingsServicesPage.openProviderListModal();
+    await institutionSettingsServicesPage.openProviderListModal2();
 
     // Remove a provider
     await page.getByRole('button', { name: 'Trash' }).click();
@@ -242,7 +242,7 @@ test.describe('Admin @regression', () => {
 
   test('Verify (manage providers) Select provider dropdown @[114094] @admin @functional', async ({ page }) => {
     // Open provider list modal
-    await institutionSettingsServicesPage.openProviderListModal();
+    await institutionSettingsServicesPage.openProviderListModal2();
 
     // Remove a provider
     await page.getByRole('button', { name: 'Trash' }).click();
