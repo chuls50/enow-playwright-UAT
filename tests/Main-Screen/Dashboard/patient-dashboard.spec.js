@@ -13,7 +13,7 @@ test.describe('Patient Dashboard @regression', () => {
     await patientDashboardPage.gotoPatientDashboard();
   });
 
-  test('Verify Content on Patient Dashboard @[111462] @patient @ui', async ({ page }) => {
+  test('Verify Content on Patient Dashboard @[111462] @patient @ui', async () => {
     // Verify UI Elements on Patient Dashboard
     await expect(patientDashboardPage.upcomingAppointments).toBeVisible();
     await expect(patientDashboardPage.pastAppointments).toBeVisible();
@@ -21,7 +21,7 @@ test.describe('Patient Dashboard @regression', () => {
     await expect(patientDashboardPage.seeProviderNow).toBeVisible();
   });
 
-  test('Verify Schedule an Appointment button on Patient Dashboard @[111463] @patient @functional', async ({ page }) => {
+  test('Verify Schedule an Appointment button on Patient Dashboard @[111463] @patient @functional', async () => {
     // Click Schedule an Appointment
     await expect(patientDashboardPage.scheduleAppointment).toBeVisible();
     await patientDashboardPage.clickScheduleAppointment();
@@ -30,7 +30,7 @@ test.describe('Patient Dashboard @regression', () => {
     await expect(patientDashboardPage.page).toHaveURL(/\/dashboard\/schedule-appointment/);
   });
 
-  test('Verify See a Provider Now button on Patient Dashboard @[111464] @patient @functional', async ({ page }) => {
+  test('Verify See a Provider Now button on Patient Dashboard @[111464] @patient @functional', async () => {
     // Click See a Provider Now
     await expect(patientDashboardPage.seeProviderNow).toBeVisible();
     await patientDashboardPage.clickSeeProviderNow();
@@ -39,9 +39,7 @@ test.describe('Patient Dashboard @regression', () => {
     await expect(patientDashboardPage.page).toHaveURL(/\/dashboard\/see-provider-now/);
   });
 
-  test('Verify Navigation to Session Details Screen from Appointment Modules on Patient Dashboard @[111465] @patient @functional', async ({
-    page,
-  }) => {
+  test('Verify Navigation to Session Details Screen from Appointment Modules on Patient Dashboard @[111465] @patient @functional', async () => {
     // Verify clicking view details navigates to session details
     await expect(patientDashboardPage.pastAppointments).toBeVisible();
 
@@ -58,7 +56,7 @@ test.describe('Patient Dashboard @regression', () => {
 
   test.skip('Verify Appointment Cancellation via "Cancel session" Button on Patient Dashboard @[111468] @multi-user @functional', async () => {});
 
-  test('Check Year Filter on Past Appointments Table on Patient Dashboard @[111469] @patient @functional', async ({ page }) => {
+  test('Check Year Filter on Past Appointments Table on Patient Dashboard @[111469] @patient @functional', async () => {
     // Verify Year filter dropdown on Past Appointments
     await expect(patientDashboardPage.pastAppointments).toBeVisible();
 

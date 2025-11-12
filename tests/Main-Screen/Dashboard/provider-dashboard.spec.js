@@ -5,9 +5,6 @@ import { ROLES, useRole, createAuthenticatedContext, createMultiRoleContexts } f
 
 // Provider Dashboard - Total tests 15
 
-// set timeout = 2min
-test.setTimeout(3 * 60 * 1000);
-
 // make sure that the test in this file run in series
 test.describe.configure({ mode: 'serial' });
 
