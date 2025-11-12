@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
-import { DashboardPage } from '../../../models/pages/provider/provider-dashboard.page';
+import { DashboardPage } from '../../../models/pages/provider/provider-dashboard.page.js';
 import { ProviderSessionOverviewPage } from '../../../models/pages/provider/provider-session-overview.page.js';
 import { ROLES, useRole } from '../../../utils/auth-helpers.js';
+import { BasePage } from '../../../models/base-page.js';
+
 // total tests 8
 
 // this test suite is going to need a lot of work
@@ -10,14 +12,14 @@ import { ROLES, useRole } from '../../../utils/auth-helpers.js';
 
 test.describe('Multi-User @regression', () => {
   test.use(useRole(ROLES.PROVIDER_COORDINATOR));
-
   let dashboardPage;
   let providerSessionOverviewPage;
+  let basePage;
 
   test.beforeEach(async ({ page }) => {
     dashboardPage = new DashboardPage(page);
     providerSessionOverviewPage = new ProviderSessionOverviewPage(page);
-    await dashboardPage.gotoProviderDashboard();
+    basePage = new BasePage(page);
   });
 
   //skipping multi user test for now

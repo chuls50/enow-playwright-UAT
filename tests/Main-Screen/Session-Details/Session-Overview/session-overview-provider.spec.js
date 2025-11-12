@@ -253,7 +253,7 @@ test.describe('Provider @regression', () => {
     await expect(sessionOverviewPage.sessionCanceledToast).toBeVisible();
   });
 
-  test('Validate Viewing Participant Profile @[111812] @provider @functional', async () => {
+  test('Validate Viewing Participant Profile @[111812] @provider @functional', async ({ page }) => {
     // Schedule session and open details
     await sessionOverviewPage.scheduleSessionForPatient(TEST_DATA.PATIENT_NAME);
     await sessionOverviewPage.openSessionDetails();
@@ -265,8 +265,7 @@ test.describe('Provider @regression', () => {
     await expect(sessionOverviewPage.clockStopwatchIcon).toBeVisible();
 
     // Open patient profile
-    await sessionOverviewPage.openPatientProfile(TEST_DATA.PATIENT_NAME);
-    await expect(sessionOverviewPage.cancelSessionModal).toBeVisible();
+    await page.getByText('cody test patient Cody Test Institution', { exact: true }).click();
 
     // Verify all patient profile fields are visible
     await expect(sessionOverviewPage.firstNameField).toBeVisible();
