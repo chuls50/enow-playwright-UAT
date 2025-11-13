@@ -83,7 +83,7 @@ test.describe('Provider @regression', () => {
     // Schedule session and open three dots menu
     await sessionOverviewPage.scheduleSessionForPatient(TEST_DATA.PATIENT_NAME);
     await sessionOverviewPage.openSessionDetails();
-    await sessionOverviewPage.openThreeDotsMenu();
+    await sessionOverviewPage.dotsVButton.click();
 
     // Verify all menu options are visible
     await expect(sessionOverviewPage.rescheduleButton).toBeVisible();
@@ -196,7 +196,7 @@ test.describe('Provider @regression', () => {
 
     // Open add participants dropdown and verify all options
     await expect(sessionOverviewPage.addParticipantsDropdown).toBeVisible();
-    await sessionOverviewPage.openAddParticipantsDropdown();
+    await sessionOverviewPage.addParticipantsDropdown.click();
     await expect(sessionOverviewPage.customDropdown).toBeVisible();
     await expect(sessionOverviewPage.addExistingUsersOption).toBeVisible();
     await expect(sessionOverviewPage.addExistingUsersOption).toBeEnabled();
