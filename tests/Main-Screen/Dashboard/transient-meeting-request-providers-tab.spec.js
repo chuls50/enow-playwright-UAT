@@ -4,16 +4,21 @@ import { ROLES, useRole } from '../../utils/auth-helpers.js';
 
 // Transient Meeting Request Providers Tab - total tests 7 (including 4 skipped)
 
+const TEST_DATA = {
+  PROVIDER_NAME: 'cody prov',
+  PROVIDER_EMAIL: 'chuls+prov1codytest@example.com',
+};
+
 test.describe('Dual-User @regression', () => {
   test.use(useRole(ROLES.PROVIDER_COORDINATOR));
   let dashboardPage;
 
   test.beforeEach(async ({ page }) => {
     dashboardPage = new DashboardPage(page);
+    await dashboardPage.gotoProviderDashboard();
   });
 
   test('Verify UI of Provider/Coordinator List Screen @[114316] @dual-user @functional', async ({ page }) => {
-    await dashboardPage.gotoProviderDashboard();
     await page.locator('a').filter({ hasText: 'Providers' }).click();
     await expect(page.getByRole('heading', { name: 'Providers' })).toBeVisible();
     await expect(page.getByRole('textbox', { name: 'Search by name, email' })).toBeVisible();
@@ -27,7 +32,6 @@ test.describe('Dual-User @regression', () => {
   });
 
   test('Verify Filtering by Status @[114317] @dual-user @functional', async ({ page }) => {
-    await dashboardPage.gotoProviderDashboard();
     await page.locator('a').filter({ hasText: 'Providers' }).click();
     await page.getByRole('link', { name: 'Status ChevronDown' }).click();
     await page.getByTestId('item Offline').click();
@@ -37,14 +41,13 @@ test.describe('Dual-User @regression', () => {
   });
 
   test('Verify Search by Name or Email @[114318] @dual-user @functional', async ({ page }) => {
-    await dashboardPage.gotoProviderDashboard();
     await page.locator('a').filter({ hasText: 'Providers' }).click();
     await page.getByRole('textbox', { name: 'Search by name, email' }).click();
-    await page.getByRole('textbox', { name: 'Search by name, email' }).fill('cody prov');
-    await expect(page.getByTestId('cell-0-name').getByRole('paragraph')).toContainText('cody prov');
+    await page.getByRole('textbox', { name: 'Search by name, email' }).fill(TEST_DATA.PROVIDER_NAME);
+    await expect(page.getByTestId('cell-0-name').getByRole('paragraph')).toContainText(TEST_DATA.PROVIDER_NAME);
     await page.getByRole('textbox', { name: 'Search by name, email' }).click();
-    await page.getByRole('textbox', { name: 'Search by name, email' }).fill('chuls+prov1codytest');
-    await expect(page.getByText('cody prov')).toBeVisible();
+    await page.getByRole('textbox', { name: 'Search by name, email' }).fill(TEST_DATA.PROVIDER_EMAIL);
+    await expect(page.getByText(TEST_DATA.PROVIDER_NAME)).toBeVisible();
   });
 });
 

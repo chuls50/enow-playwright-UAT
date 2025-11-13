@@ -37,6 +37,20 @@ export class DashboardPage extends BasePage {
 
     // Need help modal
     this.needHelp = page.getByTestId('modal');
+
+    // Session Scheduled
+    this.sessionScheduled = page.getByText('Session scheduled').first();
+    this.sessionCanceled = page.getByText('Session canceled');
+    this.dotsVButton = page.getByRole('button', { name: 'DotsV' });
+    this.cancelSessionButton = page.getByRole('button', { name: 'XCircle Cancel session' });
+    this.confirmCancelButton = page.getByRole('button', { name: 'Yes, cancel' });
+    this.closeButton = page.getByRole('button', { name: 'XClose' });
+
+    // Manual Symptom Checker Skip elements
+    this.symptomCheckerHeading = page.getByRole('heading', { name: 'My symptoms' });
+    this.symptomCheckerContinueButton = page.getByRole('button', { name: 'Continue' });
+
+    // Infermedica Triage Elements
   }
 
   // Navigation Methods
@@ -77,5 +91,25 @@ export class DashboardPage extends BasePage {
     await this.profileIcon.click();
     await this.userProfileLogout.click();
     await this.page.waitForURL(/\/login/);
+  }
+
+  async resetStateIfSessionScheduled() {
+    if (await this.sessionScheduled.isVisible()) {
+      await this.sessionScheduled.click();
+      await this.dotsVButton.click();
+      await this.cancelSessionButton.click();
+      await this.confirmCancelButton.click();
+      await this.sessionCanceled.waitFor({ state: 'visible' });
+      await this.page.waitForTimeout(3000);
+      await this.closeButton.click();
+    }
+  }
+
+  async skipManualSymptomChecker() {
+    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(2000);
+    if (await this.symptomCheckerHeading.isVisible()) {
+      await this.symptomCheckerContinueButton.click();
+    }
   }
 }

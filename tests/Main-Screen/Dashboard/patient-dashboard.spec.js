@@ -4,7 +4,7 @@ import { ROLES, useRole } from '../../utils/auth-helpers.js';
 
 // Patient Dashboard - total tests 5/12
 
-test.describe('Patient Dashboard @regression', () => {
+test.describe('Patient @regression', () => {
   test.use(useRole(ROLES.PATIENT));
   let patientDashboardPage;
 

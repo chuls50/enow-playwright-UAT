@@ -5,15 +5,11 @@ export class ProviderSessionOverviewPage extends BasePage {
     super(page);
 
     // Session Scheduling Elements
-    this.scheduleSessionButton = page.getByRole('button', {
-      name: 'CalendarPlus Schedule session',
-    });
+    this.scheduleSessionButton = page.getByRole('button', { name: 'CalendarPlus Schedule session' });
     this.changePatientLink = page.getByRole('link', { name: 'Change patient' });
     this.saveButton = page.getByRole('button', { name: 'Save' });
     this.timeSlotContainer = page.locator('._container_1hd2b_1');
-    this.scheduleVisitButton = page.getByRole('button', {
-      name: 'Schedule visit',
-    });
+    this.scheduleVisitButton = page.getByRole('button', { name: 'Schedule visit' });
 
     // Toast Messages
     this.sessionScheduledToast = page.getByTestId('toast').getByText('Session scheduled', { exact: true });
@@ -24,8 +20,8 @@ export class ProviderSessionOverviewPage extends BasePage {
     this.invitationLinkCopiedMessage = page.getByText('Invitation link copied');
 
     // Session Cards and Status
-    this.sessionScheduledCard = page.getByText('Session scheduled');
-    this.sessionCancelledCard = page.getByText('Session cancelled');
+    this.sessionScheduledCard = page.getByText('Session scheduled').first();
+    this.sessionCancelledCard = page.getByText('Session cancelled').first();
     this.mainCard = page.getByTestId('main-card');
     this.confirmedAppointmentCard = page.locator('div[data-testid="main-card"].sc-hlDTgW.enzraZ');
 
@@ -45,53 +41,35 @@ export class ProviderSessionOverviewPage extends BasePage {
 
     // Three Dots Menu (DotsV) Actions
     this.dotsVButton = page.getByRole('button', { name: 'DotsV' });
-    this.rescheduleButton = page.getByRole('button', {
-      name: 'CalendarRepeat Reschedule',
-    });
-    this.cancelSessionButton = page.getByRole('button', {
-      name: 'XCircle Cancel session',
-    });
+    this.rescheduleButton = page.getByRole('button', { name: 'CalendarRepeat Reschedule' });
+    this.cancelSessionButton = page.getByRole('button', { name: 'XCircle Cancel session' });
 
     // Cancel Session Modal
     this.cancelSessionModal = page.getByTestId('modal');
     this.yesCancelButton = page.getByRole('button', { name: 'Yes, cancel' });
-    this.noDontCancelButton = page.getByRole('button', {
-      name: 'No, don’t cancel',
-    });
+    this.noDontCancelButton = page.getByRole('button', { name: 'No, don’t cancel' });
 
     // Reschedule Modal
     this.rescheduleModal = page.getByText('Reschedule session');
-    this.rescheduleConfirmButton = page.getByRole('button', {
-      name: 'Reschedule',
-    });
-    this.reschedleCancelButton = page.getByRole('button', { name: 'Cancel' });
+    this.rescheduleConfirmButton = page.getByRole('button', { name: 'Reschedule' });
+    this.rescheduleCancelButton = page.getByRole('button', { name: 'Cancel' });
 
     // Add Participants Elements
-    this.addParticipantsDropdown = page.getByRole('link', {
-      name: 'Add participant(s) ChevronDown',
-    });
+    this.addParticipantsDropdown = page.getByRole('link', { name: 'Add participant(s) ChevronDown' });
     this.customDropdown = page.getByTestId('custom-dropdown');
     this.addExistingUsersOption = page.getByText('Add existing user(s)');
     this.inviteExternalUserOption = page.getByText('Invite external user');
     this.copyInvitationLinkOption = page.getByText('Copy invitation link');
 
     // Add Existing Users Modal
-    this.searchByNameTextbox = page.getByRole('textbox', {
-      name: 'Search by name',
-    });
-    this.addParticipantButton = page.getByRole('button', {
-      name: 'Add participant',
-    });
+    this.searchByNameTextbox = page.getByRole('textbox', { name: 'Search by name' });
+    this.addParticipantButton = page.getByRole('button', { name: 'Add participant' });
 
     // Join Session Elements
-    this.joinVideoSessionButton = page.getByRole('button', {
-      name: 'Video Join video session',
-    });
+    this.joinVideoSessionButton = page.getByRole('button', { name: 'Video Join video session' });
 
     // Navigation Elements
-    this.todayScheduleHeading = page.getByRole('heading', {
-      name: 'Your schedule for today',
-    });
+    this.todayScheduleHeading = page.getByRole('heading', { name: 'Your schedule for today' });
     this.allSessionsLink = page.getByText('Your schedule all sessions');
     this.dateCard = page.getByTestId('date-card');
 
@@ -112,18 +90,12 @@ export class ProviderSessionOverviewPage extends BasePage {
     this.insurancePolicyNumberField = page.getByText('Insurance policy number');
 
     // Video Session/Waiting Room Elements
-    this.messageChatButton = page.getByRole('button', {
-      name: 'MessageChatCircle',
-    });
+    this.messageChatButton = page.getByRole('button', { name: 'MessageChatCircle' });
     this.fileHeartButton = page.getByRole('button', { name: 'FileHeart' });
     this.welcomeToWaitingRoomText = page.getByText('Welcome to waiting room!');
     this.whenYouAreReadyText = page.getByText('When you are ready to start');
-    this.startSessionButton = page.getByRole('button', {
-      name: 'Start session',
-    });
-    this.leaveWaitingRoomButton = page.getByRole('button', {
-      name: 'LogOut Leave waiting room',
-    });
+    this.startSessionButton = page.getByRole('button', { name: 'Start session' });
+    this.leaveWaitingRoomButton = page.getByRole('button', { name: 'LogOut Leave waiting room' });
 
     // Patient Context Elements (for multi-user tests)
     this.checkButton = page.getByRole('button', { name: 'Check' });
@@ -157,28 +129,11 @@ export class ProviderSessionOverviewPage extends BasePage {
     await this.sessionScheduledCard.first().click();
   }
 
-  async openThreeDotsMenu() {
-    await this.dotsVButton.click();
-  }
-
   async cancelSession() {
     await this.dotsVButton.click();
     await this.cancelSessionButton.click();
     await this.yesCancelButton.click();
     await this.sessionCanceledToast.waitFor({ state: 'visible' });
-  }
-
-  async cancelSessionAndWaitForConfirmation() {
-    await this.dotsVButton.click();
-    await this.cancelSessionButton.click();
-    await this.yesCancelButton.click();
-    await this.sessionCanceledToast.waitFor({ state: 'visible' });
-  }
-
-  async declineCancelSession() {
-    await this.dotsVButton.click();
-    await this.cancelSessionButton.click();
-    await this.noDontCancelButton.click();
   }
 
   async rescheduleSession() {
@@ -192,11 +147,7 @@ export class ProviderSessionOverviewPage extends BasePage {
     await this.dotsVButton.click();
     await this.rescheduleButton.click();
     await this.timeSlotContainer.first().click();
-    await this.reschedleCancelButton.click();
-  }
-
-  async openAddParticipantsDropdown() {
-    await this.addParticipantsDropdown.click();
+    await this.rescheduleCancelButton.click();
   }
 
   async addExistingUser(userName) {
@@ -215,104 +166,5 @@ export class ProviderSessionOverviewPage extends BasePage {
     await this.todayScheduleHeading.click();
     await this.allSessionsLink.click();
     await this.allSessionsLink.first().click();
-  }
-
-  async openPatientProfile(patientName) {
-    await this.page.getByText(patientName, { exact: true }).click();
-  }
-
-  async closeModal() {
-    await this.closeModalButton.click();
-  }
-
-  // Patient Actions (for multi-user tests)
-  async acceptSessionRequest() {
-    await this.checkButton.click();
-  }
-
-  // Video Session Actions
-  async joinVideoSession() {
-    const videoPagePromise = this.page.waitForEvent('popup');
-    await this.joinVideoSessionButton.click();
-    return await videoPagePromise;
-  }
-
-  async leaveWaitingRoom() {
-    await this.leaveWaitingRoomButton.click();
-  }
-
-  // State Reset Helper Method
-  async resetStateIfSessionScheduled() {
-    // Helper to cancel session for a given DotsV button
-    const cancelSessionForDotsV = async (dotsVButton) => {
-      await dotsVButton.click();
-      await this.cancelSessionButton.click();
-      await this.yesCancelButton.click();
-      await this.sessionCanceledToast.first().waitFor({ state: 'visible' });
-
-      // Close modal if present
-      const xCloseButtons = await this.page.locator('button[aria-label="XClose"]').all();
-      for (const btn of xCloseButtons) {
-        if (await btn.isVisible()) {
-          await btn.click();
-        }
-      }
-      await this.page.waitForTimeout(1000);
-    };
-
-    // Cancel all visible "Session scheduled" cards
-    const scheduledCards = await this.sessionScheduledCard.all();
-    for (const card of scheduledCards) {
-      if (await card.isVisible()) {
-        await card.click();
-        // Cancel all DotsV buttons in modal
-        const dotsVButtons = await this.dotsVButton.all();
-        for (const btn of dotsVButtons) {
-          if (await btn.isVisible()) {
-            await cancelSessionForDotsV(btn);
-          }
-        }
-      }
-    }
-
-    // Cancel any remaining DotsV buttons outside modal
-    const dotsVButtons = await this.dotsVButton.all();
-    for (const btn of dotsVButtons) {
-      if (await btn.isVisible()) {
-        await cancelSessionForDotsV(btn);
-      }
-    }
-  }
-
-  // Complete Workflow Methods (combining multiple steps)
-  async scheduleAndOpenSessionDetails(patientName) {
-    await this.scheduleSessionForPatient(patientName);
-    await this.openSessionDetails();
-  }
-
-  async scheduleRescheduleAndCancel(patientName) {
-    await this.scheduleSessionForPatient(patientName);
-    await this.openSessionDetails();
-    await this.rescheduleSession();
-    await this.page.waitForTimeout(3000);
-    await this.cancelSession();
-  }
-
-  async scheduleAndVerifyThreeDotsMenu(patientName) {
-    await this.scheduleSessionForPatient(patientName);
-    await this.openSessionDetails();
-    await this.openThreeDotsMenu();
-  }
-
-  async scheduleAndAddExistingParticipant(patientName, userName) {
-    await this.scheduleSessionForPatient(patientName);
-    await this.openSessionDetails();
-    await this.addExistingUser(userName);
-  }
-
-  async scheduleAndCopyInvitationLink(patientName) {
-    await this.scheduleSessionForPatient(patientName);
-    await this.openSessionDetails();
-    await this.copyInvitationLink();
   }
 }

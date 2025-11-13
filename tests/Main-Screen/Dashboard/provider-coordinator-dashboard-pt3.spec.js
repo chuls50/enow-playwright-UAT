@@ -4,7 +4,7 @@ import { ROLES, useRole } from '../../utils/auth-helpers.js';
 
 // Provider Coordinator Dashboard pt3 - Total Tests 3
 
-test.describe('Provider Coordinator Dashboard pt3 @regression', () => {
+test.describe('Provider-Coordinator @regression', () => {
   test.use(useRole(ROLES.PROVIDER_COORDINATOR));
   let dashboardPage;
 

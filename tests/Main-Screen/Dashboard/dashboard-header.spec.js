@@ -5,7 +5,7 @@ import { DashboardPage as ProviderDashboardPage } from '../../models/pages/provi
 
 // Dashboard Header - Total tests 6 (including 1 skipped)
 
-test.describe('Dashboard Header @regression', () => {
+test.describe('Multi-user @regression', () => {
   let basePage;
   let patientDashboardPage;
   let providerDashboardPage;

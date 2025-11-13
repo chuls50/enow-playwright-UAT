@@ -27,7 +27,7 @@ export class BasePage {
   async _performLogin(usernameEnv, passwordEnv, userType) {
     try {
       // Navigate to base URL and wait for login page
-      await this.page.goto(process.env.UAT_URL);
+      await this.page.goto(process.env.PROD_URL);
       await this.page.waitForURL(/.*\/login/);
 
       // Fill email
@@ -52,35 +52,35 @@ export class BasePage {
   }
 
   // async performAdminLogin() {
-  //   return this._performLogin('ADMIN_2_PROD_USERNAME', 'ADMIN_2_PROD_PASSWORD', 'admin2');
+  //   return this._performLogin('ADMIN_2_PROD_USERNAME', 'ADMIN_2_PROD_PASSWORD', 'admin2-GM_Healthcare(PROD)');
   // }
 
   // async performProviderLogin() {
-  //   return this._performLogin('UAT_PROVIDER_USERNAME', 'UAT_PROVIDER_PASSWORD', 'provider-CodyTest(UAT)');
+  //   return this._performLogin('PROV_2_PROD_USERNAME', 'PROV_2_PROD_PASSWORD', 'provider2-GM_Healthcare(PROD)');
   // }
 
-  // async performPatientLogin() {
-  //   return this._performLogin('UAT_PATIENT_USERNAME', 'UAT_PATIENT_PASSWORD', 'patient-CodyTest(UAT)');
-  // }
+  async performPatientLogin() {
+    return this._performLogin('PAT_2_PROD_USERNAME', 'PAT_2_PROD_PASSWORD', 'patient2-GM_Healthcare(PROD)');
+  }
 
   // async performCoordinatorLogin() {
-  //   return this._performLogin('CORD_2_PROD_USERNAME', 'CORD_2_PROD_PASSWORD', 'coordinator2');
+  //   return this._performLogin('CORD_2_PROD_USERNAME', 'CORD_2_PROD_PASSWORD', 'coordinator2-GM_Healthcare(PROD)');
   // }
 
   // async performProviderCoordinatorLogin() {
-  //   return this._performLogin('PROV_CORD_PROD_USERNAME', 'PROV_CORD_PROD_PASSWORD', 'provider+coordinator');
+  //   return this._performLogin('PROV_CORD_PROD_USERNAME', 'PROV_CORD_PROD_PASSWORD', 'provider+coordinator-GM_Healthcare(PROD)');
   // }
 
   // async performAdminCoordinatorLogin() {
-  //   return this._performLogin('ADMIN_CORD_PROD_USERNAME', 'ADMIN_CORD_PROD_PASSWORD', 'admin+coordinator');
+  //   return this._performLogin('ADMIN_CORD_PROD_USERNAME', 'ADMIN_CORD_PROD_PASSWORD', 'admin+coordinator-GM_Healthcare(PROD)');
   // }
 
   // async performAdminProviderLogin() {
-  //   return this._performLogin('ADMIN_PROV_PROD_USERNAME', 'ADMIN_PROV_PROD_PASSWORD', 'admin+provider');
+  //   return this._performLogin('ADMIN_PROV_PROD_USERNAME', 'ADMIN_PROV_PROD_PASSWORD', 'admin+provider-GM_Healthcare(PROD)');
   // }
 
   // async performAdminCoordinatorProviderLogin() {
-  //   return this._performLogin('ADMIN_CORD_PROV_PROD_USERNAME', 'ADMIN_CORD_PROV_PROD_PASSWORD', 'admin+coordinator+provider');
+  //   return this._performLogin('ADMIN_CORD_PROV_PROD_USERNAME', 'ADMIN_CORD_PROV_PROD_PASSWORD', 'admin+coordinator+provider-GM_Healthcare(PROD)');
   // }
 
   async performDeviceIdLogin(deviceId) {
