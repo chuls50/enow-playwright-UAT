@@ -132,9 +132,7 @@ export class PatientListPage extends BasePage {
     // Message elements
     this.noVisitNotesMessage = page.getByText('There are currently no visit notes associated with this patient.');
     this.noPastSessionsMessage = page.getByText('no past sessions yet.');
-    this.noDischargeInstructionsMessage = page.getByText(
-      'There are currently no discharge instructions associated with this patient.'
-    );
+    this.noDischargeInstructionsMessage = page.getByText('There are currently no discharge instructions associated with this patient.');
     this.noAttachmentsMessage = page.getByText('This patient has no attachments yet.');
     this.sessionDetailsText = page.getByText('Session details');
 
