@@ -1,27 +1,72 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
+  schedule:
+    # Runs at 2:00 AM UTC every 3 days (on the 1st, 4th, 7th, etc. of each month)
+    - cron: '0 2 */3 * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 180
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        env:
+          # Base URL
+          UAT_URL: ${{ secrets.UAT_URL }}
+
+          # User credentials
+          UAT_PATIENT_USERNAME: ${{ secrets.UAT_PATIENT_USERNAME }}
+          UAT_PATIENT_PASSWORD: ${{ secrets.UAT_PATIENT_PASSWORD }}
+          UAT_PROVIDER_USERNAME: ${{ secrets.UAT_PROVIDER_USERNAME }}
+          UAT_PROVIDER_PASSWORD: ${{ secrets.UAT_PROVIDER_PASSWORD }}
+          UAT_ADMIN_USERNAME: ${{ secrets.UAT_ADMIN_USERNAME }}
+          UAT_ADMIN_PASSWORD: ${{ secrets.UAT_ADMIN_PASSWORD }}
+          UAT_COORDINATOR_USERNAME: ${{ secrets.UAT_COORDINATOR_USERNAME }}
+          UAT_COORDINATOR_PASSWORD: ${{ secrets.UAT_COORDINATOR_PASSWORD }}
+          UAT_PROVIDERCOORDINATOR_USERNAME: ${{ secrets.UAT_PROVIDERCOORDINATOR_USERNAME }}
+          UAT_PROVIDERCOORDINATOR_PASSWORD: ${{ secrets.UAT_PROVIDERCOORDINATOR_PASSWORD }}
+          UAT_ADMINCOORDINATOR_USERNAME: ${{ secrets.UAT_ADMINCOORDINATOR_USERNAME }}
+          UAT_ADMINCOORDINATOR_PASSWORD: ${{ secrets.UAT_ADMINCOORDINATOR_PASSWORD }}
+          UAT_PROVIDERADMINCOORDINATOR_USERNAME: ${{ secrets.UAT_PROVIDERADMINCOORDINATOR_USERNAME }}
+          UAT_PROVIDERADMINCOORDINATOR_PASSWORD: ${{ secrets.UAT_PROVIDERADMINCOORDINATOR_PASSWORD }}
+          UAT_PROVIDERADMIN_USERNAME: ${{ secrets.UAT_PROVIDERADMIN_USERNAME }}
+          UAT_PROVIDERADMIN_PASSWORD: ${{ secrets.UAT_PROVIDERADMIN_PASSWORD }}
+
+          # Device and Azure
+          UAT_DEVICE_ID: ${{ secrets.UAT_DEVICE_ID }}
+          AZURE_TOKEN: ${{ secrets.AZURE_TOKEN }}
+
+          # CI flag for playwright config
+          CI: true
+        run: npx playwright test
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: test-results
+          path: test-results/
+          retention-days: 30
