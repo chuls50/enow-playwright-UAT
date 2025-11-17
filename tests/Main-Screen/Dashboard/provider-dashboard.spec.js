@@ -222,7 +222,7 @@ test.describe('Provider @regression', () => {
     await providerPage.getByTestId('main-card').getByText('Session scheduled').first().click();
 
     // Open "3 Dots" menu for the scheduled appointment
-    await providerPage.getByRole('button', { name: 'DotsV' }).click();
+    await providerPage.getByRole('button', { name: 'DotsV' }).first().click();
 
     // Click on "Cancel Session" option
     await providerPage.getByRole('button', { name: 'XCircle Cancel session' }).click();
@@ -341,7 +341,7 @@ test.describe('Provider @regression', () => {
     await providerPage.getByTestId('main-card').getByText('Session scheduled').first().click();
 
     // Open "3 Dots" menu for the scheduled appointment
-    await providerPage.getByRole('button', { name: 'DotsV' }).click();
+    await providerPage.getByRole('button', { name: 'DotsV' }).first().click();
 
     // Click on "Reschedule" option
     await providerPage.getByRole('button', { name: 'CalendarRepeat Reschedule' }).click();

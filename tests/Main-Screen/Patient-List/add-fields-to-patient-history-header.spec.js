@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { BasePage } from '../../models/base-page.js';
 import { DashboardPage } from '../../models/pages/patient/patient-dashboard.page.js';
 import { ROLES, useRole } from '../../utils/auth-helpers.js';
 
@@ -14,7 +15,7 @@ test.describe('Patient @regression', () => {
 
   test('Verify Content on "Before we get started" Page @[111192] @patient @ui', async ({ page }) => {
     // Navigate to participant form as patient
-    await page.goto('https://xj9.sandbox-encounterservices.com/first-login/participant-form');
+    await page.goto(`${process.env.UAT_URL}/first-login/participant-form`);
 
     // Verify page header is displayed
     await page.getByRole('heading', { name: 'Before we get started' }).waitFor({ state: 'visible' });
@@ -51,16 +52,17 @@ test.describe('Patient @regression', () => {
 
 test.describe('Provider @regression', () => {
   test.use(useRole(ROLES.PROVIDER));
-  let dashboardPage;
+  let basePage;
 
   test.beforeEach(async ({ page }) => {
-    dashboardPage = new DashboardPage(page);
-    await dashboardPage.gotoPatientDashboard();
+    basePage = new BasePage(page);
+    await basePage.goto(`${process.env.UAT_URL}/dashboard`);
+    await basePage.waitForSpinnerToDisappear();
   });
 
   test('Verify additional fields added to patient history header @[118855] @provider @ui', async ({ page }) => {
     // Navigate to participant form as provider
-    await page.goto('https://xj9.sandbox-encounterservices.com/patients');
+    await page.goto(`${process.env.UAT_URL}/patients`);
 
     // Select first available patient from the list
     try {

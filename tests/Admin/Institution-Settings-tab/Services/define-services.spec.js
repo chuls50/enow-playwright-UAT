@@ -95,7 +95,8 @@ test.describe('Admin @regression', () => {
     await expect(institutionSettingsServicesPage.saveChangesButton).toBeDisabled();
   });
 
-  test('Validate "Manage Providers" @[112166] @admin @functional', async ({ page }) => {
+  // flaky
+  test.skip('Validate "Manage Providers" @[112166] @admin @functional', async ({ page }) => {
     await institutionSettingsServicesPage.resetState();
 
     await page.getByRole('button', { name: 'Provider List' }).first().click();

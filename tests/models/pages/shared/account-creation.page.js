@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { BasePage } from '../../base-page.js';
 import dotenv from 'dotenv';
 
-dotenv.config({ path: '.env' });
+dotenv.config({ path: '.env', quiet: true });
 
 export class AccountCreationPage extends BasePage {
   constructor(page) {
@@ -65,10 +65,7 @@ export class AccountCreationPage extends BasePage {
     await this.enterConfirmPassword(password);
   }
 
-  async testPasswordMismatchValidation(
-    correctPassword = process.env.PATIENT_PASSWORD,
-    wrongPassword = 'wrongpassword'
-  ) {
+  async testPasswordMismatchValidation(correctPassword = process.env.PATIENT_PASSWORD, wrongPassword = 'wrongpassword') {
     await this.enterPassword(correctPassword);
     await expect(this.passwordErrorIcon).not.toBeVisible();
 

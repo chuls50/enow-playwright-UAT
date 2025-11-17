@@ -80,6 +80,7 @@ test.describe('Patient @regression', () => {
 
     await dashboardPage.seeProviderNow.click();
     await dashboardPage.page.waitForLoadState('networkidle');
+    await dashboardPage.page.waitForTimeout(1000); // wait for 1 second to ensure page stability
 
     // Manual symptom checker
     // if continue is visible, then click it

@@ -126,7 +126,6 @@ export class PatientListPage extends BasePage {
     this.noPatientsYetText = page.getByText('No patients yet');
 
     // Patient-specific elements
-    this.gregJamesCell = page.getByTestId('cell-0-name').getByText('Greg James');
     this.automationTestDeviceText = page.getByText('Automation Test Device');
 
     // Message elements
@@ -237,6 +236,11 @@ export class PatientListPage extends BasePage {
   async openDocumentsTab() {
     await this.documentsTab.click();
     await this.documentsHeading.waitFor({ state: 'visible' });
+  }
+
+  async openPastSessionsTab() {
+    await this.pastSessionsTab.click();
+    await this.pastSessionsHeading.waitFor({ state: 'visible' });
   }
 
   // Multi-step action methods for visit notes

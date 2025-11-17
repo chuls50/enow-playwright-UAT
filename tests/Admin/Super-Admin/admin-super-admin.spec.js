@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { UsersTablePage } from '../../models/pages/admin/admin-users-table.page.js';
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({ quiet: true });
 
 // Super Admin - Total tests 5
 

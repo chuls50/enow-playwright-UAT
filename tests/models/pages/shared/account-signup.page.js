@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 import { BasePage } from '../../base-page.js';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 export class AccountSignupPage extends BasePage {
   constructor(page) {

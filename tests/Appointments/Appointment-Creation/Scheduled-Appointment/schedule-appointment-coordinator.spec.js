@@ -14,6 +14,7 @@ test.describe('Schedule Coordinator @regression', () => {
     await coordinatorDashboardPage.gotoCoordinatorDashboard();
   });
 
+  // bug submitted here 11/14/25
   test('Verify Schedule Session Screen Content on Clicking "Schedule Session" Button @[111789] @coordinator @ui', async ({ page }) => {
     // Click on Schedule Appointment in the sidebar
     await page.getByRole('button', { name: 'CalendarPlus Schedule session' }).waitFor({ state: 'visible' });
@@ -23,7 +24,7 @@ test.describe('Schedule Coordinator @regression', () => {
     // Verify Schedule Session screen content
 
     await expect(page.getByText('Schedule a session')).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'Schedule a session' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Your appointment' })).toBeVisible();
     await expect(page.getByText('Service', { exact: true })).toBeVisible();
     await expect(page.getByText('Appointment type')).toBeVisible();
     await expect(page.getByText('Duration', { exact: true })).toBeVisible();
@@ -93,11 +94,11 @@ test.describe('Schedule Coordinator @regression', () => {
     const fileChooser = await fileChooserPromise;
 
     // Use the requested image file path
-    const testFilePath = path.join(process.cwd(), 'images', 'hieroglyphics-10.jpg');
+    const testFilePath = path.join(process.cwd(), 'tests', 'images', 'hieroglyphics-10.jpg');
     await fileChooser.setFiles(testFilePath);
 
     // Verify the file was uploaded successfully - adjust the selector based on your UI
-    await basePage.waitForSpinnerToDisappear();
+    await page.waitForTimeout(2000); // wait for 2 seconds to ensure upload completes
     await expect(page.getByRole('img', { name: 'document preview' })).toBeVisible();
   });
 

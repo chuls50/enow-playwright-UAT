@@ -10,6 +10,7 @@ const TEST_DATA = {
     INVALID_PATIENT_NAME: 'CODY TEST USER GREG',
     VALID_EMAIL: 'chuls+patcodytest@globalmed.com',
     INVALID_EMAIL: 'chuls+invalid@globalmed.com',
+    NO_PAST_SESSIONS_PATIENT: 'John two Doe',
   },
   FILTER_OPTIONS: {
     SERVICE: 'General Practice',
@@ -311,13 +312,17 @@ test.describe('Provider @regression', () => {
     await expect(patientListPage.previousButton).toBeDisabled();
   });
 
-  test('Verify empty state for past sessions tab @[116591] @dual-user @functional', async ({ page }) => {
+  test('Verify empty state for past sessions tab @[116591] @provider @functional', async ({ page }) => {
     // This test requires provider+coordinator role - needs separate test suite
     // Navigate to Patients using POM method
     await patientListPage.navigateToPatients();
 
     // Click the first automation test device using POM method
-    await patientListPage.openAutomationTestDevice();
+    const patientName = TEST_DATA.SEARCH_TERMS.NO_PAST_SESSIONS_PATIENT;
+    await page.getByText(patientName).first().click();
+
+    // Navigate to Past Sessions tab using POM method
+    await patientListPage.openPastSessionsTab();
 
     // Verify no past sessions using POM locator
     await expect(patientListPage.noPastSessionsMessage).toBeVisible();
@@ -332,6 +337,7 @@ test.describe('Provider @regression', () => {
     await patientListPage.openVisitNotesTab();
 
     // Verify Visit Notes tab UI using POM locators and helper methods
+    const patientName = TEST_DATA.SEARCH_TERMS.VALID_PATIENT_NAME;
     await expect(patientListPage.visitNotesHeading).toBeVisible();
     await expect(await patientListPage.getBreadcrumbText(patientName)).toBeVisible();
     await expect(await patientListPage.getPatientHeading(patientName)).toBeVisible();
@@ -450,6 +456,7 @@ test.describe('Provider @regression', () => {
     await patientListPage.openDischargeInstructionsTab();
 
     // Verify Discharge Instructions tab UI using POM locators and helper methods
+    const patientName = TEST_DATA.SEARCH_TERMS.VALID_PATIENT_NAME;
     await expect(patientListPage.dischargeInstructionsHeading).toBeVisible();
     await expect(await patientListPage.getBreadcrumbText(patientName)).toBeVisible();
     await expect(await patientListPage.getPatientHeading(patientName)).toBeVisible();
@@ -542,6 +549,7 @@ test.describe('Provider @regression', () => {
     await patientListPage.openAttachmentsTab();
 
     // Verify Attachments tab UI using POM locators and helper methods
+    const patientName = TEST_DATA.SEARCH_TERMS.VALID_PATIENT_NAME;
     await expect(patientListPage.attachmentsHeading).toBeVisible();
     await expect(await patientListPage.getBreadcrumbText(patientName)).toBeVisible();
     await expect(await patientListPage.getPatientHeading(patientName)).toBeVisible();
@@ -556,6 +564,7 @@ test.describe('Provider @regression', () => {
     await patientListPage.openAttachmentsTab();
 
     // Verify Attachments table structure using POM locators and helper methods
+    const patientName = TEST_DATA.SEARCH_TERMS.VALID_PATIENT_NAME;
     await expect(patientListPage.attachmentsHeading).toBeVisible();
     await expect(await patientListPage.getBreadcrumbText(patientName)).toBeVisible();
     await expect(await patientListPage.getPatientHeading(patientName)).toBeVisible();

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { InstitutionSettingsProfilePage } from '../../../models/pages/admin/institution-settings-profile.page.js';
 import dotenv from 'dotenv';
-dotenv.config();
+dotenv.config({ quiet: true });
 
 // Admin Configuration White Label pt2 - Total Tests 7
 

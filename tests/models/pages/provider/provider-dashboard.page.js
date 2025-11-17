@@ -40,7 +40,7 @@ export class DashboardPage extends BasePage {
     this.onDemandButton = page.getByRole('button', { name: 'OnDemand On demand requests' });
     this.availableToggle = page.getByText('Available');
     this.availabilitySwitch = page.getByTestId('switch-div');
-    this.onDemandCloseButton = page.getByRole('button', { name: 'XClose' });
+    this.onDemandCloseButton = page.getByRole('button', { name: 'XClose' }).first();
 
     // Mobile Elements
     this.bottomNavbar = page.getByTestId('bottom-navigation');

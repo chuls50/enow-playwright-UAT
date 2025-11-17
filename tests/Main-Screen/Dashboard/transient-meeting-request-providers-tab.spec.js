@@ -1,21 +1,24 @@
 import { test, expect } from '@playwright/test';
 import { DashboardPage } from '../../models/pages/provider/provider-dashboard.page.js';
+import { BasePage } from '../../models/base-page.js';
 import { ROLES, useRole } from '../../utils/auth-helpers.js';
 
 // Transient Meeting Request Providers Tab - total tests 7 (including 4 skipped)
 
 const TEST_DATA = {
   PROVIDER_NAME: 'cody prov',
-  PROVIDER_EMAIL: 'chuls+prov1codytest@example.com',
+  PROVIDER_EMAIL: 'chuls+prov1codytest@globalmed.com',
 };
 
 test.describe('Dual-User @regression', () => {
   test.use(useRole(ROLES.PROVIDER_COORDINATOR));
   let dashboardPage;
+  let basePage;
 
   test.beforeEach(async ({ page }) => {
     dashboardPage = new DashboardPage(page);
-    await dashboardPage.gotoProviderDashboard();
+    basePage = new BasePage(page);
+    await basePage.goto(`${process.env.UAT_URL}/dashboard`);
   });
 
   test('Verify UI of Provider/Coordinator List Screen @[114316] @dual-user @functional', async ({ page }) => {
@@ -53,10 +56,12 @@ test.describe('Dual-User @regression', () => {
 
 // Skipping multi-user tests for now
 test.describe('Multi-User @regression', () => {
-  let dashboardPage;
+  test.use(useRole(ROLES.PROVIDER_COORDINATOR));
+  let basePage;
 
   test.beforeEach(async ({ page }) => {
-    dashboardPage = new DashboardPage(page);
+    basePage = new BasePage(page);
+    await basePage.goto(`${process.env.UAT_URL}/dashboard`);
   });
 
   // multi user test
