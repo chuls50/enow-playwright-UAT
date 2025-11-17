@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { BasePage } from '../../../models/base-page.js';
 
-test.describe('Workflow Feedback Part 1 @regression', () => {
+test.describe('Multi-User @regression @e2e', () => {
   let basePage;
 
   test.beforeAll(async ({ page }) => {

@@ -11,7 +11,7 @@ import { DashboardPage } from '../../../models/pages/patient/patient-dashboard.p
 
 // Here, we are testing on the "Global Healthcare" institution on PROD, which has interactive triage ENABLED
 
-test.describe('Patient Symptom Checker @regression', () => {
+test.describe('Patient @regression', () => {
   // let basePage;
   let dashboardPage;
 

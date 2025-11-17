@@ -337,13 +337,11 @@ test.describe('Provider - English @regression', () => {
     await expect(onboardingPage.firstNameValidationError).not.toBeVisible();
   });
 
-  test('[Negative] Verify the validation of the Last name field on the Before we get started page @[112508] @provider @functional', async ({
-    page,
-  }) => {
+  test('[Negative] Verify the validation of the Last name field on the Before we get started page @[112508] @provider @functional @e2e', async ({}) => {
     // Login as provider and navigate to onboarding
     await onboardingPage.navigateToOnboarding();
 
-    // // ensure onboarding page language is English
+    // ensure onboarding page language is English
     await onboardingPage.ensurePageIsEnglish();
 
     // wait for page to load
@@ -351,18 +349,24 @@ test.describe('Provider - English @regression', () => {
     await expect(onboardingPage.pageTitle).toBeVisible();
 
     // Test required field validation
-    await expect(page.getByText('Last name*')).toBeVisible();
-    await page.getByRole('textbox', { name: 'Enter your last name' }).click();
-    await page.getByRole('textbox', { name: 'Enter your last name' }).clear();
-    await expect(page.getByText('Last name is required')).toBeVisible();
-    await page.getByRole('textbox', { name: 'Enter your last name' }).fill('provider first time test&');
-    await expect(page.getByText('Last name must contain at')).toBeVisible();
-    await page.getByRole('textbox', { name: 'Enter your last name' }).clear();
-    await page.getByRole('textbox', { name: 'Enter your last name' }).fill('provider first time test.-provider first time test');
-    await expect(page.getByText('Last name must contain at')).not.toBeVisible();
-    await page.getByRole('textbox', { name: 'Enter your last name' }).clear();
-    await page.getByRole('textbox', { name: 'Enter your last name' }).fill('provider first time test');
-    await expect(page.getByText('Last name must contain at')).not.toBeVisible();
+    await expect(onboardingPage.lastNameLabel).toBeVisible();
+    await onboardingPage.lastNameInput.click();
+    await onboardingPage.clearLastName();
+    await expect(onboardingPage.lastNameRequiredError).toBeVisible();
+
+    // Test invalid characters
+    await onboardingPage.fillLastName(TEST_DATA.VALIDATION.INVALID_NAMES.LAST);
+    await expect(onboardingPage.lastNameValidationError).toBeVisible();
+
+    // Test valid input with special characters
+    await onboardingPage.clearLastName();
+    await onboardingPage.fillLastName(TEST_DATA.VALIDATION.VALID_NAMES.LAST_WITH_CHARS);
+    await expect(onboardingPage.lastNameValidationError).not.toBeVisible();
+
+    // Test valid input
+    await onboardingPage.clearLastName();
+    await onboardingPage.fillLastName(TEST_DATA.VALIDATION.VALID_NAMES.LAST);
+    await expect(onboardingPage.lastNameValidationError).not.toBeVisible();
   });
 
   test('[Negative] Verify the validation of Languages spoken drop down list on the Before we get started page @[112509] @provider @functional', async ({

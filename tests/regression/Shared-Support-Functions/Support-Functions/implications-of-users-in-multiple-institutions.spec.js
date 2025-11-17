@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { BasePage } from '../../../models/base-page.js';
 
-test.describe('Implications of Users in Multiple Institutions @regression', () => {
+test.describe('Super Admin @regression', () => {
   let basePage;
 
   test.beforeAll(async ({ page }) => {

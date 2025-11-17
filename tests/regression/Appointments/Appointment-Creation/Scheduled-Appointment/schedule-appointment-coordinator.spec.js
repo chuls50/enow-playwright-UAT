@@ -5,7 +5,7 @@ import path from 'path';
 
 // Schedule Appointment Coordinator - Total Tests 7
 
-test.describe('Schedule Coordinator @regression', () => {
+test.describe('Coordinator @regression', () => {
   test.use(useRole(ROLES.COORDINATOR));
   let coordinatorDashboardPage;
 
@@ -209,7 +209,7 @@ test.describe('Schedule Coordinator @regression', () => {
     const fileChooser = await fileChooserPromise;
 
     // Use the requested image file path
-    const testFilePath = path.join(process.cwd(), 'images', 'hieroglyphics-10.jpg');
+    const testFilePath = path.join(process.cwd(), 'tests', 'images', 'hieroglyphics-10.jpg');
     await fileChooser.setFiles(testFilePath);
 
     // Verify the file was uploaded successfully - adjust the selector based on your UI

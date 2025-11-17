@@ -15,8 +15,8 @@ const TEST_DATA = {
     medicalSpecialty: 'Allergologist',
     language: 'Spanish',
   },
-  invalidAvatarFile: '../../../images/invalid-image.txt',
-  largeAvatarFile: '../../../images/large-image.jpg',
+  invalidAvatarFile: '../../../../images/invalid-image.txt',
+  largeAvatarFile: '../../../../images/large-image.jpg',
 };
 
 // Provider My Account - Total tests 12 (including 1 skipped)

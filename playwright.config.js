@@ -48,34 +48,37 @@ export default defineConfig({
     //     attachmentsType: ['screenshot', 'video', 'trace'],
     //     testCaseIdMatcher: /@\[(\d+)\]/,
     //     testPointMapper: async (testCase, testPoints) => {
-    //       // Get the project name from the test project
-    //       const projectName = testCase.parent.project()?.name;
+    //       // Get the project name - testCase is the Playwright TestCase object
+    //       const projectName = testCase.parent?.project()?.name || '';
           
     //       // Define configuration mappings based on project name patterns
     //       let configFilter;
           
-    //       // Check for Chrome desktop projects
-    //       if (projectName.includes('-chrome') && !projectName.includes('-mobile')) {
+    //       // Check for Chrome desktop projects (matches 'chrome-desktop')
+    //       if (projectName === 'chrome-desktop' || (projectName.includes('chrome') && projectName.includes('desktop'))) {
     //         configFilter = 'Browser Web';
     //       }
     //       // Check for Chrome mobile projects 
-    //       else if (projectName.includes('chrome-mobile') || projectName.endsWith('-chrome-mobile')) {
+    //       else if (projectName.includes('chrome-mobile') || projectName.includes('chrome') && projectName.includes('mobile')) {
     //         configFilter = 'Browser Chrome Mobile';
     //       }
     //       // Check for Safari mobile projects
-    //       else if (projectName.includes('safari-mobile') || projectName.endsWith('-safari-mobile')) {
+    //       else if (projectName.includes('safari-mobile') || projectName.includes('safari') && projectName.includes('mobile')) {
     //         configFilter = 'Browser Safari Mobile';
     //       }
-    //       // Default case for any other project
+    //       // Default case for any other project (including auth setup projects)
     //       else {
     //         // Return the first available test point if no specific configuration matches
     //         return testPoints.length > 0 ? [testPoints[0]] : [];
     //       }
 
-    //       // Return the filtered test points based on the configuration name
-    //       return testPoints.filter((testPoint) => 
-    //         testPoint.configuration.name.includes(configFilter)
+    //       // Filter test points based on the configuration name
+    //       const filtered = testPoints.filter((testPoint) => 
+    //         testPoint.configuration?.name?.includes(configFilter)
     //       );
+          
+    //       // Return filtered results, or first test point as fallback
+    //       return filtered.length > 0 ? filtered : (testPoints.length > 0 ? [testPoints[0]] : []);
     //     },
     //     testRunConfig: {
     //       owner: {

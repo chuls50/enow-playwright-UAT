@@ -45,7 +45,7 @@ test.describe('Patient @regression', () => {
 
   test('Verify Upload Photo Functionality @[111246] @patient @functional', async () => {
     // Test data
-    const testImagePath = path.join(__dirname, '../../../images/profile-icon.jpg');
+    const testImagePath = path.join(__dirname, '../../../../images/profile-icon.jpg');
 
     // Upload photo and verify functionality
     await patientMyAccountPage.uploadPhoto(testImagePath);

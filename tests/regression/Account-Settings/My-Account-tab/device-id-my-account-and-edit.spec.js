@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { useRole, ROLES } from '../../../utils/auth-helpers.js';
 
-test.describe('Device @regression', () => {
+test.describe('Device_ID @regression', () => {
   test.use(useRole(ROLES.DEVICE_USER));
   test.beforeEach(async ({ page }) => {
     await page.goto('https://xj9.sandbox-encounterservices.com/dashboard');

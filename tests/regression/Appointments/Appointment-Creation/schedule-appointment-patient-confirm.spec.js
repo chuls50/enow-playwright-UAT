@@ -9,7 +9,7 @@ const TEST_DATA = {
   SERVICE_NAME: 'Pediatrics',
 };
 
-test.describe('Schedule Appointment Patient Confirm @regression', () => {
+test.describe('Patient @regression', () => {
   test.use(useRole(ROLES.PATIENT));
   let dashboardPage;
 

@@ -7,7 +7,7 @@ import { ROLES, useRole } from '../../../../utils/auth-helpers.js';
 // make sure that the test in this file run in series
 test.describe.configure({ mode: 'serial' });
 
-test.describe('Session Summary @regression', () => {
+test.describe('Provider @regression', () => {
   test.use(useRole(ROLES.PROVIDER));
   let dashboardPage;
 

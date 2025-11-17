@@ -3,7 +3,7 @@ import { DashboardPage } from '../../../../models/pages/provider/provider-dashbo
 import { ROLES, useRole } from '../../../../utils/auth-helpers.js';
 
 // Session Payments - Total Tests 16 (including 16 skipped)
-test.describe('Multi-user @regression', () => {
+test.describe('Multi-User @regression @e2e', () => {
   test.use(useRole(ROLES.PROVIDER));
   let dashboardPage;
 

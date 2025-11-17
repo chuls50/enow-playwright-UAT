@@ -2,9 +2,9 @@ import { test, expect } from '@playwright/test';
 import { NotificationsPage } from '../../../models/pages/provider/provider-notifications.page.js';
 import { ROLES, useRole } from '../../../utils/auth-helpers.js';
 
-// Total tests 11/12
+// Manage Notifications - Total Tests 12 (including 1 skipped)
 
-test.describe('Manage Notifications @regression', () => {
+test.describe('Provider @regression', () => {
   test.use(useRole(ROLES.PROVIDER));
   let notificationsPage;
 

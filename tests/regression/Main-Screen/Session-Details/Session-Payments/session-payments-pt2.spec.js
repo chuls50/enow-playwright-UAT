@@ -5,7 +5,7 @@ import { ROLES, useRole } from '../../../../utils/auth-helpers.js';
 // Session Payments pt2 - Total Tests 13 (including 13 skipped)
 
 // skip payments for now, since there is more new stuff coming soon
-test.describe('Multi-user @regression', () => {
+test.describe('Multi-User @regression @e2e', () => {
   test.use(useRole(ROLES.PROVIDER));
   let dashboardPage;
 

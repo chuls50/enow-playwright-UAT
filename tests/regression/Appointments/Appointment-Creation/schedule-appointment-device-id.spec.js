@@ -4,7 +4,7 @@ import { ROLES, useRole } from '../../../utils/auth-helpers.js';
 
 // Schedule Appointment Device ID - Total Tests 10 (including 10 skipped)
 
-test.describe('Schedule Appointment Device ID @regression', () => {
+test.describe('Device_ID @regression', () => {
   test.use(useRole(ROLES.DEVICE_USER));
   let dashboardPage;
 

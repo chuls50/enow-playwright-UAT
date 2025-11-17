@@ -15,7 +15,7 @@ const TEST_DATA = {
   INVALID_SPECIAL_CHARS: '!@#$%^&*(',
 };
 
-test.describe('Patient Edit Profile pt2 @regression', () => {
+test.describe('Patient @regression', () => {
   test.use(useRole(ROLES.PATIENT));
   let myAccountPage;
 

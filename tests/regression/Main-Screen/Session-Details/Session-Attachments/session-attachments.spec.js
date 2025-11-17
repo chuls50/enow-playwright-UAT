@@ -5,7 +5,7 @@ import { ROLES, useRole } from '../../../../utils/auth-helpers.js';
 
 // Session Attachments - Total Tests 10
 
-test.describe('Session Attachments @regression', () => {
+test.describe('Provider @regression', () => {
   test.use(useRole(ROLES.PROVIDER));
   let dashboardPage;
 

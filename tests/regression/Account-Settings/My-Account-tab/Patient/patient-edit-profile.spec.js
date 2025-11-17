@@ -18,9 +18,9 @@ const TEST_DATA = {
   RESET_FIRST_NAME: 'cody test patient',
   RESET_LAST_NAME: 'Cody Test Institution',
   INVALID_CHARACTERS: '#$%^&*',
-  PROFILE_IMAGE_PATH: path.join(__dirname, '../../../images/profile-icon.jpg'),
-  INVALID_FILE_PATH: path.join(__dirname, '../../../images/invalid-image.txt'),
-  LARGE_IMAGE_PATH: path.join(__dirname, '../../../images/large-image.jpg'),
+  PROFILE_IMAGE_PATH: path.join(__dirname, '../../../../images/profile-icon.jpg'),
+  INVALID_FILE_PATH: path.join(__dirname, '../../../../images/invalid-image.txt'),
+  LARGE_IMAGE_PATH: path.join(__dirname, '../../../../images/large-image.jpg'),
 };
 
 test.describe('Patient @regression', () => {
