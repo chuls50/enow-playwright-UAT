@@ -23,6 +23,7 @@
     "@alex_neo/playwright-azure-reporter": "^1.16.2",
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.9.2",
+    "allure-playwright": "^3.4.2",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-playwright": "^2.3.0",

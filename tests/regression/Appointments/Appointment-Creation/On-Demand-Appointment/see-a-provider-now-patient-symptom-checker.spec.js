@@ -50,7 +50,7 @@ test.describe('Patient @regression', () => {
     await expect(page.getByRole('link', { name: 'Choose files' })).toBeVisible();
 
     // Verify Notice of consent section is displayed
-    const noticeOfConsentCheckbox = page.locator('.sc-cxgKzJ');
+    const noticeOfConsentCheckbox = page.locator('.sc-hdBJTi');
     await expect(noticeOfConsentCheckbox).toBeVisible();
     await expect(page.getByText('I have read the Notice of')).toBeVisible();
 
@@ -191,7 +191,7 @@ test.describe('Patient @regression', () => {
     await expect(requestOnDemandCareButton).toBeDisabled();
 
     // Click the Notice of Consent checkbox and verify Request on Demand Care button is enabled
-    const noticeOfConsentCheckbox = page.locator('.sc-cxgKzJ');
+    const noticeOfConsentCheckbox = page.locator('.sc-hdBJTi');
     await noticeOfConsentCheckbox.click();
     await expect(requestOnDemandCareButton).toBeEnabled();
 
@@ -213,7 +213,7 @@ test.describe('Patient @regression', () => {
     await page.getByRole('button', { name: 'Save' }).click();
 
     // Accept Notice of Consent and click Request on Demand Care button
-    const noticeOfConsentCheckbox = page.locator('.sc-cxgKzJ');
+    const noticeOfConsentCheckbox = page.locator('.sc-hdBJTi');
     await noticeOfConsentCheckbox.click();
     const requestOnDemandCareButton = page.getByRole('button', { name: 'Request on Demand Care' });
     await requestOnDemandCareButton.click();
@@ -247,7 +247,7 @@ test.describe('Patient @regression', () => {
     await expect(requestOnDemandCareButton).toBeDisabled();
 
     // Click the Notice of Consent checkbox and verify Request on Demand Care button is enabled
-    const noticeOfConsentCheckbox = page.locator('.sc-cxgKzJ');
+    const noticeOfConsentCheckbox = page.locator('.sc-hdBJTi');
     await noticeOfConsentCheckbox.click();
     await expect(requestOnDemandCareButton).toBeEnabled();
 
@@ -312,7 +312,7 @@ test.describe('Patient @regression', () => {
     await page.getByRole('button', { name: 'Save' }).click();
 
     // Click on Notice of Consent checkbox
-    const noticeOfConsentCheckbox = page.locator('.sc-cxgKzJ');
+    const noticeOfConsentCheckbox = page.locator('.sc-hdBJTi');
     await noticeOfConsentCheckbox.click();
 
     // Click Request on Demand Care button

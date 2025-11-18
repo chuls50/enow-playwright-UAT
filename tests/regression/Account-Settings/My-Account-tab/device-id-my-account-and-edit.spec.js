@@ -10,7 +10,7 @@ test.describe('Device_ID @regression', () => {
 
   test('Verify My Account View for Device ID User Displays Correct Fields @[115333] @device @ui', async ({ page }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
 
     // verify fields
@@ -34,7 +34,7 @@ test.describe('Device_ID @regression', () => {
 
   test('Verify Edit Profile View for Device ID User Displays Correct Fields @[115334] @device @ui', async ({ page }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
 
     await page.getByRole('button', { name: 'Edit Edit' }).click();
@@ -62,7 +62,7 @@ test.describe('Device_ID @regression', () => {
     page,
   }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
 
     // verify avatar
@@ -72,7 +72,7 @@ test.describe('Device_ID @regression', () => {
 
   test('Verify Validation for Name and Device ID in Edit Profile View @[115336]', async ({ page }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
 
     // open edit profile
@@ -96,7 +96,7 @@ test.describe('Device_ID @regression', () => {
 
   test('Verify Optional Address Fields Are Displayed and Editable @[115337] @device @functional', async ({ page }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
 
     // open edit profile
@@ -139,7 +139,7 @@ test.describe('Device_ID @regression', () => {
 
   test('Verify Time Zone and Application Language Are Displayed and Editable @[115338] @device @functional', async ({ page }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
 
     // application language
@@ -170,9 +170,9 @@ test.describe('Device_ID @regression', () => {
     await expect(page.getByText('Time zone updated')).toBeVisible();
   });
 
-  test('[Negative] Verify “Delete Account” Option Is Not Available for Device ID Users @[115339] @device @ui', async ({ page }) => {
+  test('[Negative] Verify "Delete Account" Option Is Not Available for Device ID Users @[115339] @device @ui', async ({ page }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
 
     // verify absence of delete account option
@@ -181,7 +181,7 @@ test.describe('Device_ID @regression', () => {
 
   test('Verify Notifications Section Displays for Device ID Users @[115340] @device @ui', async ({ page }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
 
     // verify notifications
@@ -203,16 +203,16 @@ test.describe('Device_ID @regression', () => {
 
   test('Verify Avatar Dropdown Displays Device ID Name and ID @[115539] @device @ui', async ({ page }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
 
     // verify avatar dropdown
-    await expect(page.getByRole('button', { name: 'Hatsune Mikuuuu 911272679' })).toBeVisible();
+    await expect(page.getByText('Hatsune Mikuuuu 911272679')).toBeVisible();
     await expect(page.getByText('chuls+devicecodytest')).toBeVisible();
   });
 
   test('Verify Device ID User Can Upload Profile Photo from My Account Screen @[115540] @device @functional', async ({ page }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
 
     // upload photo images/profile-icon.jpg
@@ -228,7 +228,7 @@ test.describe('Device_ID @regression', () => {
 
   test('Verify Device ID User Can Delete Profile Photo from My Account Screen @[115541] @device @functional', async ({ page }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
 
     // upload photo images/profile-icon.jpg
@@ -244,7 +244,7 @@ test.describe('Device_ID @regression', () => {
 
   test('[Negative] Verify Error When Device ID Already Exists @[115542] @device @functional', async ({ page }) => {
     // open my account
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'SettingsGear Account settings' }).click();
 
     // open edit profile

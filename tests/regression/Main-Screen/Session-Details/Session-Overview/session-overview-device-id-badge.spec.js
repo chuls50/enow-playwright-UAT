@@ -57,7 +57,7 @@ test.describe('Multi-User @regression', () => {
     }
 
     // logout ProviderCoordinator
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'LogOut Log out' }).click();
     await page.waitForLoadState('networkidle');
 
@@ -137,7 +137,7 @@ test.describe('Multi-User @regression', () => {
     }
 
     // logout ProviderCoordinator
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'LogOut Log out' }).click();
     await page.waitForLoadState('networkidle');
 
@@ -232,7 +232,7 @@ test.describe('Multi-User @regression', () => {
     }
 
     // Logout ProviderCoordinator
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'LogOut Log out' }).click();
     await page.waitForLoadState('networkidle');
 

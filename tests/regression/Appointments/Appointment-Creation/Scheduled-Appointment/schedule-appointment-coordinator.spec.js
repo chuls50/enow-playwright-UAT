@@ -221,7 +221,7 @@ test.describe('Coordinator @regression', () => {
     await expect(page.getByText('Session scheduled', { exact: true })).toBeVisible({ timeout: 15000 });
 
     // logout
-    await page.locator('div:nth-child(2) > .sc-fbguzk').click();
+    await page.getByTestId('popover-trigger').first().click();
     await page.getByRole('button', { name: 'LogOut Log out' }).click();
 
     // login as patient2

@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { useRole, ROLES } from '../../../../utils/auth-helpers.js';
 import { MyAccountPage } from '../../../../models/pages/admin/admin-my-account.page.js';
+import { BasePage } from '../../../../models/base-page.js';
 
 // Combined Roles Account Profiles - Total tests: 5
 
@@ -72,11 +73,11 @@ test.describe('Provider+Coordinator  @regression', () => {
   // Login as a Provider + Coordinator
   test.use(useRole(ROLES.PROVIDER_COORDINATOR));
 
-  let myAccountPage;
+  let basePage;
 
   test.beforeEach(async ({ page }) => {
-    myAccountPage = new MyAccountPage(page);
-    await myAccountPage.gotoMyAccount();
+    basePage = new BasePage(page);
+    await basePage.goto(`${process.env.UAT_URL}/account-settings/my-account`);
   });
 
   test('Verify Verify Account Settings screen for Provider + Coordinator combined roles @[117741] @dual-user @ui', async ({ page }) => {

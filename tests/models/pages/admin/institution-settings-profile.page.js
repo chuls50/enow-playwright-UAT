@@ -25,7 +25,7 @@ export class InstitutionSettingsProfilePage extends BasePage {
     this.deviceIDAccessLinkCopiedMessage = page.getByText('Link successfully copied');
     this.phoneNumberText = page.getByText('Phone number').first();
     this.phoneNumberInput = page.locator('input[name="phone\\.number"]');
-    this.phoneNumberDropdown = page.locator('.sc-dMpJUC').first();
+    this.phoneNumberDropdown = page.getByText('US (+1)').first();
 
     // Institution Address
     this.institutionAddressText = page.getByRole('heading', {

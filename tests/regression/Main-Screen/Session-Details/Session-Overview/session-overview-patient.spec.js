@@ -40,7 +40,7 @@ test.describe('Patient @regression', () => {
     await page.locator('._container_1hd2b_1').first().click();
 
     // accept notice of consent
-    await page.locator('.sc-cxgKzJ').click();
+    await page.locator('.sc-hdBJTi').click();
 
     // schedule visit
     await page.getByRole('button', { name: 'Schedule visit' }).click();
@@ -137,7 +137,7 @@ test.describe('Patient @regression', () => {
     await page.locator('._container_1hd2b_1').first().click();
 
     // accept notice of consent
-    await page.locator('.sc-cxgKzJ').click();
+    await page.locator('.sc-hdBJTi').click();
 
     // schedule visit
     await page.getByRole('button', { name: 'Schedule visit' }).click();
@@ -184,7 +184,7 @@ test.describe('Patient @regression', () => {
     await page.locator('._container_1hd2b_1').first().click();
 
     // accept notice of consent
-    await page.locator('.sc-cxgKzJ').click();
+    await page.locator('.sc-hdBJTi').click();
 
     // schedule visit
     await page.getByRole('button', { name: 'Schedule visit' }).click();
@@ -241,7 +241,7 @@ test.describe('Patient @regression', () => {
     await page.locator('._container_1hd2b_1').first().click();
 
     // accept notice of consent
-    await page.locator('.sc-cxgKzJ').click();
+    await page.locator('.sc-hdBJTi').click();
 
     // schedule visit
     await page.getByRole('button', { name: 'Schedule visit' }).click();
@@ -286,7 +286,7 @@ test.describe('Patient @regression', () => {
     await page.locator('._container_1hd2b_1').first().click();
 
     // accept notice of consent
-    await page.locator('.sc-cxgKzJ').click();
+    await page.locator('.sc-hdBJTi').click();
 
     // schedule visit
     await page.getByRole('button', { name: 'Schedule visit' }).click();

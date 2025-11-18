@@ -65,7 +65,7 @@ test.describe('Provider @regression', () => {
     await expect(page.getByRole('button', { name: 'DotsV' }).first()).toBeVisible();
 
     // reset state
-    await page.getByRole('button', { name: 'DotsV' }).click();
+    await page.getByRole('button', { name: 'DotsV' }).first().click();
     await page.getByRole('button', { name: 'Trash Remove attachment' }).click();
     await page.getByRole('button', { name: 'Yes, remove' }).click();
 

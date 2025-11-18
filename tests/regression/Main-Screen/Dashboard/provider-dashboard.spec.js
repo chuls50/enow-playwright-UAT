@@ -171,7 +171,7 @@ test.describe('Provider @regression', () => {
     // Verify Reschedule Session screen elements
     await expect(providerPage.getByTestId('modal')).toBeVisible();
     await expect(providerPage.getByText('Reschedule session')).toBeVisible();
-    await expect(providerPage.getByRole('heading', { name: 'Select new date & time' })).toBeVisible();
+    await expect(providerPage.getByRole('heading', { name: 'Select new date and time' })).toBeVisible();
     await expect(providerPage.getByRole('button', { name: 'Cancel' })).toBeVisible();
     await expect(providerPage.getByRole('button', { name: 'Reschedule' })).toBeVisible();
 
@@ -349,7 +349,7 @@ test.describe('Provider @regression', () => {
     // Verify Reschedule Session screen elements
     await expect(providerPage.getByTestId('modal')).toBeVisible();
     await expect(providerPage.getByText('Reschedule session')).toBeVisible();
-    await expect(providerPage.getByRole('heading', { name: 'Select new date & time' })).toBeVisible();
+    await expect(providerPage.getByRole('heading', { name: 'Select new date and time' })).toBeVisible();
     await expect(providerPage.getByRole('button', { name: 'Cancel' })).toBeVisible();
     await expect(providerPage.getByRole('button', { name: 'Reschedule' })).toBeVisible();
 
