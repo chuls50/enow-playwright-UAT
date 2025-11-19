@@ -50,12 +50,6 @@ test.describe('Patient @regression', () => {
     await expect(patientDashboardPage.sessionDetailsHeading).toBeVisible();
   });
 
-  test.skip('Verify Join Session Action on Confirmed Appointment on Patient Dashboard @[111466] @multi-user @functional', async () => {});
-
-  test.skip('Verify Appointment Confirmation via “Check” Button on Patient Dashboard @[111467] @multi-user @functional', async () => {});
-
-  test.skip('Verify Appointment Cancellation via "Cancel session" Button on Patient Dashboard @[111468] @multi-user @functional', async () => {});
-
   test('Check Year Filter on Past Appointments Table on Patient Dashboard @[111469] @patient @functional', async () => {
     // Verify Year filter dropdown on Past Appointments
     await expect(patientDashboardPage.pastAppointments).toBeVisible();
@@ -67,17 +61,47 @@ test.describe('Patient @regression', () => {
     await expect(patientDashboardPage.itemsWrapper).toBeVisible();
   });
 
-  test.skip('Check Join Chat Session from Dashboard @[114035] @multi-user @functional', async () => {});
+  test('Verify Redirection to Manual Intake on Click of Schedule Appointment With Triage Disabled @[114044] @patient @functional', async () => {
+    // Triage is always disabled on Cody Test Institution - UAT
+
+    // Navigate to Schedule Appointment
+    await patientDashboardPage.clickScheduleAppointment();
+
+    // Verify Manual Intake Header (i.e 'My symptoms')
+    await expect(patientDashboardPage.manualIntakeHeader).toBeVisible();
+  });
+
+  test('Verify Redirection to Manual Intake on Click of See a Provider Now With Triage Disabled @[114045] @patient @functional', async () => {
+    // Triage is always disabled on Cody Test Institution - UAT
+
+    // Navigate to See a Provider Now
+    await patientDashboardPage.clickSeeProviderNow();
+
+    // Verify Manual Intake Header (i.e 'My symptoms')
+    await expect(patientDashboardPage.symptomCheckerHeading).toBeVisible();
+  });
 
   test.skip('Verify Redirection to Symptom Checker When Scheduling Appointment Without Pending Triage @[114036] @patient @functional', async () => {});
+});
+
+test.describe('Multi-User @regression', () => {
+  let basePage;
+
+  test.beforeEach(async ({ page }) => {
+    basePage = patientDashboardPage = new DashboardPage(page);
+  });
+
+  test.skip('Check Join Chat Session from Dashboard @[114035] @multi-user @functional', async () => {});
+
+  test.skip('Verify Join Session Action on Confirmed Appointment on Patient Dashboard @[111466] @multi-user @functional', async () => {});
+
+  test.skip('Verify Appointment Confirmation via “Check” Button on Patient Dashboard @[111467] @multi-user @functional', async () => {});
+
+  test.skip('Verify Appointment Cancellation via "Cancel session" Button on Patient Dashboard @[111468] @multi-user @functional', async () => {});
 
   // removed
   test.skip('Verify Triage Popup and Routing Options on Click of Schedule Appointment With Pending Triage @[114042] @patient @functional', async () => {});
 
   // removed
   test.skip('Check Triage Popup and Routing Options on Click of See a Provider Now With Pending Triage @[114043] @patient @functional', async () => {});
-
-  test.skip('Verify Redirection to Manual Intake on Click of Schedule Appointment With Triage Disabled @[114044] @patient @functional', async () => {});
-
-  test.skip('Verify Redirection to Manual Intake on Click of See a Provider Now With Triage Disabled @[114045] @patient @functional', async () => {});
 });

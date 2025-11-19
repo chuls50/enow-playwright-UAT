@@ -1,53 +1,29 @@
 import { test, expect } from '@playwright/test';
-import { BasePage } from '../../../models/base-page.js';
 import { DashboardPage as PatientDashboardPage } from '../../../models/pages/patient/patient-dashboard.page.js';
 import { DashboardPage as ProviderDashboardPage } from '../../../models/pages/provider/provider-dashboard.page.js';
+import { ROLES, useRole } from '../../../utils/auth-helpers.js';
 
 // Dashboard Header - Total tests 6 (including 1 skipped)
 
-test.describe('Multi-user @regression', () => {
-  let basePage;
-  let patientDashboardPage;
+test.describe('Provider @regression', () => {
+  test.use(useRole(ROLES.PROVIDER));
   let providerDashboardPage;
 
   test.beforeEach(async ({ page }) => {
-    basePage = new BasePage(page);
     providerDashboardPage = new ProviderDashboardPage(page);
-    patientDashboardPage = new PatientDashboardPage(page);
+    await providerDashboardPage.gotoProviderDashboard();
   });
 
   test('Verify the Presence of the Top Navigation Bar for Providers @[112563] @provider @ui', async () => {
-    // Login as provider and navigate to dashboard
-    await basePage.performUATProviderLogin();
-    await providerDashboardPage.gotoProviderDashboard();
-
     // Verify navigation bar is visible
     await expect(providerDashboardPage.page.getByTestId('navigation')).toBeVisible();
   });
 
-  test('Verify the Presence of the Top Navigation Bar for Patients @[112564] @patient @ui', async ({ page, browser }) => {
-    // Login as patient and navigate to dashboard
-    await basePage.performUATPatientLogin();
-    await patientDashboardPage.gotoPatientDashboard();
-
-    // Verify navigation bar elements are visible
-    await expect(patientDashboardPage.navbarInstitutionLogo).toBeVisible();
-    await expect(patientDashboardPage.navbarDashboard).toBeVisible();
-
-    // Open user profile menu and verify it displays
-    await patientDashboardPage.openUserProfileMenu();
-    await expect(patientDashboardPage.userProfileSection).toBeVisible();
-  });
-
-  test.skip('Verify Institution Dropdown Functionality @[112565] @provider @multi-institution', async () => {
+  test.skip('Verify Institution Dropdown Functionality @[112565] @provider @functional', async () => {
     // This test is skipped and will be implemented in the future
   });
 
   test('Verify Availability Toggle Functionality For Providers @[112566] @provider @functional', async () => {
-    // Login as provider and navigate to dashboard
-    await basePage.performUATProviderLogin();
-    await providerDashboardPage.gotoProviderDashboard();
-
     // Turn on availability toggle
     await providerDashboardPage.toggleAvailabilityOn();
 
@@ -64,10 +40,6 @@ test.describe('Multi-user @regression', () => {
   });
 
   test('Verify Notification Icon Functionality For Providers @[112567] @provider @functional', async () => {
-    // Login as provider and navigate to dashboard
-    await basePage.performUATProviderLogin();
-    await providerDashboardPage.gotoProviderDashboard();
-
     // Verify notification bell is visible
     await expect(providerDashboardPage.notificationBell).toBeVisible();
 
@@ -77,12 +49,29 @@ test.describe('Multi-user @regression', () => {
     await expect(providerDashboardPage.notificationsClearAllButton).toBeVisible();
     await expect(providerDashboardPage.notificationsXClose).toBeVisible();
   });
+});
 
-  test('Verify User Profile Menu Functionality @[112568] @patient @functional', async ({ page, browser }) => {
-    // Login as patient and navigate to dashboard
-    await basePage.performUATPatientLogin();
+test.describe('Patient @regression', () => {
+  test.use(useRole(ROLES.PATIENT));
+
+  let patientDashboardPage;
+
+  test.beforeEach(async ({ page }) => {
+    patientDashboardPage = new PatientDashboardPage(page);
     await patientDashboardPage.gotoPatientDashboard();
+  });
 
+  test('Verify the Presence of the Top Navigation Bar for Patients @[112564] @patient @ui', async () => {
+    // Verify navigation bar elements are visible
+    await expect(patientDashboardPage.navbarInstitutionLogo).toBeVisible();
+    await expect(patientDashboardPage.navbarDashboard).toBeVisible();
+
+    // Open user profile menu and verify it displays
+    await patientDashboardPage.openUserProfileMenu();
+    await expect(patientDashboardPage.userProfileSection).toBeVisible();
+  });
+
+  test('Verify User Profile Menu Functionality @[112568] @patient @functional', async () => {
     // Open user profile menu
     await patientDashboardPage.openUserProfileMenu();
 

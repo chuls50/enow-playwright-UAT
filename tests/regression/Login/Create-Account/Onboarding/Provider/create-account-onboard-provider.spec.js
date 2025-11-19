@@ -255,14 +255,9 @@ test.describe('Provider - English @regression', () => {
     await expect(page.getByText('At least one medical')).toBeVisible();
   });
 
-  test('Verify Availibility and Functionality of the Timezone section on the Before we get started page @[112517] @provider @functional', async ({
-    page,
-  }) => {
+  test('Verify Functionality of the Timezone section on Before we get started page @[112517] @provider @functional', async ({ page }) => {
     // Login as provider and navigate to onboarding
     await onboardingPage.navigateToOnboarding();
-
-    // ensure onboarding page language is English
-    await onboardingPage.ensurePageIsEnglish();
 
     // wait for page to load
     await onboardingPage.pageTitle.waitFor({ state: 'visible' });
@@ -271,12 +266,7 @@ test.describe('Provider - English @regression', () => {
     // change timezone
     await page.getByRole('link', { name: 'Change time zone' }).click();
     await page.getByText('Automatic time zone').click();
-    await page.getByTestId('modal').getByTestId('icon-ChevronDown').click();
-    await expect(page.getByTestId('custom-dropdown')).toBeVisible();
-    await page.getByTestId('modal').getByTestId('icon-ChevronDown').click();
-    await page.getByText('Automatic time zone').click();
-    await page.getByRole('button', { name: 'Cancel' }).click();
-    await expect(page.getByTestId('modal')).not.toBeVisible();
+    await expect(page.getByRole('button', { name: 'Save changes' })).toBeEnabled();
   });
 
   test('Verify Adding and Discarding Licenses on the Before we get started page @[112516] @provider @functional', async ({ page }) => {

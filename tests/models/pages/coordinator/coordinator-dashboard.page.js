@@ -5,9 +5,7 @@ export class CoordinatorDashboardPage extends BasePage {
     super(page);
 
     // Dashboard Elements
-    this.scheduleHeading = page.getByRole('heading', {
-      name: 'Your schedule for today',
-    });
+    this.scheduleHeading = page.getByRole('heading', { name: 'Your schedule for today' });
 
     // Navigation
     this.navigation = page.getByTestId('navigation');
@@ -18,9 +16,7 @@ export class CoordinatorDashboardPage extends BasePage {
     this.waitingRoomsLink = page.locator('a').filter({ hasText: 'Waiting rooms' });
 
     // Action Buttons
-    this.scheduleSession = page.getByRole('button', {
-      name: 'CalendarPlus Schedule session',
-    });
+    this.scheduleSession = page.getByRole('button', { name: 'CalendarPlus Schedule session' });
     this.notificationBell = page.getByRole('link', { name: 'Bell' });
   }
 
