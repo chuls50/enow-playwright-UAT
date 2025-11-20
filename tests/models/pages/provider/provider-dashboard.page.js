@@ -255,4 +255,35 @@ export class DashboardPage extends BasePage {
     await this.page.getByRole('button', { name: 'Schedule visit' }).click();
     await this.page.getByTestId('main-card').getByText('Session scheduled').first().waitFor({ state: 'visible' });
   }
+
+  async rescheduleAppointmentFromSessionDetails() {
+    // Check if the DotsV menu button is visible
+    const dotsVVisible = await this.page.getByRole('button', { name: 'DotsV' }).first().isVisible();
+    if (dotsVVisible) {
+      // Open "3 Dots" menu for the scheduled appointment
+      await this.page.getByRole('button', { name: 'DotsV' }).first().click();
+
+      // Click on "Reschedule" option
+      await this.page.getByRole('button', { name: 'CalendarRepeat Reschedule' }).click();
+
+      // Wait for reschedule modal to appear
+      await this.page.getByTestId('modal').waitFor({ state: 'visible' });
+
+      // Select a new time slot (using nth(1) to select second available slot)
+      await this.page.locator('div._container_1hd2b_1').nth(1).click();
+
+      // Click on Reschedule button to confirm
+      await this.page.getByRole('button', { name: 'Reschedule' }).click();
+      await this.page.getByText('Success').waitFor({ state: 'visible' });
+    }
+  }
+
+  async cancelAppointmentFromSessionDetails() {
+    const dotsVVisible = await this.page.getByRole('button', { name: 'DotsV' }).first().isVisible();
+    if (dotsVVisible) {
+      await this.page.getByRole('button', { name: 'DotsV' }).first().click();
+      await this.page.getByRole('button', { name: 'XCircle Cancel session' }).click();
+      await this.page.getByRole('button', { name: 'Yes, cancel' }).click();
+    }
+  }
 }

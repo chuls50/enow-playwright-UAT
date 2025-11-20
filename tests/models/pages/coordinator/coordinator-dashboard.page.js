@@ -18,6 +18,9 @@ export class CoordinatorDashboardPage extends BasePage {
     // Action Buttons
     this.scheduleSession = page.getByRole('button', { name: 'CalendarPlus Schedule session' });
     this.notificationBell = page.getByRole('link', { name: 'Bell' });
+
+    // Provider Tab
+    this.providersTab = page.getByText('Providers');
   }
 
   // Navigation Methods

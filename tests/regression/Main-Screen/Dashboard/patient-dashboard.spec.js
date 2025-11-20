@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { DashboardPage } from '../../../models/pages/patient/patient-dashboard.page.js';
 import { ROLES, useRole } from '../../../utils/auth-helpers.js';
 
-// Patient Dashboard - total tests 5/12
+// Patient Dashboard - Total Tests 12 (including 7 skipped)
 
 test.describe('Patient @regression', () => {
   test.use(useRole(ROLES.PATIENT));
@@ -68,7 +68,7 @@ test.describe('Patient @regression', () => {
     await patientDashboardPage.clickScheduleAppointment();
 
     // Verify Manual Intake Header (i.e 'My symptoms')
-    await expect(patientDashboardPage.manualIntakeHeader).toBeVisible();
+    await expect(patientDashboardPage.symptomCheckerHeading).toBeVisible();
   });
 
   test('Verify Redirection to Manual Intake on Click of See a Provider Now With Triage Disabled @[114045] @patient @functional', async () => {

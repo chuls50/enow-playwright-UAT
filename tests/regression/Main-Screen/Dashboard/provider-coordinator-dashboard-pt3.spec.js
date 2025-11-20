@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { DashboardPage } from '../../../models/pages/provider/provider-dashboard.page.js';
 import { ROLES, useRole } from '../../../utils/auth-helpers.js';
 
-// Provider Coordinator Dashboard pt3 - Total Tests 3
+// Provider Coordinator Dashboard pt3 - Total Tests 3 (including 1 skipped)
 
 test.describe('Provider-Coordinator @regression', () => {
   test.use(useRole(ROLES.PROVIDER_COORDINATOR));
