@@ -8,6 +8,10 @@ import { ROLES, useRole, createAuthenticatedContext, createMultiRoleContexts } f
 // make sure that the test in this file run in series
 // test.describe.configure({ mode: 'serial' });
 
+const TEST_DATA = {
+  PATIENT_NAME: 'cody test patient',
+};
+
 test.describe('Provider @regression', () => {
   test.use(useRole(ROLES.PROVIDER));
   let providerDashboardPage;
@@ -22,6 +26,26 @@ test.describe('Provider @regression', () => {
 
     // Verify navigation bar is visible
     await expect(providerDashboardPage.navbar).toBeVisible();
+  });
+
+  test('Verify "3 Dots" dropdown menu for Upcoming events @[111454] @provider @functional', async ({ page }) => {
+    // Go to Provider Dashboard
+    await providerDashboardPage.gotoProviderDashboard();
+
+    // Schedule appointment for "cody test patient"
+    await providerDashboardPage.scheduleAppointmentWithPatient(TEST_DATA.PATIENT_NAME);
+
+    // click it
+    await page.getByTestId('main-card').getByText('Session scheduled').first().click();
+
+    // Open "3 Dots" menu for the scheduled appointment
+    await page.getByRole('button', { name: 'DotsV' }).click();
+    await expect(page.getByRole('button', { name: 'CalendarRepeat Reschedule' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'XCircle Cancel session' })).toBeVisible();
+
+    // Reset state by cancelling the appointment
+    await page.getByRole('button', { name: 'XCircle Cancel session' }).click();
+    await page.getByRole('button', { name: 'Yes, cancel' }).click();
   });
 });
 
@@ -52,92 +76,47 @@ test.describe('Multi-User @regression', () => {
     const providerPage = providerDashboardPage.page;
     const patientPage = patientDashboardPage.page;
 
-    try {
-      // Navigate to Provider Dashboard
-      await providerDashboardPage.gotoProviderDashboard();
+    // Navigate to Provider Dashboard
+    await providerDashboardPage.gotoProviderDashboard();
 
-      // Schedule appointment for "cody test patient"
-      await providerPage.getByRole('button', { name: 'CalendarPlus Schedule session' }).click();
-      await providerPage.getByRole('link', { name: 'Change patient' }).click();
-      await providerPage.getByText('cody test patient').click();
-      await providerPage.getByRole('button', { name: 'Save' }).click();
-      await providerPage.locator('div._container_1hd2b_1').first().click();
-      await providerPage.getByRole('button', { name: 'Schedule visit' }).click();
-      await expect(providerPage.getByTestId('main-card').getByText('Session scheduled').first()).toBeVisible();
+    // Schedule appointment for "cody test patient"
+    await providerDashboardPage.scheduleAppointmentWithPatient(TEST_DATA.PATIENT_NAME);
 
-      // Navigate to Patient Dashboard
-      await patientDashboardPage.gotoPatientDashboard();
+    // Verify appointment is visible on Provider Dashboard
+    await expect(providerPage.getByTestId('main-card').getByText('Session scheduled').first()).toBeVisible();
 
-      // Accept the scheduled appointment
-      await patientPage.getByRole('button', { name: 'Check' }).first().click();
-      await expect(patientPage.getByText('Session request accepted')).toBeVisible();
+    // Navigate to Patient Dashboard
+    await patientDashboardPage.gotoPatientDashboard();
 
-      // Reschedule the appointment
-      await patientPage.getByRole('button', { name: 'DotsV' }).first().click();
-      await patientPage.getByRole('button', { name: 'CalendarRepeat Reschedule' }).click();
-      await patientPage.locator('div._container_1hd2b_1').first().click();
-      await patientPage.getByRole('button', { name: 'Reschedule' }).click();
-      await expect(patientPage.getByTestId('main-card').getByText('Session rescheduled')).toBeVisible();
+    // Accept the scheduled appointment
+    await patientPage.getByRole('button', { name: 'Check' }).first().click();
+    await expect(patientPage.getByText('Session request accepted')).toBeVisible();
 
-      // Switch back to provider context to verify rescheduled session
-      await providerPage.reload();
-      await providerPage.getByText('Session rescheduled').first().waitFor({ state: 'visible' });
-      await expect(providerPage.getByText('Session rescheduled').first()).toBeVisible();
+    // Reschedule the appointment
+    await patientPage.getByRole('button', { name: 'DotsV' }).first().click();
+    await patientPage.getByRole('button', { name: 'CalendarRepeat Reschedule' }).click();
+    await patientPage.locator('div._container_1hd2b_1').first().click();
+    await patientPage.getByRole('button', { name: 'Reschedule' }).click();
+    await expect(patientPage.getByTestId('main-card').getByText('Session rescheduled')).toBeVisible();
 
-      // Accept the rescheduled appointment
-      await providerPage.getByTestId('main-card').getByRole('button', { name: 'Check' }).click();
-      await expect(providerPage.getByText('Session request accepted')).toBeVisible();
+    // Switch back to provider context to verify rescheduled session
+    await providerPage.reload();
+    await providerPage.getByText('Session rescheduled').first().waitFor({ state: 'visible' });
+    await expect(providerPage.getByText('Session rescheduled').first()).toBeVisible();
 
-      // Reset state by cancelling the appointment if needed
-      const dotsVVisible = await providerPage.getByRole('button', { name: 'DotsV' }).first().isVisible();
-      if (dotsVVisible) {
-        await providerPage.getByRole('button', { name: 'DotsV' }).first().click();
-        await providerPage.getByRole('button', { name: 'XCircle Cancel session' }).click();
-        await providerPage.getByRole('button', { name: 'Yes, cancel' }).click();
-      }
-    } catch (error) {
-      // Log error for debugging
-      console.error('Test failed:', error);
-      throw error;
+    // Accept the rescheduled appointment
+    await providerPage.getByTestId('main-card').getByRole('button', { name: 'Check' }).click();
+    await expect(providerPage.getByText('Session request accepted')).toBeVisible();
+
+    // Reset state by cancelling the appointment if needed
+    const dotsVVisible = await providerPage.getByRole('button', { name: 'DotsV' }).first().isVisible();
+    if (dotsVVisible) {
+      await providerPage.getByRole('button', { name: 'DotsV' }).first().click();
+      await providerPage.getByRole('button', { name: 'XCircle Cancel session' }).click();
+      await providerPage.getByRole('button', { name: 'Yes, cancel' }).click();
     }
   });
 });
-
-//   test('Verify "3 Dots" dropdown menu for Upcoming events @[111454] @provider @functional', async ({ browser }) => {
-//     // Create Provider context with stored auth state
-//     const providerContext = await createAuthenticatedContext(browser, ROLES.PROVIDER);
-//     const providerPage = await providerContext.newPage();
-
-//     // Initialize DashboardPage with the provider page
-//     const providerDashboard = new DashboardPage(providerPage);
-
-//     // Navigate to Provider Dashboard
-//     await providerDashboard.gotoProviderDashboard();
-
-//     // Schedule appointment for "cody test patient"
-//     await providerPage.getByRole('button', { name: 'CalendarPlus Schedule session' }).click();
-//     await providerPage.getByRole('link', { name: 'Change patient' }).click();
-//     await providerPage.getByText('cody test patient').click();
-//     await providerPage.getByRole('button', { name: 'Save' }).click();
-//     // click on the first available time slot via class="_container_1hd2b_1"
-//     await providerPage.locator('div._container_1hd2b_1').first().click();
-//     await providerPage.getByRole('button', { name: 'Schedule visit' }).click();
-//     await expect(providerPage.getByTestId('main-card').getByText('Session scheduled').first()).toBeVisible();
-//     // click it
-//     await providerPage.getByTestId('main-card').getByText('Session scheduled').first().click();
-
-//     // Open "3 Dots" menu for the scheduled appointment
-//     await providerPage.getByRole('button', { name: 'DotsV' }).first().click();
-//     await expect(providerPage.getByRole('button', { name: 'CalendarRepeat Reschedule' })).toBeVisible();
-//     await expect(providerPage.getByRole('button', { name: 'XCircle Cancel session' })).toBeVisible();
-
-//     // Reset state by cancelling the appointment
-//     await providerPage.getByRole('button', { name: 'XCircle Cancel session' }).click();
-//     await providerPage.getByRole('button', { name: 'Yes, cancel' }).click();
-
-//     // Clean up
-//     await providerContext.close();
-//   });
 
 //   test('Verify "Reschedule Session" screen @[111455] @provider @functional', async ({ browser }) => {
 //     // Create Provider context with stored auth state

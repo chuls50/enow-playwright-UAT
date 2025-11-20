@@ -245,4 +245,14 @@ export class DashboardPage extends BasePage {
   async openNotificationPanel() {
     await this.notificationBell.click();
   }
+
+  async scheduleAppointmentWithPatient(patientName) {
+    await this.scheduleSessionButton.click();
+    await this.page.getByRole('link', { name: 'Change patient' }).click();
+    await this.page.getByText(patientName).click();
+    await this.page.getByRole('button', { name: 'Save' }).click();
+    await this.page.locator('div._container_1hd2b_1').first().click();
+    await this.page.getByRole('button', { name: 'Schedule visit' }).click();
+    await this.page.getByTestId('main-card').getByText('Session scheduled').first().waitFor({ state: 'visible' });
+  }
 }
