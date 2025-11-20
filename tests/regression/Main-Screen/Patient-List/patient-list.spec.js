@@ -67,8 +67,7 @@ test.describe('Provider @regression', () => {
   });
 
   test('Verify patient data columns in the list @[115927] @provider @ui', async ({ page }) => {
-    // Perform provider login and navigate to patient list
-    // await basePage.performProviderLogin();
+    // Navigate to My Patients using POM method
     await patientListPage.navigateToMyPatients();
 
     // Verify all required table column headers are visible
@@ -79,8 +78,7 @@ test.describe('Provider @regression', () => {
   });
 
   test('Verify functionality of "Schedule Session" icon @[115928] @provider @ui', async ({ page }) => {
-    // Perform provider login and navigate to patient list
-    // await basePage.performProviderLogin();
+    // Navigate to My Patients using POM method
     await patientListPage.navigateToMyPatients();
 
     // Click schedule session icon for first patient using POM method
@@ -88,8 +86,7 @@ test.describe('Provider @regression', () => {
   });
 
   test('Verify Patient list search functionality @[115929] @provider @ui', async ({ page }) => {
-    // Perform provider login and navigate to patient list
-    // await basePage.performProviderLogin();
+    // Navigate to My Patients using POM method
     await patientListPage.navigateToMyPatients();
 
     // Search for valid patient name using TEST_DATA
@@ -110,7 +107,7 @@ test.describe('Provider @regression', () => {
   });
 
   test('Verify sorting functionality in Patient list table @[115930] @provider @functional', async ({ page }) => {
-    // Navigate to patient list
+    // Navigate to My Patients using POM method
     await patientListPage.navigateToMyPatients();
 
     // Test Name column sorting using POM methods
