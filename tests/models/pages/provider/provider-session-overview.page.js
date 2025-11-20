@@ -122,7 +122,7 @@ export class ProviderSessionOverviewPage extends BasePage {
     await this.timeSlotContainer.first().click();
     await this.scheduleVisitButton.click();
     await this.sessionScheduledToast.waitFor({ state: 'visible' });
-    await this.sessionScheduledToast.waitFor({ state: 'hidden' });
+    await this.page.waitForTimeout(1000);
   }
 
   async openSessionDetails() {
