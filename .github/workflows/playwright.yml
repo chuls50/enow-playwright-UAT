@@ -26,7 +26,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
+      - name: Setup Authentication
         env:
           # Base URL
           UAT_URL: ${{ secrets.UAT_URL }}
@@ -51,11 +51,18 @@ jobs:
 
           # Device and Azure
           UAT_DEVICE_ID: ${{ secrets.UAT_DEVICE_ID }}
-          AZURE_TOKEN: ${{ secrets.AZURE_TOKEN }}
 
           # CI flag for playwright config
           CI: true
-        run: npx playwright test
+        run: npx playwright test --project=auth-admin --project=auth-provider --project=auth-patient --project=auth-coordinator --project=auth-admin-coordinator --project=auth-provider-coordinator --project=auth-provider-admin --project=auth-provider-admin-coordinator --project=auth-device
+
+      - name: Run Playwright tests
+        env:
+          UAT_URL: ${{ secrets.UAT_URL }}
+          UAT_DEVICE_ID: ${{ secrets.UAT_DEVICE_ID }}
+          AZURE_TOKEN: ${{ secrets.AZURE_TOKEN }}
+          CI: true
+        run: npx playwright test --project=chrome-desktop
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
