@@ -26,37 +26,6 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Setup Authentication
-        env:
-          # Base URL
-          UAT_URL: ${{ secrets.UAT_URL }}
-
-          # User credentials
-          UAT_PATIENT_USERNAME: ${{ secrets.UAT_PATIENT_USERNAME }}
-          UAT_PATIENT_PASSWORD: ${{ secrets.UAT_PATIENT_PASSWORD }}
-          UAT_PROVIDER_USERNAME: ${{ secrets.UAT_PROVIDER_USERNAME }}
-          UAT_PROVIDER_PASSWORD: ${{ secrets.UAT_PROVIDER_PASSWORD }}
-          UAT_ADMIN_USERNAME: ${{ secrets.UAT_ADMIN_USERNAME }}
-          UAT_ADMIN_PASSWORD: ${{ secrets.UAT_ADMIN_PASSWORD }}
-          UAT_COORDINATOR_USERNAME: ${{ secrets.UAT_COORDINATOR_USERNAME }}
-          UAT_COORDINATOR_PASSWORD: ${{ secrets.UAT_COORDINATOR_PASSWORD }}
-          UAT_PROVIDERCOORDINATOR_USERNAME: ${{ secrets.UAT_PROVIDERCOORDINATOR_USERNAME }}
-          UAT_PROVIDERCOORDINATOR_PASSWORD: ${{ secrets.UAT_PROVIDERCOORDINATOR_PASSWORD }}
-          UAT_ADMINCOORDINATOR_USERNAME: ${{ secrets.UAT_ADMINCOORDINATOR_USERNAME }}
-          UAT_ADMINCOORDINATOR_PASSWORD: ${{ secrets.UAT_ADMINCOORDINATOR_PASSWORD }}
-          UAT_PROVIDERADMINCOORDINATOR_USERNAME: ${{ secrets.UAT_PROVIDERADMINCOORDINATOR_USERNAME }}
-          UAT_PROVIDERADMINCOORDINATOR_PASSWORD: ${{ secrets.UAT_PROVIDERADMINCOORDINATOR_PASSWORD }}
-          UAT_PROVIDERADMIN_USERNAME: ${{ secrets.UAT_PROVIDERADMIN_USERNAME }}
-          UAT_PROVIDERADMIN_PASSWORD: ${{ secrets.UAT_PROVIDERADMIN_PASSWORD }}
-          UAT_DEVICE_ID: ${{ secrets.UAT_DEVICE_ID }}
-
-          # Azure
-          AZURE_TOKEN: ${{ secrets.AZURE_TOKEN }}
-
-          # CI flag for playwright config
-          CI: true
-        run: npx playwright test --project=auth-admin --project=auth-provider --project=auth-patient --project=auth-coordinator --project=auth-admin-coordinator --project=auth-provider-coordinator --project=auth-provider-admin --project=auth-provider-admin-coordinator --project=auth-device
-
       - name: Run Playwright tests
         env:
           # Base URL
