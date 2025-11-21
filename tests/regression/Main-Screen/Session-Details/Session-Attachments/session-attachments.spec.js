@@ -44,7 +44,7 @@ test.describe('Provider @regression', () => {
 
     // Verify appointment is cancelled
     await page.waitForTimeout(1000);
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Validate display of Attachments Tab with files uploaded @[111840] @provider @functional', async ({ page }) => {
@@ -84,7 +84,7 @@ test.describe('Provider @regression', () => {
 
     // Verify appointment is cancelled
     await page.waitForTimeout(1000);
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Click on Upload File Link @[111841] @provider @functional', async ({ page }) => {
@@ -124,7 +124,7 @@ test.describe('Provider @regression', () => {
 
     // Verify appointment is cancelled
     await page.waitForTimeout(1000);
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify functionality of Dropdown menu for attached files @[111843] @provider @functional', async ({ page }) => {
@@ -170,7 +170,7 @@ test.describe('Provider @regression', () => {
 
     // Verify appointment is cancelled
     await page.waitForTimeout(1000);
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Validate Download functionality from Dropdown menu @[111844]', async ({ page }) => {
@@ -224,7 +224,8 @@ test.describe('Provider @regression', () => {
     await dashboardPage.cancelAppointmentFromSessionDetails();
 
     // Verify appointment is cancelled
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await page.waitForTimeout(1000);
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify "Remove Attachment" functionality @[111845] @provider @functional', async ({ page }) => {
@@ -264,7 +265,7 @@ test.describe('Provider @regression', () => {
 
     // Verify appointment is cancelled
     await page.waitForTimeout(1000);
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify Upload of Acceptated File Types @[111869] @provider @functional', async ({ page }) => {
@@ -304,7 +305,7 @@ test.describe('Provider @regression', () => {
 
     // Verify appointment is cancelled
     await page.waitForTimeout(1000);
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('[Negative] - Verify Rejection of Unsupported File Types @[111870] @provider @functional', async ({ page }) => {
@@ -330,7 +331,7 @@ test.describe('Provider @regression', () => {
 
     // Verify appointment is cancelled
     await page.waitForTimeout(1000);
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Validate Drag-and-Drop File Upload Functionality @[111872] @provider @functional', async ({ page }) => {
@@ -397,7 +398,7 @@ test.describe('Provider @regression', () => {
 
     // Verify appointment is cancelled
     await page.waitForTimeout(1000);
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('[Negative] Validate Maximum File Size Restriction @[111876] @provider @functional', async ({ page }) => {
@@ -423,6 +424,6 @@ test.describe('Provider @regression', () => {
 
     // Verify appointment is cancelled
     await page.waitForTimeout(1000);
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 });

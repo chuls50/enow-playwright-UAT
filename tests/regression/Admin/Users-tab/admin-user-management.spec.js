@@ -120,9 +120,7 @@ test.describe('Admin @regression', () => {
     // Toggle user to inactive state
     await userTablePage.activeToggleSwitch.click();
     await userTablePage.page.waitForTimeout(1000);
-    await userTablePage.page.waitForSelector('text=User is now inactive', {
-      state: 'visible',
-    });
+    await userTablePage.page.waitForSelector('text=User is now inactive', { state: 'visible' });
     await expect(userTablePage.userInactiveMessage).toBeVisible();
 
     // Toggle user back to active state

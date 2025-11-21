@@ -47,7 +47,7 @@ test.describe('Provider @regression', () => {
     await page.getByRole('button', { name: 'Yes, cancel' }).click();
 
     // Verify appointment is cancelled
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify "Reschedule Session" screen @[111455] @provider @functional', async ({ page }) => {
@@ -74,7 +74,7 @@ test.describe('Provider @regression', () => {
     await providerDashboardPage.cancelAppointmentFromSessionDetails();
 
     // Verify appointment is cancelled
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify "Cancel Session" popup @[111456] @provider @functional', async ({ page }) => {
@@ -116,7 +116,7 @@ test.describe('Provider @regression', () => {
     await providerDashboardPage.cancelAppointmentFromSessionDetails();
 
     // Verify appointment is cancelled
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify Schedule Session button functionality @[114171] @provider @functional', async ({ page }) => {
@@ -188,7 +188,7 @@ test.describe('Provider @regression', () => {
     await providerDashboardPage.cancelAppointmentFromSessionDetails();
 
     // Verify appointment is cancelled
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify Dashboard updates after actions @[111460] @provider @functional', async ({ page }) => {
@@ -208,7 +208,7 @@ test.describe('Provider @regression', () => {
     await providerDashboardPage.cancelAppointmentFromSessionDetails();
 
     // Verify Session canceled message is visible on Provider Dashboard
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 });
 
@@ -276,7 +276,7 @@ test.describe('Multi-User @regression', () => {
     await providerPage.getByRole('button', { name: 'Yes, cancel' }).click();
 
     // Verify appointment is cancelled
-    await expect(providerPage.getByText('Session canceled')).toBeVisible();
+    await expect(providerPage.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify appointment is declined on "X" button click @[114174] @multi-user @functional', async ({ page }) => {
@@ -315,7 +315,7 @@ test.describe('Multi-User @regression', () => {
     await providerPage.getByText('Yes, decline').click();
 
     // Verify appointment is declined
-    await expect(providerPage.getByText('Session request declined')).toBeVisible();
+    await expect(providerPage.getByTestId('toast').getByText('Session request declined', { exact: true })).toBeVisible();
   });
 
   test('Verify appointment is confirmed on "Check" button click @[114175] @multi-user @functional', async ({ page }) => {
@@ -351,7 +351,7 @@ test.describe('Multi-User @regression', () => {
 
     // Confirm the rescheduled appointment
     await providerPage.getByTestId('main-card').getByRole('button', { name: 'Check' }).click();
-    await expect(providerPage.getByText('Session request accepted')).toBeVisible();
+    await expect(providerPage.getByTestId('toast').getByText('Session request accepted', { exact: true })).toBeVisible();
 
     // Open 'Session Scheduled' main card
     await providerPage.getByRole('button', { name: 'DotsV' }).first().click();
@@ -359,7 +359,7 @@ test.describe('Multi-User @regression', () => {
     await providerPage.getByRole('button', { name: 'Yes, cancel' }).click();
 
     // Verify appointment is cancelled
-    await expect(providerPage.getByText('Session canceled')).toBeVisible();
+    await expect(providerPage.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test.skip('Verify Scheduled Requests Section @[111457] @multi-user @functional', async ({ page }) => {});

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { DashboardPage } from '../../../../models/pages/provider/provider-dashboard.page.js';
 import { ROLES, useRole } from '../../../../utils/auth-helpers.js';
 
-// total tests 8
+// Session Overview Device ID Badge - Total Tests 8
 
 const TEST_DATA = {
   DEVICE_NAME: 'Hatsune Mikuuuu',

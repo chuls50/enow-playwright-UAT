@@ -22,8 +22,6 @@ test.describe('Patient @regression', () => {
   });
 
   test('Validate the Display of "My Symptoms" Screen when Interactive Triage is Disabled @[113451] @patient @ui', async ({ page }) => {
-    // await basePage.performUATPatientLogin();
-
     // click on schedule an appointment
     await page.getByText('Schedule an appointment').click();
 

@@ -59,7 +59,7 @@ test.describe('Patient @regression', () => {
     await page.getByRole('button', { name: 'DotsV' }).click();
     await page.getByRole('button', { name: 'XCircle Cancel session' }).click();
     await page.getByRole('button', { name: 'Yes, cancel' }).click();
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify Support Link Navigation on Appointment Confirmed Page @[111493] @patient @functional', async ({ page }) => {
@@ -114,7 +114,7 @@ test.describe('Patient @regression', () => {
     await page.getByRole('button', { name: 'DotsV' }).click();
     await page.getByRole('button', { name: 'XCircle Cancel session' }).click();
     await page.getByRole('button', { name: 'Yes, cancel' }).click();
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify Navigation to My Appointments from Appointment Confirmed Page @[111494] @patient @functional', async ({ page }) => {
@@ -169,6 +169,6 @@ test.describe('Patient @regression', () => {
     await page.getByRole('button', { name: 'DotsV' }).click();
     await page.getByRole('button', { name: 'XCircle Cancel session' }).click();
     await page.getByRole('button', { name: 'Yes, cancel' }).click();
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 });

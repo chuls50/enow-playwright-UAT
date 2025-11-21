@@ -94,7 +94,7 @@ export class DashboardPage extends BasePage {
   }
 
   async resetStateIfSessionScheduled() {
-    if (await this.sessionScheduled.isVisible()) {
+    if (await this.page.isVisible()) {
       await this.sessionScheduled.click();
       await this.dotsVButton.click();
       await this.cancelSessionButton.click();

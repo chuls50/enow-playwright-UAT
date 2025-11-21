@@ -57,7 +57,7 @@ test.describe('Provider @regression', () => {
     await page.getByRole('button', { name: 'DotsV' }).click();
     await page.getByRole('button', { name: 'XCircle Cancel session' }).click();
     await page.getByRole('button', { name: 'Yes, cancel' }).click();
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify “Cancel” Button Functionality on Invite External User Screen @[114452] @provider @functional', async ({ page }) => {
@@ -116,7 +116,7 @@ test.describe('Provider @regression', () => {
     await page.getByRole('button', { name: 'DotsV' }).click();
     await page.getByRole('button', { name: 'XCircle Cancel session' }).click();
     await page.getByRole('button', { name: 'Yes, cancel' }).click();
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('[Negative] Verify Validation of Required Fields on Invite External User Screen @[114453] @provider @functional', async ({
@@ -185,7 +185,7 @@ test.describe('Provider @regression', () => {
     await page.getByRole('button', { name: 'DotsV' }).click();
     await page.getByRole('button', { name: 'XCircle Cancel session' }).click();
     await page.getByRole('button', { name: 'Yes, cancel' }).click();
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('[Negative] Verify Validation of Invalid Input on Invite External User Screen @[114454] @provider @functional', async ({ page }) => {
@@ -252,7 +252,7 @@ test.describe('Provider @regression', () => {
     await page.getByRole('button', { name: 'DotsV' }).click();
     await page.getByRole('button', { name: 'XCircle Cancel session' }).click();
     await page.getByRole('button', { name: 'Yes, cancel' }).click();
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify External User Invitation Sent and Invite Modal Closed for Valid Input @[114455] @provider @functional', async ({ page }) => {
@@ -308,7 +308,7 @@ test.describe('Provider @regression', () => {
     await page.getByRole('button', { name: 'DotsV' }).click();
     await page.getByRole('button', { name: 'XCircle Cancel session' }).click();
     await page.getByRole('button', { name: 'Yes, cancel' }).click();
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 
   test('Verify Toast Message Displayed After Successful Invite @[114459] @provider @functional', async ({ page }) => {
@@ -364,7 +364,7 @@ test.describe('Provider @regression', () => {
     await page.getByRole('button', { name: 'DotsV' }).click();
     await page.getByRole('button', { name: 'XCircle Cancel session' }).click();
     await page.getByRole('button', { name: 'Yes, cancel' }).click();
-    await expect(page.getByText('Session canceled')).toBeVisible();
+    await expect(page.getByTestId('toast').getByText('Session canceled', { exact: true })).toBeVisible();
   });
 });
 
